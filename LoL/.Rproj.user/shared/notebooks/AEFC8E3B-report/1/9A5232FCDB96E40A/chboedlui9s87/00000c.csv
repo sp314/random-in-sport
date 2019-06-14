@@ -1,0 +1,10 @@
+"0","matches_bt <- matches %>%
+  group_nest(league, year, split) %>%
+  mutate(
+    three_col = map(.x = data, .f = ~select(., blue_side, red_side, result)),
+    four_col = map(.x = three_col, .f = codes_to_counts, codes = c(1, 0)),
+    bt = map(.x = four_col, .f = btdata, return_graph = TRUE)
+  )
+"
+"2","Error: The package Matrix.utils is needed for this function to work. Please install it.
+"

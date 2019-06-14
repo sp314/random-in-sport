@@ -1,0 +1,46 @@
+---
+title: "Game Information Content"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(BradleyTerryScalable)
+```
+
+```{r, warning=F}
+col_spec <- cols(
+  gameid = col_character()
+)
+
+matches <- read_csv(file = 'data/lol_matches_16_19.csv', col_types = col_spec) %>%
+  select(league, split, week, game, patchno, gamelength, side, result, team) %>%
+  mutate(
+    red_side = lead(team)
+  ) %>%
+  rename('blue_side' = team) %>%
+  filter(side == "Blue") %>%
+  replace_na(replace = list(week = "t.t", game = "t")) %>%
+  separate(col = split, sep = "-", into = c("year", "split")) %>%
+  separate(col = week, into = c("week", "day"), extra = "merge") %>%
+  mutate(
+    day = if_else(condition =  is.na(day), true = game, false = day),
+    year = as.numeric(year), split = as.numeric(split), week = as.factor(week), day = as.factor(day), game = as.factor(game), patchno = as.factor(patchno)
+    ) %>%
+  select(-c(side))
+```
+
+```{r}
+matches_bt <- matches %>%
+  group_nest(league, year, split) %>%
+  mutate(
+    three_col = map(.x = data, .f = ~select(., blue_side, red_side, result)),
+    four_col = map(.x = three_col, .f = codes_to_counts, codes = c(1, 0)),
+    bt = map(.x = four_col, .f = btdata, return_graph = TRUE)
+  )
+```
+
+```{r}
+
+```
+

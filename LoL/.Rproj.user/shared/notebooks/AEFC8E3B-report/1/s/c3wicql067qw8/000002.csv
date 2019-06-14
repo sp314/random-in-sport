@@ -1,0 +1,4 @@
+"0","col_spec <- cols("
+"0","  gameid = col_character()"
+"0",")"
+"0","matches <- read_csv(file = 'data/lol_matches_16_19.csv', col_types = col_spec)"
