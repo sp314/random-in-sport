@@ -1,0 +1,86 @@
+---
+title: "Playing around with competitive balance"
+output: html_notebook
+author: "Son Phan"
+---
+
+##Load Libraries
+```{r}
+library(tidyverse)
+library(BradleyTerryScalable)
+library(igraph)
+library(Matrix)
+```
+
+##Read in and clean data (Oracle's Elixir)
+```{r, warning=F}
+col_spec <- cols(
+  gameid = col_character()
+)
+
+matches <- read_csv(file = 'data/lol_matches_16_19.csv', col_types = col_spec) %>%
+  select(league, split, week, game, patchno, gamelength, side, result, team) %>%
+  mutate(
+    red_side = lead(team)
+  ) %>%
+  rename('blue_side' = team) %>%
+  filter(side == "Blue") %>%
+  replace_na(replace = list(week = "t.t", game = "t")) %>%
+  separate(col = split, sep = "-", into = c("year", "split")) %>%
+  separate(col = week, into = c("week", "day"), extra = "merge") %>%
+  mutate(
+    day = if_else(condition =  is.na(day), true = game, false = day),
+    year = as.numeric(year), split = as.numeric(split), week = as.factor(week), day = as.factor(day), game = as.factor(game), patchno = as.factor(patchno)
+    ) %>%
+  select(-c(side))
+```
+
+
+##Map each split to a dataset, apply model and diagnostics on each
+```{r}
+matches_bt <- matches %>%
+  group_nest(league, year, split) %>%
+  mutate(
+    three_col = map(.x = data, .f = ~select(., blue_side, red_side, result)), 
+    four_col = map(.x = three_col, .f = codes_to_counts, codes = c(1, 0)),
+    bt = map(.x = four_col, .f = btdata, return_graph = TRUE), #Bradley-Terry Model for strength parameters, fitted by MLE
+    mle = map(.x = bt, .f = btfit, a = 1), #Could possibly fit by MAP with a Bayesian shape prior
+    coef = map(.x = mle, .f = coef),
+    prob = map(.x = mle, .f = btprob)
+  )
+```
+Model should probably look to add regressors for the strength parameter to better quantify the value of each win to the team's strength
+
+```{r}
+l <- "LCS" #set league
+y <- 2019 #year
+s <- 1 #split 1 = spring, 2 = summer
+split_df <- matches_bt %>%
+  filter(league == l, year == y, split == s)
+
+par(mar = c(0, 0, 0, 0) + 1)
+plot.igraph(split_df$bt[[1]]$graph, vertex.size = 35, edge.arrow.size = 0.4)
+```
+
+```{r}
+split_df$coef[[1]]
+var(split_df$coef[[1]]) #Variance of strengths, (a measure of league parity, 0 meaning all equal teams)
+split_df$prob[[1]]
+```
+
+I could at some different simulations here
+```{r}
+league_dim <- dim(split_df$prob[[1]])[1] #dimensions of the comparison count matrix (just the number of teams in the league)
+league_names <- colnames(split_df$prob[[1]])
+
+#Make a  matrix that represents each team playing 69 games with each other
+n_games <- 69
+Nmat<- matrix(data = n_games, nrow = league_dim, ncol = league_dim)
+diag(Nmat) <- 0 #No team plays itself
+dimnames(Nmat) <- list(league_names, league_names)
+
+#Simulate this tournament structure
+sim <- simulate_BT(pi = exp(split_df$coef[[1]]), N = Nmat, nsim = 1, seed = 1, result_class = "sparseMatrix")[[1]]
+printSpMatrix2(sim/n_games)
+```
+
