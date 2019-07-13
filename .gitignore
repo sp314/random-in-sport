@@ -6,3 +6,5 @@ parsing_oracles_elixir.Rmd
 *.RData
 *.Rhistory
 *.DS_Store
+.Rproj.user
+Lol
