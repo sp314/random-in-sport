@@ -74,13 +74,13 @@ league_dim <- dim(split_df$prob[[1]])[1] #dimensions of the comparison count mat
 league_names <- colnames(split_df$prob[[1]])
 
 #Make a  matrix that represents each team playing 69 games with each other
-n_games <- 69
+n_games <- 100
 Nmat<- matrix(data = n_games, nrow = league_dim, ncol = league_dim)
 diag(Nmat) <- 0 #No team plays itself
 dimnames(Nmat) <- list(league_names, league_names)
 
 #Simulate this tournament structure
 sim <- simulate_BT(pi = exp(split_df$coef[[1]]), N = Nmat, nsim = 1, seed = 1, result_class = "sparseMatrix")[[1]]
-printSpMatrix2(sim/n_games)
+printSpMatrix2(sim)
 ```
 
