@@ -2,7 +2,6 @@ LoL/data/raw
 LoL/.Rproj.user/
 *.nb.html
 parsing_oracles_elixir.Rmd
-*.Rproj
 *.RData
 *.Rhistory
 *.DS_Store
