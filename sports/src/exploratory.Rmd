@@ -1,0 +1,41 @@
+---
+title: "Explore"
+output: html_notebook
+---
+Find between league variation in days since last game.
+```{r setup}
+knitr::opts_knit$set(root.dir = normalizePath(".."))
+```
+
+```{r packages_data}
+library(tidyverse)
+library(lubridate)
+library()
+
+#Read in data
+nba <- read_csv(file = "data/nba.csv")
+nhl <- read_csv(file = "data/nhl.csv")
+nfl <- read_csv(file = "data/nfl.csv")
+```
+
+```{r match_gaps}
+match_gaps <-list(
+  stack(data.frame(nba = c(nba$home_days_since_last_game, nba$away_days_since_last_game))),
+  stack(data.frame(nfl = c(nfl$home_days_since_last_game, nfl$away_days_since_last_game))),
+  stack(data.frame(nhl = c(nhl$home_days_since_last_game, nhl$away_days_since_last_game)))
+  )
+match_gaps_no_0s <- do.call(rbind.data.frame, match_gaps) %>%
+  filter(values != 0) %>%
+  rename('league' = ind, 'days' = values) %>%
+  mutate(league = as.factor(league))
+```
+
+```{r match_gaps_vis}
+match_gaps_no_0s %>%
+  ggplot() +
+  geom_histogram(aes(x = days, y = ..density.., fill = league)) + 
+  facet_wrap(~league, nrow = 3, scales = "free")
+```
+
+
+NFL's match gap distribution is centered at a much higher number of days (~7) than the NBA and NHL (~2)
