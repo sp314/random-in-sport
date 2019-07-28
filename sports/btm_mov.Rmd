@@ -1,0 +1,151 @@
+---
+title: "Bradley-Terry and OLS Margin of Victory Model"
+header-includes:
+ - \usepackage{mathtools}
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE, message=FALSE}
+library(tidyverse)
+library(lubridate)
+library(BradleyTerry2)
+library(Matrix)
+library(printr)
+
+options(width = 80)
+
+nba <- read_csv(file = "data/nba.csv", col_types = cols(game_date = col_date(format = "%m/%d/%y"), season = col_factor()))
+# nfl <- read_csv(file = "data/nfl.csv", col_types = cols(game_date = col_date(format = "%m/%d/%y"), season = col_factor())
+# nhl <- read_csv(file = "data/nhl.csv", col_types = cols(game_date = col_date(format = "%m/%d/%y"), season = col_factor())
+```
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+## BT Model
+I restrict our sample to a single season of NBA for now and just run a simple Bradley-Terry for evaluating the strength parameters $\theta_s$ for all teams $s$ as well as the home field advantage regressor $\alpha$. This model is representative of (1) where $\pi_{i,j}$ is the probability $i$ (home) beats $j$ (away).
+
+\begin{equation}
+  \ln\left( \frac{\pi_{i,j}}{1 - \pi_{i,j}} \right) = \theta_i - \theta_j + \alpha
+\end{equation}
+
+
+```{r initial_bt}
+nba_10 <- nba %>%
+  filter(season == "2010-11") %>% mutate(home = factor(home), away = factor(away))
+
+nba_10_btm <- BTm(outcome = home_win, #1 if player1 (home) wins and 0 if player2 (away) does
+    player1 = data.frame(team = home, hfa = 1, days_since_last_game = home_days_since_last_game), 
+    player2 = data.frame(team = away, hfa = 0, days_since_last_game = away_days_since_last_game),
+    formula = ~team + hfa + days_since_last_game, id = "team", data = nba_10)
+
+summary(nba_10_btm)
+```
+
+HFA seems to increase a teams strength parameter quite a lot (0.55495) with a high statistical significance from the null. That's about the difference between last place 30th Minnesota Timberwolves (-1.521) and the middle of the pack 14th Houston Rockets (0.069)
+
+```{r initial_bt_plot}
+nba_10_btm_thetas <- qvcalc(BTabilities(nba_10_btm))$qvframe %>% #quasi normal standard errors
+  rownames_to_column(var = "team")
+
+nba_10_btm_thetas %>%
+  ggplot(aes(x = reorder(as.factor(team), estimate), color = as.factor(team))) +
+  geom_point(aes(y = estimate)) +
+  geom_errorbar(aes(ymin = estimate - quasiSE, ymax = estimate + quasiSE)) + 
+  coord_flip() + theme(legend.position = "none") + xlab("Team") + ylab(expression(theta))
+```
+
+## Margin of Victory (Massey Rating)
+Now, we try a margin of victory to predict $\theta_i$. For now, I will stick to a basic model without home-field advantage and add that covariate in afterward. In (2), $\delta_{i,j}$ represents the number of points $i$ (home) has over $j$ (away) and is negative if $j$ won. 
+
+\begin{equation}
+  \delta_{i,j} = \theta_i - \theta_j
+\end{equation}
+
+\begin{equation}
+  \mathbf{X \theta} = \mathbf{y}
+\end{equation}
+<br>
+\[
+\mathbf{X} =
+\begin{bmatrix}
+\begin{array}{rrrrrrr}
+1 & 0 & -1 & 0 & 0 & \cdots  & 0\\
+0 & 0 & 1 & 0 & -1 & \cdots  & 0\\
+-1 & 0 & 1 & 0 & 1 & \cdots  & 0\\
+\vdots &  &  & &  & \ddots  & \vdots\\
+0 & -1 & 0 & 0 & 0 & \cdots  & 1 \\
+1 & 1 & 1 & 1 & 1 & \cdots  & 1
+\end{array}
+\end{bmatrix}, \quad
+\mathbf{r} =
+\begin{bmatrix}
+\begin{array}{r}
+\theta_1 \\
+\theta_2 \\
+\theta_3 \\
+\vdots\\
+\theta_s
+\end{array}
+\end{bmatrix}, \quad
+\mathbf{y} =
+\begin{bmatrix}
+\begin{array}{r}
+y_1 \\
+y_2 \\
+y_3 \\
+\vdots\\
+y_k \\
+0
+\end{array}
+\end{bmatrix}
+\]
+<br>
+
+Thus, for a season with $k$ games and $s$ teams, (3) is our system of linear equations. The sparse matrix $\mathbf{X}_{k \times s}$ has each row representing a game, all elements in a particular row are 0 except for teams $i$ and $j$ participating in the game, with 1 under the winning team's column and -1 under the losing team's column. $\mathbf{\theta}_{s \times 1}$ is the vector of strength parameters and $\mathbf{y}_{k \times 1}$ is the point differential for each match. Because each row sums to 0, the columns of $\mathbf{M}_{s \times s}$ are not linearly independent and $rank(\mathbf{M}_{s \times s}) < s$ meaning that there is no unique solution to (2).
+
+This is solved by including a linear constraint to $\mathbf{X}$ by adding a row constraint. A simple constraint is to have all of the strength parameters sum up to 1 $\left(\sum_S \theta_i = 0\right)$. This is done by inserting a row with all ones in $\mathbf{X}$ and having the corresponding element in $\mathbf{y}$ be $0$.
+
+```{r}
+stack_games <- function(df, ...){
+  home_teams <- df %>%
+    select(season, game_id, home, home_mov, ...) %>% 
+    mutate(hfa = 1) %>% 
+    rename('team' = home)
+  away_teams <- df %>%
+    select(season, game_id, away, home_mov, ...) %>% 
+    mutate(hfa = -1) %>% 
+    rename('team' = away)
+  return(bind_rows(home_teams, away_teams))
+}
+
+nba_10_model_matrix <- nba_10 %>%
+  stack_games %>%
+  spread(key = team, value = hfa, fill = 0) %>% 
+  select(-c(season, game_id)) %>%
+  rbind(c(0, rep(1, length(levels(nba_10$home))))) # Linear Constraint
+
+nba_10_mov <- lm(formula = home_mov ~., data = nba_10_model_matrix)
+summary(nba_10_mov)
+```
+
+Home-field advantage tends to add about a 3 point margin of victory. A few teams changed in the ranking, because some teams lost in blow outs and the last place team, Minnesota, had lost some closer games.
+
+```{r}
+nba_10_mov_thetas <- coef(summary(nba_10_mov)) %>%
+  data.frame() %>%
+  rownames_to_column(var = "team") %>%
+  filter(team != "(Intercept)")
+
+nba_10_mov_thetas %>%
+  ggplot(aes(x = reorder(as.factor(team), Estimate), color = as.factor(team))) +
+  geom_point(aes(y = Estimate)) +
+  geom_errorbar(aes(ymin = Estimate - Std..Error, ymax =Estimate + Std..Error)) + 
+  coord_flip() + theme(legend.position = "none") + xlab("Team") + ylab(expression(theta))
+```
+
