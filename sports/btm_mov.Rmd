@@ -13,8 +13,10 @@ library(lubridate)
 library(BradleyTerry2)
 library(Matrix)
 library(printr)
+library(furrr)
 
 options(width = 80)
+set.seed(190730)
 
 nba <- read_csv(file = "data/nba.csv", col_types = cols(game_date = col_date(format = "%m/%d/%y"), season = col_factor()))
 # nfl <- read_csv(file = "data/nfl.csv", col_types = cols(game_date = col_date(format = "%m/%d/%y"), season = col_factor())
@@ -35,13 +37,15 @@ I restrict our sample to a single season of NBA for now and just run a simple Br
 \end{equation}
 
 
-```{r initial_bt}
+```{r bt}
 nba_10 <- nba %>%
-  filter(season == "2010-11") %>% mutate(home = factor(home), away = factor(away))
+  filter(season == "2010-11") %>%
+  mutate(home = as.factor(home),
+         away = as.factor(away))
 
 nba_10_btm <- BTm(outcome = home_win, #1 if player1 (home) wins and 0 if player2 (away) does
-    player1 = data.frame(team = home, hfa = 1, days_since_last_game = home_days_since_last_game), 
-    player2 = data.frame(team = away, hfa = 0, days_since_last_game = away_days_since_last_game),
+    player1 = data.frame(team = as.factor(home), hfa = 1, days_since_last_game = home_days_since_last_game), 
+    player2 = data.frame(team = as.factor(away), hfa = 0, days_since_last_game = away_days_since_last_game),
     formula = ~team + hfa + days_since_last_game, id = "team", data = nba_10)
 
 summary(nba_10_btm)
@@ -49,7 +53,7 @@ summary(nba_10_btm)
 
 HFA seems to increase a teams strength parameter quite a lot (0.55495) with a high statistical significance from the null. That's about the difference between last place 30th Minnesota Timberwolves (-1.521) and the middle of the pack 14th Houston Rockets (0.069)
 
-```{r initial_bt_plot}
+```{r bt_plot}
 nba_10_btm_thetas <- qvcalc(BTabilities(nba_10_btm))$qvframe %>% #quasi normal standard errors
   rownames_to_column(var = "team")
 
@@ -111,7 +115,7 @@ Thus, for a season with $k$ games and $s$ teams, (3) is our system of linear equ
 
 This is solved by including a linear constraint to $\mathbf{X}$ by adding a row constraint. A simple constraint is to have all of the strength parameters sum up to 1 $\left(\sum_S \theta_i = 0\right)$. This is done by inserting a row with all ones in $\mathbf{X}$ and having the corresponding element in $\mathbf{y}$ be $0$.
 
-```{r}
+```{r massey}
 stack_games <- function(df, ...){
   home_teams <- df %>%
     select(season, game_id, home, home_mov, ...) %>% 
@@ -136,7 +140,7 @@ summary(nba_10_mov)
 
 Home-field advantage tends to add about a 3 point margin of victory. A few teams changed in the ranking, because some teams lost in blow outs and the last place team, Minnesota, had lost some closer games.
 
-```{r}
+```{r massey_plot}
 nba_10_mov_thetas <- coef(summary(nba_10_mov)) %>%
   data.frame() %>%
   rownames_to_column(var = "team") %>%
@@ -148,4 +152,80 @@ nba_10_mov_thetas %>%
   geom_errorbar(aes(ymin = Estimate - Std..Error, ymax =Estimate + Std..Error)) + 
   coord_flip() + theme(legend.position = "none") + xlab("Team") + ylab(expression(theta))
 ```
+
+## Creating Training Sets for Quantifying Information Content
+
+I start by sampling a portion of the season games without replacement and applying the Bradley-Terry model. The models are then used to predict the remainder games up to a probability. These probabilities are then used to simulate results and we derive the information content metric (4). This metric 
+
+```{r info_content_helpers}
+training_split_df <- function(df, prop, n_sets) {
+  train_list <- list()
+  test_list <- list()
+  
+  for (idx in 1:n_sets) {
+    #Create training set
+    train <- df %>%
+      sample_frac(prop, replace = FALSE)
+    
+    #Create test set
+    test  <- df %>% 
+      anti_join(y = train, by = 'game_id')
+    
+    train_list[[idx]] <- train
+    test_list[[idx]] <- test
+  }
+  
+  tibble(
+    prop = prop,
+    train = train_list,
+    test = test_list)
+}
+
+#Transform log_odds to prob
+sigmoid <- function(log_odds) {
+  1/(1 + exp(-log_odds))
+}
+
+#Function returns the sum of sim and actual predicting the same, conf.matrix = true only returns the confusion matrix version
+pred_accuracy <- function(sim, actual, conf.matrix = FALSE) {
+  cm <- xtabs(formula = ~ sim + actual)
+  if (conf.matrix) {
+    return()
+  }
+  
+  total_games <- length(actual)
+  correct_true <- ifelse(test = is.na(cm[4]), yes = 0, no = cm[4])
+  correct_false <- ifelse(test = is.na(cm[1]), yes = 0, no = cm[1])
+  return((correct_true + correct_false)/total_games)
+}
+```
+
+For each training set, I fit the Bradley-Terry Model with HFA, I then use the model to predict the log odds for each match within the training set. This prediction is identical to plugging in the parameters to (1) Translating that to a probability using the sigmoid function, I then use a simple proportion of correct predictions of game outcomes from the Monte-Carlo simulation as an information metric. 
+
+I test below my method for finding information content on a 20 training and complementary test sets at one eigth of the season's games. There will be warnings for perfect separation in this case bcause of the small proportion of games. In an example I looked at, Boston was rated very highly because they won 4 away games in the set and that made predictions with them shoot to probability 1 in their favor. 
+
+Next steps will be to evaluate this method for sequential games as well as directly compare it to Wolfson Koopmeiner's information metric. Any other ideas are totally welcome :)
+
+```{r info_content_exec}
+#Sorry for the monster of a call, the gist is that I'm using a dataframe where some columns are also dataframes, using map makes things similar to apply functions to each dataframe element, futuremap is a parallel processing implementation of purrr's original map from the tidyverse
+
+nba_10_info_sets <- training_split_df(df = nba_10, prop = 0.125, n_sets = 20) %>%
+  mutate(
+    set_id = row_number(),
+    btm = future_map(.x = train, .f = ~BTm(outcome = home_win, 
+                                           player1 = data.frame(team = home, hfa = 1), player2 = data.frame(team = away, hfa = 0),
+                                           formula = ~team + hfa, id = "team", data = .x)), 
+    pred_logit = future_map2(.x = test, .y = btm, .f = ~predict(object = .y, newdata = .x)),
+    pred_prob = future_map(.x = pred_logit, .f = sigmoid),
+    sim_results = future_map(.x = pred_prob, .f = ~rbernoulli(n = 1, p = .x)),
+    actuals = future_map(.x = test, .f = ~pull(.data = .x, var = 'home_win')),
+    info_metric = unlist(future_map2(.x = sim_results, .y = actuals, .f = ~pred_accuracy(sim = .x, actual = .y)))
+  )
+```
+
+```{r}
+#[1] 0.5769981
+mean(nba_10_info_sets$info_metric)
+```
+
 
