@@ -61,20 +61,21 @@ get_days_since_last_game <- function(df) {
       'home_days_since_last_game' = team0_days_since_last_game,
       'away_days_since_last_game' = team1_days_since_last_game
     ) %>%
+    mutate(home_mov = home_score - away_score) %>%
     arrange(game_date, game_id) %>%
     select(-c(team0_hfa, team1_hfa))
   
   return(home_away)
 }
 
-# # RUN
-# nba <- read_csv(file = "../../sports_scraper/nba_1999_2019.csv") %>% get_days_since_last_game()
-# nhl <- read_csv(file = "../../sports_scraper/nhl_1999_2018.csv") %>% get_days_since_last_game()
-# nfl <- read_csv(file = "../../sports_scraper/nfl_1999_2018.csv") %>% get_days_since_last_game()
-# 
-# write_csv(x = nba, path = "data/nba.csv")
-# write_csv(x = nhl, path = "data/nhl.csv")
-# write_csv(x = nfl, path = "data/nfl.csv")
+# RUN
+nba <- read_csv(file = "../../sports_scraper/nba_1999_2019.csv") %>% get_days_since_last_game()
+nhl <- read_csv(file = "../../sports_scraper/nhl_1999_2018.csv") %>% get_days_since_last_game()
+nfl <- read_csv(file = "../../sports_scraper/nfl_1999_2018.csv") %>% get_days_since_last_game()
+
+write_csv(x = nba, path = "data/nba.csv")
+write_csv(x = nhl, path = "data/nhl.csv")
+write_csv(x = nfl, path = "data/nfl.csv")
 # 
 # # Visualize for fun!
 # nba_date_gaps <- c(nba$home_days_since_last_game, nba$away_days_since_last_game)
