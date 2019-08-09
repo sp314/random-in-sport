@@ -1,8 +1,6 @@
 ---
 title: "Information Content of Sports Games"
 author: Son Phan
-header-includes:
- - \usepackage{mathtools}
 output:
   html_document:
     theme: paper
@@ -11,6 +9,26 @@ output:
     highlight: kate
     df_print: paged
 ---
+```{css style, echo=FALSE}
+.tocify-item {
+  text-indent: 0px;
+}
+
+.tocify {
+  margin: 5px 10px;
+  font-size: 1.7rem;
+}
+
+body {
+  font-size: 14px;
+}
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+  font-style: oblique;
+  color: #154067;
+  background-color: #ffffff;
+}
+```
 
 ```{r setup, include=FALSE, message=FALSE}
 library(tidyverse)
@@ -25,8 +43,8 @@ set.seed(190730)
 
 # Data is scraped using files from sports_scraper and then processed through days_since_last_game.R
 nba <- read_csv(file = "data/nba.csv", col_types = cols(game_date = col_date(format = "%Y-%m-%d"), season = col_factor()))
-# nfl <- read_csv(file = "data/nfl.csv", col_types = cols(game_date = col_date(format = "%m/%d/%y"), season = col_factor())
-# nhl <- read_csv(file = "data/nhl.csv", col_types = cols(game_date = col_date(format = "%m/%d/%y"), season = col_factor())
+# nfl <- read_csv(file = "data/nfl.csv", col_types = cols(game_date = col_date(format = "%m/%d/%y"), season = col_factor()))
+# nhl <- read_csv(file = "data/nhl.csv", col_types = cols(game_date = col_date(format = "%m/%d/%y"), season = col_factor()))
 ```
 
 <script type="text/x-mathjax-config">
@@ -38,7 +56,7 @@ MathJax.Hub.Config({
 ## Initial Bradley-Terry Model
 I restrict our sample to a single season of NBA for now and just run a simple Bradley-Terry for evaluating the strength parameters $\theta_s$ for all teams $s$ as well as the home field advantage regressor $\alpha$. This model is representative of (1) where $\pi_{i,j}$ is the probability $i$ (home) beats $j$ (away). I use the BradleyTerry2 package, which simply estimates each parameter by maximum likelihood.
 
-\begin{equation}
+\begin{equation} 
   \ln\left( \frac{\pi_{i,j}}{1 - \pi_{i,j}} \right) = \theta_i - \theta_j + \alpha
 \end{equation}
 
@@ -91,7 +109,7 @@ summary(nba_11_btm_days)
 
 My prior going into fitting this model is that coefficient for **days_out**, $\delta$ would likely be very insignificant. Just by my thinking, the amount of days in between matches might have a more complex relationship with winning odds and is likely not linear. For instance, a long time not playing may give teams an opportunity to rest but also can make them deconditioned from intense competition, on the flipside, a team can have a lot of momentum playing a lot frequently but can result in injuries and 'burnout'. 
 
-We end up seeing a pretty small coefficient as well as a low absolute z score and higher p value. Most of the strength parameters are not really affected by the inclusion of this predictor, with the change across $\theta$'s being below the order of $0.01$. Testing this across seasons as well as with the measuring information content through forecasting will be a good step forward.
+We end up seeing a pretty small coefficient as well as a low absolute z score and higher p value. Most of the strength parameters are not really affected by the inclusion of this predictor, with the change across $\theta$'s being below the order of $0.01$. In addition to looking at a deeper number of lagged games, testing this across seasons as well as with the measuring information content through forecasting will be a good step forward.
 
 ```{r bt_days_plot, echo=FALSE}
 qvcalc(BTabilities(nba_11_btm_days))$qvframe %>% #quasi normal standard errors
@@ -102,9 +120,39 @@ qvcalc(BTabilities(nba_11_btm_days))$qvframe %>% #quasi normal standard errors
   coord_flip() + theme(legend.position = "none") + xlab("Team") + ylab(expression(theta))
 ```
 
-## Quantifying Information Content
+## Away Distance Traveled
 
-This process is marked by a few steps. In general we want to:
+Another feature I looked at was the distance that the away team had to travel before a particular match. This is similar to the previous theory that players may get burned out and possibly more burned out by having to travel more. The model is outlined below with $d_{j,i}$ being the distance between team $j$ and team $i$'s location. I use approximate locations based on cities rather than exact stadium locations.
+
+\begin{equation}
+  \ln\left( \frac{\pi_{i,j}}{1 - \pi_{i,j}} \right) = \theta_i - \theta_j + \alpha + \delta d_{j,i}
+\end{equation}
+
+```{r bt_distance}
+# Fit Bradley-Terry rating model for binary outcomes
+nba_11_btm_distance <- BTm(outcome = home_win, #1 if player1 (home) wins and 0 if player2 (away) does
+    player1 = data.frame(team = home, hfa = 1, distance_traveled = 0), 
+    player2 = data.frame(team = away, hfa = 0, distance_traveled = away_distance_traveled),
+    formula = ~team + hfa + distance_traveled, id = "team", data = nba_11)
+
+summary(nba_11_btm_distance)
+```
+
+```{r bt_distance_plot, echo=FALSE}
+qvcalc(BTabilities(nba_11_btm_distance))$qvframe %>% #quasi normal standard errors
+  rownames_to_column(var = "team") %>%
+  ggplot(aes(x = reorder(as.factor(team), estimate), color = as.factor(team))) +
+  geom_point(aes(y = estimate)) +
+  geom_errorbar(aes(ymin = estimate - quasiSE, ymax = estimate + quasiSE)) + 
+  coord_flip() + theme(legend.position = "none") + xlab("Team") + ylab(expression(theta))
+```
+
+
+
+
+## Quantifying Information Content: Random Sample Games
+
+This process is marked by a few steps outlined by Wolfson-Koopmeiners. In general we want to:
 
 * Fit a rating model on several training sets with proportion *p* of total season games
 * Calculate predicted probabilities, $\pi_{ij}$ for the results of each match in the remaining season's games
@@ -122,22 +170,22 @@ I make functions for sampling a portion of the season games without replacement 
 training_split_df <- function(df, prop, n_sets) {
   train_list <- list()
   test_list <- list()
-  
+
   for (p in prop) {
     for (idx in 1:n_sets) {
       #Create training set
       train <- df %>%
         sample_frac(p, replace = FALSE)
-      
+
       #Create test set
-      test  <- df %>% 
+      test  <- df %>%
         anti_join(y = train, by = 'game_id')
-      
+
       train_list[[as.character(p)]][[idx]] <- train
       test_list[[as.character(p)]][[idx]] <- test
     }
   }
-  
+
   tibble(
     train_prop = rep(prop, n_sets) %>% sort(),
     train = train_list %>% unlist(recursive = FALSE),
@@ -155,14 +203,14 @@ pred_accuracy <- function(sim, actual, conf.matrix = FALSE) {
   if (conf.matrix) {
     return(xtabs(formula = ~ sim + actual))
   }
-  
+
   return(sum(actual == sim)/length(actual))
 }
 ```
 
-For each training set, I fit the Bradley-Terry Model with HFA, I then use the model to predict the log odds for each match within the training set. This prediction is identical to plugging in the parameters to (1) Translating that to a probability using the sigmoid function, I then use a simple proportion of correct predictions of game outcomes from the Monte-Carlo simulation as an information metric. 
+For each training set, I fit the Bradley-Terry Model with HFA, I then use the model to predict the log odds for each match within the training set. This prediction is identical to plugging in the parameters to (1) Translating that to a probability using the sigmoid function, I then use a simple proportion of correct predictions of game outcomes from the Monte-Carlo simulation as an information metric.
 
-I test below my method for finding information content on a 20 training and complementary test sets at one eigth of the season's games. There will be warnings for perfect separation in this case bcause of the small proportion of games. In an example I looked at, Boston was rated very highly because they won 4 away games in the set and that made predictions with them shoot to probability 1 in their favor. 
+I test below my method for finding information content on a 20 training and complementary test sets at one eigth of the season's games. There will be warnings for perfect separation in this case bcause of the small proportion of games. In an example I looked at, Boston was rated very highly because they won 4 away games in the set and that made predictions with them shoot to probability 1 in their favor.
 
 Next steps will be to evaluate this method for sequential games as well as directly compare it to Wolfson Koopmeiner's information metric.
 
@@ -176,9 +224,9 @@ nba_11_info_metrics <- nba_11_info_sets %>%
   group_by(train_prop) %>%
   mutate(
     set_id = row_number(),
-    btm = future_map(.x = train, .f = ~BTm(outcome = home_win, 
+    btm = future_map(.x = train, .f = ~BTm(outcome = home_win,
                                            player1 = data.frame(team = home, hfa = 1), player2 = data.frame(team = away, hfa = 0),
-                                           formula = ~team + hfa, id = "team", data = .x)), 
+                                           formula = ~team + hfa, id = "team", data = .x)),
     pred_logit = future_map2(.x = test, .y = btm, .f = ~predict(object = .y, newdata = .x)),
     pred_prob = future_map(.x = pred_logit, .f = sigmoid),
     sim = future_map(.x = pred_prob, .f = ~rbernoulli(n = 1, p = .x)),
@@ -189,7 +237,7 @@ nba_11_info_metrics <- nba_11_info_sets %>%
   )
 ```
 
-```{r info_metrics_eval} 
+```{r info_metrics_eval}
 nba_11_info_metrics %>%
   summarise(mean_info_metric = mean(info_metric),
             median_info_metric = median(info_metric),
@@ -200,12 +248,12 @@ nba_11_info_metrics %>%
 
 ![](wolfson_compare.png "Wolfson Graph")
 
-I was able to reproduce the NBA 2010-2011 season results from Wolfson Koopmeiner's paper for the mean information metric. In that paper they simply take the predicted probability of the match result and predict a win if the probability is over 0.5. The same information metric in (4) based off of predicted results is used. 
+I was able to reproduce the NBA 2010-2011 season results from Wolfson Koopmeiner's paper for the mean information metric. In that paper they simply take the predicted probability of the match result and predict a win if the probability is over 0.5. The same information metric in (4) based off of predicted results is used.
 
 However, we see a pretty significant difference when implementing an info metric based off of a Monte-Carlo simulation from the predicted probabilties rather than the simple greater than 0.5 rule used in the paper. Next steps are to fit a similar quadratic curve as is what's seen in the paper to see how it would compare to the visual crux of the paper.
 
 ## Margin of Victory
-Now, we try a margin of victory to predict $\theta_i$ where the intercept parameter in the linear model represents a home field advantage. In (2), $\delta_{i,j}$ represents the number of points $i$ (home) has over $j$ (away) and is negative if $j$ won. 
+Now, we try a margin of victory to predict $\theta_i$ where the intercept parameter in the linear model represents a home field advantage. In (2), $\delta_{i,j}$ represents the number of points $i$ (home) has over $j$ (away) and is negative if $j$ won.
 
 \begin{equation}
   \delta_{i,j} = \theta_i - \theta_j + \alpha
@@ -259,12 +307,12 @@ This is solved by including a linear constraint to $\mathbf{X}$ through a row co
 # Function records each instance of a team participating in a match, whether they were home or away
 stack_games <- function(df, ...){
   home_teams <- df %>%
-    select(season, game_id, home, home_mov, ...) %>% 
-    mutate(hfa = 1) %>% 
+    select(season, game_id, home, home_mov, ...) %>%
+    mutate(hfa = 1) %>%
     rename('team' = home)
   away_teams <- df %>%
-    select(season, game_id, away, home_mov, ...) %>% 
-    mutate(hfa = -1) %>% 
+    select(season, game_id, away, home_mov, ...) %>%
+    mutate(hfa = -1) %>%
     rename('team' = away)
   return(bind_rows(home_teams, away_teams))
 }
@@ -272,9 +320,10 @@ stack_games <- function(df, ...){
 # Creates a column for each team and, in each game_id row, puts a 1 if they're the home team and a -1 if they're away, 0 otherwise
 # Equivalent to a column of home_mov results and a design matrix for each game
 # home_mov = home - away + hfa
+
 nba_11_model_matrix <- nba_11 %>%
   stack_games %>%
-  spread(key = team, value = hfa, fill = 0) %>% 
+  spread(key = team, value = hfa, fill = 0) %>%
   select(-c(season, game_id)) %>%
   rbind(c(0, rep(1, length(levels(nba_11$home))))) # Linear Constraint, make the sum of all team parameters equal to 0
 
@@ -293,7 +342,7 @@ nba_11_mov_thetas <- coef(summary(nba_11_mov)) %>%
 nba_11_mov_thetas %>%
   ggplot(aes(x = reorder(as.factor(team), Estimate), color = as.factor(team))) +
   geom_point(aes(y = Estimate)) +
-  geom_errorbar(aes(ymin = Estimate - Std..Error, ymax =Estimate + Std..Error)) + 
+  geom_errorbar(aes(ymin = Estimate - Std..Error, ymax =Estimate + Std..Error)) +
   coord_flip() + theme(legend.position = "none") + xlab("Team") + ylab(expression(theta))
 ```
 

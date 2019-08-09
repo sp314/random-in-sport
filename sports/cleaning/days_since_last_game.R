@@ -46,7 +46,7 @@ get_days_since_last_game <- function(df) {
       team0_win = team0_score > team1_score
     ) %>%
     select(season, game_id, game_date, team0, team1, team0_win, team0_score, team1_score,
-           team0_hfa, team1_hfa, team0_days_since_last_game, team1_days_since_last_game) %>%
+           team0_hfa, team1_hfa, team0_days_since_last_game, team1_days_since_last_game, away_distance_traveled) %>%
     ungroup()
   
   #With the feature now recorded, select the rows where team0 is home and revert to home away cols
@@ -70,13 +70,14 @@ get_days_since_last_game <- function(df) {
 
 # RUN
 nba <- read_csv(file = "../../sports_scraper/nba_1999_2019.csv") %>% get_days_since_last_game()
-nhl <- read_csv(file = "../../sports_scraper/nhl_1999_2018.csv") %>% get_days_since_last_game()
+nhl <- read_csv(file = "../../sports_scraper/nhl_1999_2019.csv") %>% get_days_since_last_game()
 nfl <- read_csv(file = "../../sports_scraper/nfl_1999_2018.csv") %>% get_days_since_last_game()
 
-write_csv(x = nba, path = "data/nba.csv")
-write_csv(x = nhl, path = "data/nhl.csv")
-write_csv(x = nfl, path = "data/nfl.csv")
-# 
+# write_csv(x = nba, path = "data/nba.csv")
+# write_csv(x = nhl, path = "data/nhl.csv")
+# write_csv(x = nfl, path = "data/nfl.csv")
+
+
 # # Visualize for fun!
 # nba_date_gaps <- c(nba$home_days_since_last_game, nba$away_days_since_last_game)
 # nba_date_gaps <- data.frame(days_since_last_game = nba_date_gaps[nba_date_gaps != 0], 
