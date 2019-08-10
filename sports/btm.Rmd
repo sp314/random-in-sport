@@ -70,18 +70,18 @@ nba_11 <- nba %>%
     )
 
 # Fit Bradley-Terry rating model for binary outcomes
-nba_11_btm <- BTm(outcome = home_win, #1 if player1 (home) wins and 0 if player2 (away) does
+btm <- BTm(outcome = home_win, #1 if player1 (home) wins and 0 if player2 (away) does
     player1 = data.frame(team = home, hfa = 1), 
     player2 = data.frame(team = away, hfa = 0),
     formula = ~team + hfa, id = "team", data = nba_11)
 
-summary(nba_11_btm)
+summary(btm)
 ```
 
 HFA seems to increase a teams strength parameter quite a lot (0.53427) with a high statistical significance from the null. That's about the difference between last place 30th Minnesota Timberwolves (-1.521) and the middle of the pack 14th Houston Rockets (0.069).
 
 ```{r bt_plot, echo=FALSE}
-qvcalc(BTabilities(nba_11_btm))$qvframe %>% #quasi normal standard errors
+qvcalc(BTabilities(btm))$qvframe %>% #quasi normal standard errors
   rownames_to_column(var = "team") %>%
   ggplot(aes(x = reorder(as.factor(team), estimate), color = as.factor(team))) +
   geom_point(aes(y = estimate)) +
@@ -99,12 +99,12 @@ I add another variable within the Bradley-Terry model to measure the effect of h
 
 ```{r bt_days}
 # Fit Bradley-Terry rating model for binary outcomes
-nba_11_btm_days <- BTm(outcome = home_win, #1 if player1 (home) wins and 0 if player2 (away) does
+btm_days <- BTm(outcome = home_win, #1 if player1 (home) wins and 0 if player2 (away) does
     player1 = data.frame(team = home, hfa = 1, days_out = home_days_since_last_game), 
     player2 = data.frame(team = away, hfa = 0, days_out = away_days_since_last_game),
     formula = ~team + hfa + days_out, id = "team", data = nba_11)
 
-summary(nba_11_btm_days)
+summary(btm_days)
 ```
 
 My prior going into fitting this model is that coefficient for **days_out**, $\delta$ would likely be very insignificant. Just by my thinking, the amount of days in between matches might have a more complex relationship with winning odds and is likely not linear. For instance, a long time not playing may give teams an opportunity to rest but also can make them deconditioned from intense competition, on the flipside, a team can have a lot of momentum playing a lot frequently but can result in injuries and 'burnout'. 
@@ -112,7 +112,7 @@ My prior going into fitting this model is that coefficient for **days_out**, $\d
 We end up seeing a pretty small coefficient as well as a low absolute z score and higher p value. Most of the strength parameters are not really affected by the inclusion of this predictor, with the change across $\theta$'s being below the order of $0.01$. In addition to looking at a deeper number of lagged games, testing this across seasons as well as with the measuring information content through forecasting will be a good step forward.
 
 ```{r bt_days_plot, echo=FALSE}
-qvcalc(BTabilities(nba_11_btm_days))$qvframe %>% #quasi normal standard errors
+qvcalc(BTabilities(btm_days))$qvframe %>% #quasi normal standard errors
   rownames_to_column(var = "team") %>%
   ggplot(aes(x = reorder(as.factor(team), estimate), color = as.factor(team))) +
   geom_point(aes(y = estimate)) +
@@ -120,24 +120,67 @@ qvcalc(BTabilities(nba_11_btm_days))$qvframe %>% #quasi normal standard errors
   coord_flip() + theme(legend.position = "none") + xlab("Team") + ylab(expression(theta))
 ```
 
-I redo this model letting the coefficient for `home_days_since_last_game` and `away_days_since_last_game` be different and manually running the regression in glm.
+I redo this model letting the coefficient for `home_days_since_last_game` and `away_days_since_last_game` be different and manually running the regression in glm. This equation is expressed below.
 
-```{r bt_manual}
-nba_11_btm_model_matrix <- nba_11 %>%
+\begin{equation}
+  \ln\left( \frac{\pi_{i,j}}{1 - \pi_{i,j}} \right) = \theta_i - \theta_j + \alpha + \delta_h d_{i} - \delta_a d_{j}
+\end{equation}
+
+```{r bt_days_manual}
+# Function records each instance of a team participating in a match, whether they were home or away
+stack_games <- function(df, ...){
+  home_teams <- df %>%
+    select(season, game_id, home, home_mov, ...) %>%
+    mutate(hfa = 1) %>%
+    rename('team' = home)
+  away_teams <- df %>%
+    select(season, game_id, away, home_mov, ...) %>%
+    mutate(hfa = -1) %>%
+    rename('team' = away)
+  return(bind_rows(home_teams, away_teams))
+}
+
+btm_model_matrix <- nba_11 %>%
   stack_games() %>%
   mutate(home_win = home_mov > 0) %>%
   spread(key = team, value = hfa, fill = 0) %>%
   select(-c(season, game_id, home_mov)) %>%
   cbind(nba_11$home_days_since_last_game, nba_11$away_days_since_last_game) %>%
   rename('home_days_since_last_game' = `nba_11$home_days_since_last_game`, 
-         'away_days_since_last_game' = `nba_11$away_days_since_last_game`) %>%
-  rbind(c(0, rep(1, length(levels(nba_11$home))))) # Linear Constraint, make the sum of all team parameters equal to 0
+         'away_days_since_last_game' = `nba_11$away_days_since_last_game` )%>%
+  rbind(c(1 , rep(1, length(levels(nba_11$home))), 0, 0)) # Arbitrary linear constraint for unique solution vec
 
-nba_11_btm_days_manual <- glm(formula = home_win ~ ., family = "binomial", data = nba_11_btm_model_matrix)
-summary(nba_11_btm_days_manual)
+btm_days_manual <- glm(formula = home_win ~ ., family = "binomial", data = btm_model_matrix)
+summary(btm_days_manual)
 ```
 
 It still remains that having more days out since last game for the home team reduces their chance of winning. On the flipside having more days out on the away team increase the home team's chance of winning. All in all, the model spits out a negative effect on winning probability for increased days out.
+
+Continuing onward, it is quite possible that there is a non-linear relationship between days out and winning odds, additionally the sample is centered about around 2 `days_since_last_game`. I want to test this first by fitting the same model as (2), having the number of days out be a factor variable. The equation is outlined below where 9 is the highest number of days out, $\delta_{h, i}$ is the effect of having a team be $i$ days out on the winning odds for the home team and $d_{h, i}$ is 1 or 0 whether the home team is $i$ days out or not.
+
+\begin{equation}
+  \displaystyle \ln\left( \frac{\pi_{i,j}}{1 - \pi_{i,j}} \right) = \theta_i - \theta_j + \alpha + \sum_{i = 1}^{9}\delta_{i}d_{a, i} + \sum_{i = 1}^{9}\delta_{i}d_{a, i}
+\end{equation}
+
+```{r bt_days_fct}
+all_days_values <- unique(union(nba_11$home_days_since_last_game, nba_11$away_days_since_last_game))
+
+nba_11_days_fct <- nba_11 %>%
+  mutate(
+    home_days_since_last_game = factor(x = home_days_since_last_game, levels = all_days_values),
+    away_days_since_last_game = factor(x = away_days_since_last_game, levels = all_days_values)
+  )
+
+# Fit Bradley-Terry rating model for binary outcomes
+btm_days <- BTm(outcome = home_win, #1 if player1 (home) wins and 0 if player2 (away) does
+    player1 = data.frame(team = home, hfa = 1, days_out = home_days_since_last_game), 
+    player2 = data.frame(team = away, hfa = 0, days_out = away_days_since_last_game),
+    formula = ~team + hfa + days_out, id = "team", data = nba_11_days_fct)
+
+summary(btm_days)
+```
+
+It's a pretty non-linear trend. It seems like the high days out really messes with winning odds so that may be why it's trending negative on the continuous models (2)/(3). I'll look into the decision tree models. I want to try on the entire data set to see if this rings true since the only day_out9 is for an away team so that may be skewing things heavily. Also, I use days_out0 as the first game of the season, should think about how we think about the first day of the season in the data. 
 
 ## Away Distance Traveled
 
@@ -149,16 +192,16 @@ Another feature I looked at was the distance that the away team had to travel be
 
 ```{r bt_distance}
 # Fit Bradley-Terry rating model for binary outcomes
-nba_11_btm_distance <- BTm(outcome = home_win, #1 if player1 (home) wins and 0 if player2 (away) does
+btm_distance <- BTm(outcome = home_win, #1 if player1 (home) wins and 0 if player2 (away) does
     player1 = data.frame(team = home, hfa = 1, distance_traveled = 0), 
     player2 = data.frame(team = away, hfa = 0, distance_traveled = away_distance_traveled),
     formula = ~team + hfa + distance_traveled, id = "team", data = nba_11)
 
-summary(nba_11_btm_distance)
+summary(btm_distance)
 ```
 
 ```{r bt_distance_plot, echo=FALSE}
-qvcalc(BTabilities(nba_11_btm_distance))$qvframe %>% #quasi normal standard errors
+qvcalc(BTabilities(btm_distance))$qvframe %>% #quasi normal standard errors
   rownames_to_column(var = "team") %>%
   ggplot(aes(x = reorder(as.factor(team), estimate), color = as.factor(team))) +
   geom_point(aes(y = estimate)) +
@@ -234,9 +277,9 @@ Next steps will be to evaluate this method for sequential games as well as direc
 #Sorry for the monster of a call, the gist is that I'm using a dataframe where some columns are also dataframes, using map makes things similar to apply functions to each dataframe element, futuremap is a parallel processing implementation of purrr's original map from the tidyverse
 
 #Take a dataframe where each row is a training set and test set of a proportion
-nba_11_info_sets <- training_split_df(df = nba_11, prop = c(0.125,0.25, 0.375, 0.50, 0.625, 0.75, 0.875), n_sets = 100)
+info_sets <- training_split_df(df = nba_11, prop = c(0.125,0.25, 0.375, 0.50, 0.625, 0.75, 0.875), n_sets = 100)
 
-nba_11_info_metrics <- nba_11_info_sets %>%
+info_metrics <- info_sets %>%
   group_by(train_prop) %>%
   mutate(
     set_id = row_number(),
@@ -255,7 +298,7 @@ nba_11_info_metrics <- nba_11_info_sets %>%
 ```
 
 ```{r info_metrics_eval}
-nba_11_info_metrics %>%
+info_metrics %>%
   summarise(mean_info_metric = mean(info_metric),
             median_info_metric = median(info_metric),
             mean_wolfson_info_metric = mean(wolfson_info_metric),
@@ -321,19 +364,6 @@ Thus, for a season with $k$ games and $s$ teams, (3) is our system of linear equ
 This is solved by including a linear constraint to $\mathbf{X}$ through a row constraint. A simple constraint is to have all of the strength parameters sum up to 1 $\left(\sum_S \theta_i = 0\right)$. This is done by inserting a row with all ones in $\mathbf{X}$ and having the corresponding element in the response vector, $\mathbf{y}$, be $0$.
 
 ```{r massey}
-# Function records each instance of a team participating in a match, whether they were home or away
-stack_games <- function(df, ...){
-  home_teams <- df %>%
-    select(season, game_id, home, home_mov, ...) %>%
-    mutate(hfa = 1) %>%
-    rename('team' = home)
-  away_teams <- df %>%
-    select(season, game_id, away, home_mov, ...) %>%
-    mutate(hfa = -1) %>%
-    rename('team' = away)
-  return(bind_rows(home_teams, away_teams))
-}
-
 # Creates a column for each team and, in each game_id row, puts a 1 if they're the home team and a -1 if they're away, 0 otherwise
 # Equivalent to a column of home_mov results and a design matrix for each game
 # home_mov = home - away + hfa
