@@ -39,7 +39,7 @@ library(printr)
 library(furrr)
 
 options(width = 80)
-set.seed(190730)
+set.seed(07301999)
 
 # Data is scraped using files from sports_scraper and then processed through days_since_last_game.R
 nba <- read_csv(file = "data/nba.csv", col_types = cols(game_date = col_date(format = "%Y-%m-%d"), season = col_factor()))
@@ -120,6 +120,25 @@ qvcalc(BTabilities(nba_11_btm_days))$qvframe %>% #quasi normal standard errors
   coord_flip() + theme(legend.position = "none") + xlab("Team") + ylab(expression(theta))
 ```
 
+I redo this model letting the coefficient for `home_days_since_last_game` and `away_days_since_last_game` be different and manually running the regression in glm.
+
+```{r bt_manual}
+nba_11_btm_model_matrix <- nba_11 %>%
+  stack_games() %>%
+  mutate(home_win = home_mov > 0) %>%
+  spread(key = team, value = hfa, fill = 0) %>%
+  select(-c(season, game_id, home_mov)) %>%
+  cbind(nba_11$home_days_since_last_game, nba_11$away_days_since_last_game) %>%
+  rename('home_days_since_last_game' = `nba_11$home_days_since_last_game`, 
+         'away_days_since_last_game' = `nba_11$away_days_since_last_game`) %>%
+  rbind(c(0, rep(1, length(levels(nba_11$home))))) # Linear Constraint, make the sum of all team parameters equal to 0
+
+nba_11_btm_days_manual <- glm(formula = home_win ~ ., family = "binomial", data = nba_11_btm_model_matrix)
+summary(nba_11_btm_days_manual)
+```
+
+It still remains that having more days out since last game for the home team reduces their chance of winning. On the flipside having more days out on the away team increase the home team's chance of winning. All in all, the model spits out a negative effect on winning probability for increased days out.
+
 ## Away Distance Traveled
 
 Another feature I looked at was the distance that the away team had to travel before a particular match. This is similar to the previous theory that players may get burned out and possibly more burned out by having to travel more. The model is outlined below with $d_{j,i}$ being the distance between team $j$ and team $i$'s location. I use approximate locations based on cities rather than exact stadium locations.
@@ -146,9 +165,6 @@ qvcalc(BTabilities(nba_11_btm_distance))$qvframe %>% #quasi normal standard erro
   geom_errorbar(aes(ymin = estimate - quasiSE, ymax = estimate + quasiSE)) + 
   coord_flip() + theme(legend.position = "none") + xlab("Team") + ylab(expression(theta))
 ```
-
-
-
 
 ## Quantifying Information Content: Random Sample Games
 
@@ -214,7 +230,7 @@ I test below my method for finding information content on a 20 training and comp
 
 Next steps will be to evaluate this method for sequential games as well as directly compare it to Wolfson Koopmeiner's information metric.
 
-```{r info_content_exec, warning=FALSE}
+```{r info_content_exec}
 #Sorry for the monster of a call, the gist is that I'm using a dataframe where some columns are also dataframes, using map makes things similar to apply functions to each dataframe element, futuremap is a parallel processing implementation of purrr's original map from the tidyverse
 
 #Take a dataframe where each row is a training set and test set of a proportion
@@ -229,7 +245,8 @@ nba_11_info_metrics <- nba_11_info_sets %>%
                                            formula = ~team + hfa, id = "team", data = .x)),
     pred_logit = future_map2(.x = test, .y = btm, .f = ~predict(object = .y, newdata = .x)),
     pred_prob = future_map(.x = pred_logit, .f = sigmoid),
-    sim = future_map(.x = pred_prob, .f = ~rbernoulli(n = 1, p = .x)),
+    sim = future_map(.x = pred_prob, .f = ~ifelse(test = .x < 0.6 & .x > 0.4, yes = rbinom(n = length(.x), size = 1, p = .x), no = (. > 0.5))),
+    # sim = future_map(.x = pred_prob, .f = ~rbern(n = length(.x), p = .x)),
     naive_sim = future_map(.x = pred_prob, .f = ~(. > 0.5)),
     actual = future_map(.x = test, .f = ~pull(.data = .x, var = 'home_win')),
     info_metric = unlist(future_map2(.x = sim, .y = actual, .f = ~pred_accuracy(sim = .x, actual = .y))),
@@ -321,25 +338,25 @@ stack_games <- function(df, ...){
 # Equivalent to a column of home_mov results and a design matrix for each game
 # home_mov = home - away + hfa
 
-nba_11_model_matrix <- nba_11 %>%
+mov_model_matrix <- nba_11 %>%
   stack_games %>%
   spread(key = team, value = hfa, fill = 0) %>%
   select(-c(season, game_id)) %>%
   rbind(c(0, rep(1, length(levels(nba_11$home))))) # Linear Constraint, make the sum of all team parameters equal to 0
 
-nba_11_mov <- lm(formula = home_mov ~., data = nba_11_model_matrix)
-summary(nba_11_mov)
+mov <- lm(formula = home_mov ~., data = mov_model_matrix)
+summary(mov)
 ```
 
 Strength parameters represent a shift of the expected margin of victory over the other team. An example being a match up between Atlanta Hawks (-1.2021) and Phoenix Suns (-0.5638), with the Atlanta Hawks having the home-field advantage, would have an expected margin of victory of $\theta_{AH} - \theta_{PS} + \alpha = 2.5292$ in favor of the Atlanta Hawks.
 
 ```{r massey_plot}
-nba_11_mov_thetas <- coef(summary(nba_11_mov)) %>%
+mov_thetas <- coef(summary(mov)) %>%
   data.frame() %>%
   rownames_to_column(var = "team") %>%
   filter(team != "(Intercept)")
 
-nba_11_mov_thetas %>%
+mov_thetas %>%
   ggplot(aes(x = reorder(as.factor(team), Estimate), color = as.factor(team))) +
   geom_point(aes(y = Estimate)) +
   geom_errorbar(aes(ymin = Estimate - Std..Error, ymax =Estimate + Std..Error)) +
