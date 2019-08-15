@@ -3607,24 +3607,22 @@ MathJax.Hub.Config({
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">#Sorry for the monster of a call, the gist is that I&#39;m using a dataframe where some columns are also dataframes, using map makes things similar to apply functions to each dataframe element, futuremap is a parallel processing implementation of purrr&#39;s original map from the tidyverse</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a></span>
 <span id="cb17-3"><a href="#cb17-3"></a><span class="co">#Take a dataframe where each row is a training set and test set of a proportion</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a>info_sets &lt;-<span class="st"> </span><span class="kw">training_split_df</span>(<span class="dt">df =</span> nba_<span class="dv">11</span>, <span class="dt">prop =</span> <span class="kw">c</span>(<span class="fl">0.125</span>,<span class="fl">0.25</span>, <span class="fl">0.375</span>, <span class="fl">0.50</span>, <span class="fl">0.625</span>, <span class="fl">0.75</span>, <span class="fl">0.875</span>), <span class="dt">n_sets =</span> <span class="dv">100</span>)</span>
+<span id="cb17-4"><a href="#cb17-4"></a>info_sets &lt;-<span class="st"> </span><span class="kw">training_split_df</span>(<span class="dt">df =</span> nba_<span class="dv">11</span>, <span class="dt">prop =</span> <span class="kw">c</span>(<span class="fl">0.125</span>,<span class="fl">0.25</span>, <span class="fl">0.375</span>, <span class="fl">0.50</span>, <span class="fl">0.625</span>, <span class="fl">0.75</span>, <span class="fl">0.875</span>), <span class="dt">n_sets =</span> <span class="dv">100</span>, <span class="dt">mov =</span> <span class="ot">FALSE</span>)</span>
 <span id="cb17-5"><a href="#cb17-5"></a></span>
 <span id="cb17-6"><a href="#cb17-6"></a>info_metrics &lt;-<span class="st"> </span>info_sets <span class="op">%&gt;%</span></span>
 <span id="cb17-7"><a href="#cb17-7"></a><span class="st">  </span><span class="kw">group_by</span>(train_prop) <span class="op">%&gt;%</span></span>
 <span id="cb17-8"><a href="#cb17-8"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
 <span id="cb17-9"><a href="#cb17-9"></a>    <span class="dt">set_id =</span> <span class="kw">row_number</span>(),</span>
-<span id="cb17-10"><a href="#cb17-10"></a>    <span class="dt">btm =</span> <span class="kw">future_map</span>(<span class="dt">.x =</span> train, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">BTm</span>(<span class="dt">outcome =</span> home_win,</span>
-<span id="cb17-11"><a href="#cb17-11"></a>                                           <span class="dt">player1 =</span> <span class="kw">data.frame</span>(<span class="dt">team =</span> home, <span class="dt">hfa =</span> <span class="dv">1</span>), <span class="dt">player2 =</span> <span class="kw">data.frame</span>(<span class="dt">team =</span> away, <span class="dt">hfa =</span> <span class="dv">0</span>),</span>
-<span id="cb17-12"><a href="#cb17-12"></a>                                           <span class="dt">formula =</span> <span class="op">~</span>team <span class="op">+</span><span class="st"> </span>hfa, <span class="dt">id =</span> <span class="st">&quot;team&quot;</span>, <span class="dt">data =</span> .x)),</span>
-<span id="cb17-13"><a href="#cb17-13"></a>    <span class="dt">pred_logit =</span> <span class="kw">future_map2</span>(<span class="dt">.x =</span> test, <span class="dt">.y =</span> btm, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">predict</span>(<span class="dt">object =</span> .y, <span class="dt">newdata =</span> .x)),</span>
-<span id="cb17-14"><a href="#cb17-14"></a>    <span class="dt">pred_prob =</span> <span class="kw">future_map</span>(<span class="dt">.x =</span> pred_logit, <span class="dt">.f =</span> sigmoid),</span>
-<span id="cb17-15"><a href="#cb17-15"></a>    <span class="dt">sim =</span> <span class="kw">future_map</span>(<span class="dt">.x =</span> pred_prob, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">ifelse</span>(<span class="dt">test =</span> .x <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.6</span> <span class="op">&amp;</span><span class="st"> </span>.x <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.4</span>, <span class="dt">yes =</span> <span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">length</span>(.x), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">p =</span> .x), <span class="dt">no =</span> (. <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>))),</span>
-<span id="cb17-16"><a href="#cb17-16"></a>    <span class="co"># sim = future_map(.x = pred_prob, .f = ~rbern(n = length(.x), p = .x)),</span></span>
-<span id="cb17-17"><a href="#cb17-17"></a>    <span class="dt">naive_sim =</span> <span class="kw">future_map</span>(<span class="dt">.x =</span> pred_prob, <span class="dt">.f =</span> <span class="op">~</span>(. <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>)),</span>
-<span id="cb17-18"><a href="#cb17-18"></a>    <span class="dt">actual =</span> <span class="kw">future_map</span>(<span class="dt">.x =</span> test, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">pull</span>(<span class="dt">.data =</span> .x, <span class="dt">var =</span> <span class="st">&#39;home_win&#39;</span>)),</span>
-<span id="cb17-19"><a href="#cb17-19"></a>    <span class="dt">info_metric =</span> <span class="kw">unlist</span>(<span class="kw">future_map2</span>(<span class="dt">.x =</span> sim, <span class="dt">.y =</span> actual, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">pred_accuracy</span>(<span class="dt">sim =</span> .x, <span class="dt">actual =</span> .y))),</span>
-<span id="cb17-20"><a href="#cb17-20"></a>    <span class="dt">wolfson_info_metric =</span> <span class="kw">unlist</span>(<span class="kw">future_map2</span>(<span class="dt">.x =</span> naive_sim, <span class="dt">.y =</span> actual, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">pred_accuracy</span>(<span class="dt">sim =</span> .x, <span class="dt">actual =</span> .y)))</span>
-<span id="cb17-21"><a href="#cb17-21"></a>  )</span></code></pre></div>
+<span id="cb17-10"><a href="#cb17-10"></a>    <span class="dt">btm =</span> <span class="kw">future_map</span>(<span class="dt">.x =</span> train, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">glm</span>(<span class="dt">formula =</span> Y <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">family =</span> <span class="kw">binomial</span>(), <span class="dt">data =</span> .x)),</span>
+<span id="cb17-11"><a href="#cb17-11"></a>    <span class="dt">pred_logit =</span> <span class="kw">future_map2</span>(<span class="dt">.x =</span> test, <span class="dt">.y =</span> btm, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">predict.glm</span>(<span class="dt">object =</span> .y, <span class="dt">newdata =</span> .x)),</span>
+<span id="cb17-12"><a href="#cb17-12"></a>    <span class="dt">pred_prob =</span> <span class="kw">future_map</span>(<span class="dt">.x =</span> pred_logit, <span class="dt">.f =</span> sigmoid),</span>
+<span id="cb17-13"><a href="#cb17-13"></a>    <span class="co"># sim = future_map(.x = pred_prob, .f = ~ifelse(test = .x &lt; 0.6 &amp; .x &gt; 0.4, yes = rbinom(n = length(.x), size = 1, prob = .x), no = (. &gt; 0.5))),</span></span>
+<span id="cb17-14"><a href="#cb17-14"></a>    <span class="dt">sim =</span> <span class="kw">future_map</span>(<span class="dt">.x =</span> pred_prob, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">length</span>(.x), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> .x)),</span>
+<span id="cb17-15"><a href="#cb17-15"></a>    <span class="dt">naive_sim =</span> <span class="kw">future_map</span>(<span class="dt">.x =</span> pred_prob, <span class="dt">.f =</span> <span class="op">~</span>(. <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>)),</span>
+<span id="cb17-16"><a href="#cb17-16"></a>    <span class="dt">actual =</span> <span class="kw">future_map</span>(<span class="dt">.x =</span> test, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">pull</span>(<span class="dt">.data =</span> .x, <span class="dt">var =</span> <span class="st">&#39;Y&#39;</span>)),</span>
+<span id="cb17-17"><a href="#cb17-17"></a>    <span class="dt">info_metric =</span> <span class="kw">unlist</span>(<span class="kw">future_map2</span>(<span class="dt">.x =</span> sim, <span class="dt">.y =</span> actual, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">pred_accuracy</span>(<span class="dt">sim =</span> .x, <span class="dt">actual =</span> .y))),</span>
+<span id="cb17-18"><a href="#cb17-18"></a>    <span class="dt">wolfson_info_metric =</span> <span class="kw">unlist</span>(<span class="kw">future_map2</span>(<span class="dt">.x =</span> naive_sim, <span class="dt">.y =</span> actual, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">pred_accuracy</span>(<span class="dt">sim =</span> .x, <span class="dt">actual =</span> .y)))</span>
+<span id="cb17-19"><a href="#cb17-19"></a>  )</span></code></pre></div>
 <pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 
 ## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
@@ -3663,50 +3661,50 @@ MathJax.Hub.Config({
 <tbody>
 <tr class="odd">
 <td align="right">0.125</td>
-<td align="right">0.6411989</td>
-<td align="right">0.6412639</td>
+<td align="right">0.6111245</td>
+<td align="right">0.6124535</td>
 <td align="right">0.6425929</td>
 <td align="right">0.6412639</td>
 </tr>
 <tr class="even">
 <td align="right">0.250</td>
-<td align="right">0.6609219</td>
-<td align="right">0.6610629</td>
+<td align="right">0.6093059</td>
+<td align="right">0.6095445</td>
 <td align="right">0.6651518</td>
 <td align="right">0.6670282</td>
 </tr>
 <tr class="odd">
 <td align="right">0.375</td>
-<td align="right">0.6703121</td>
-<td align="right">0.6723017</td>
+<td align="right">0.6082965</td>
+<td align="right">0.6072822</td>
 <td align="right">0.6757737</td>
 <td align="right">0.6749025</td>
 </tr>
 <tr class="even">
 <td align="right">0.500</td>
-<td align="right">0.6723740</td>
-<td align="right">0.6707317</td>
+<td align="right">0.6093984</td>
+<td align="right">0.6097561</td>
 <td align="right">0.6794309</td>
 <td align="right">0.6796748</td>
 </tr>
 <tr class="odd">
 <td align="right">0.625</td>
-<td align="right">0.6728850</td>
-<td align="right">0.6724512</td>
+<td align="right">0.6085900</td>
+<td align="right">0.6095445</td>
 <td align="right">0.6816269</td>
 <td align="right">0.6789588</td>
 </tr>
 <tr class="even">
 <td align="right">0.750</td>
-<td align="right">0.6734740</td>
-<td align="right">0.6737013</td>
+<td align="right">0.6052922</td>
+<td align="right">0.6055195</td>
 <td align="right">0.6834091</td>
 <td align="right">0.6818182</td>
 </tr>
 <tr class="odd">
 <td align="right">0.875</td>
-<td align="right">0.6833117</td>
-<td align="right">0.6883117</td>
+<td align="right">0.6094156</td>
+<td align="right">0.6136364</td>
 <td align="right">0.6924026</td>
 <td align="right">0.6948052</td>
 </tr>

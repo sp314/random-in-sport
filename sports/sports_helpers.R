@@ -11,10 +11,6 @@ match_design_matrix <- function(df, mov, ...) {
     model.matrix(~team + hfa - 1, ., contrasts.arg = list(team = "contr.sum"))
   
   design <- cbind(home_teams - away_teams, df %>% select(...))
-  
-  n_teams <- length(levels(nba_11$home))
-  n_predictors <- ncol(design) - n_teams
-
   if (mov) {
     design <- cbind(Y = df$home_mov, design)
   }
@@ -27,7 +23,7 @@ match_design_matrix <- function(df, mov, ...) {
 
 
 # For each proportion, make n_sets of training and test sets and bind into dataframe
-training_split_df <- function(df, prop, n_sets) {
+training_split_df <- function(df, prop, n_sets, mov) {
   train_list <- list()
   test_list <- list()
   
@@ -35,13 +31,15 @@ training_split_df <- function(df, prop, n_sets) {
     for (idx in 1:n_sets) {
       #Create training set
       train <- df %>%
-        sample_frac(p, replace = FALSE)
+        sample_frac(p, replace = FALSE) %>%
+        match_design_matrix(mov = mov, game_id)
       
       #Create test set
       test  <- df %>%
-        anti_join(y = train, by = 'game_id')
+        anti_join(y = train, by = 'game_id') %>%
+        match_design_matrix(mov = mov)
       
-      train_list[[as.character(p)]][[idx]] <- train
+      train_list[[as.character(p)]][[idx]] <- train[1:ncol(test)]
       test_list[[as.character(p)]][[idx]] <- test
     }
   }

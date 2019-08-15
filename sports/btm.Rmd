@@ -37,7 +37,6 @@ library(broom)
 library(Matrix)
 library(printr)
 library(furrr)
-library(BradleyTerry2)
 source("sports_helpers.R")
 
 options(width = 80)
@@ -265,21 +264,19 @@ Next steps will be to evaluate this method for sequential games as well as direc
 #Sorry for the monster of a call, the gist is that I'm using a dataframe where some columns are also dataframes, using map makes things similar to apply functions to each dataframe element, futuremap is a parallel processing implementation of purrr's original map from the tidyverse
 
 #Take a dataframe where each row is a training set and test set of a proportion
-info_sets <- training_split_df(df = nba_11, prop = c(0.125,0.25, 0.375, 0.50, 0.625, 0.75, 0.875), n_sets = 100)
+info_sets <- training_split_df(df = nba_11, prop = c(0.125,0.25, 0.375, 0.50, 0.625, 0.75, 0.875), n_sets = 100, mov = FALSE)
 
 info_metrics <- info_sets %>%
   group_by(train_prop) %>%
   mutate(
     set_id = row_number(),
-    btm = future_map(.x = train, .f = ~BTm(outcome = home_win,
-                                           player1 = data.frame(team = home, hfa = 1), player2 = data.frame(team = away, hfa = 0),
-                                           formula = ~team + hfa, id = "team", data = .x)),
-    pred_logit = future_map2(.x = test, .y = btm, .f = ~predict(object = .y, newdata = .x)),
+    btm = future_map(.x = train, .f = ~glm(formula = Y ~ . - 1, family = binomial(), data = .x)),
+    pred_logit = future_map2(.x = test, .y = btm, .f = ~predict.glm(object = .y, newdata = .x)),
     pred_prob = future_map(.x = pred_logit, .f = sigmoid),
-    sim = future_map(.x = pred_prob, .f = ~ifelse(test = .x < 0.6 & .x > 0.4, yes = rbinom(n = length(.x), size = 1, p = .x), no = (. > 0.5))),
-    # sim = future_map(.x = pred_prob, .f = ~rbern(n = length(.x), p = .x)),
+    # sim = future_map(.x = pred_prob, .f = ~ifelse(test = .x < 0.6 & .x > 0.4, yes = rbinom(n = length(.x), size = 1, prob = .x), no = (. > 0.5))),
+    sim = future_map(.x = pred_prob, .f = ~rbinom(n = length(.x), size = 1, prob = .x)),
     naive_sim = future_map(.x = pred_prob, .f = ~(. > 0.5)),
-    actual = future_map(.x = test, .f = ~pull(.data = .x, var = 'home_win')),
+    actual = future_map(.x = test, .f = ~pull(.data = .x, var = 'Y')),
     info_metric = unlist(future_map2(.x = sim, .y = actual, .f = ~pred_accuracy(sim = .x, actual = .y))),
     wolfson_info_metric = unlist(future_map2(.x = naive_sim, .y = actual, .f = ~pred_accuracy(sim = .x, actual = .y)))
   )
