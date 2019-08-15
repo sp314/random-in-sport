@@ -1,25 +1,25 @@
 season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_since_last_game,away_days_since_last_game,away_distance_traveled,home_mov
-1999,1,1998-10-09,Calgary Flames,San Jose Sharks,FALSE,3,3,0,0,1646.1108820169086,0
-1999,2,1998-10-09,Florida Panthers,Tampa Bay Lightning,TRUE,4,1,0,0,288.21092229421953,3
-1999,3,1998-10-09,New York Rangers,Philadelphia Flyers,FALSE,0,1,0,0,129.76049887506204,-1
-1999,4,1998-10-10,Boston Bruins,St. Louis Blues,FALSE,3,3,0,0,1668.8206538399186,0
-1999,5,1998-10-10,Carolina Hurricanes,Tampa Bay Lightning,FALSE,4,4,0,1,965.6212732300062,0
-1999,6,1998-10-10,Chicago Blackhawks,New Jersey Devils,TRUE,2,1,0,0,1128.6593725222901,1
-1999,7,1998-10-10,Colorado Avalanche,Ottawa Senators,FALSE,3,4,0,0,2467.90684045333,-1
-1999,8,1998-10-10,Dallas Stars,Buffalo Sabres,TRUE,4,1,0,0,1929.4552545697054,3
-1999,9,1998-10-10,Edmonton Oilers,Los Angeles Kings,FALSE,1,2,0,0,2202.135963213759,-1
-1999,10,1998-10-10,Montreal Canadiens,New York Rangers,TRUE,7,1,0,1,534.2879401746067,6
-1999,11,1998-10-10,Nashville Predators,Florida Panthers,FALSE,0,1,0,1,1273.683354838402,-1
-1999,12,1998-10-10,New York Islanders,Pittsburgh Penguins,FALSE,3,4,0,0,507.26040911440913,-1
+1999,1,1998-10-09,Calgary Flames,San Jose Sharks,FALSE,3,3,4,4,1646.1108820169086,0
+1999,2,1998-10-09,Florida Panthers,Tampa Bay Lightning,TRUE,4,1,4,4,288.21092229421953,3
+1999,3,1998-10-09,New York Rangers,Philadelphia Flyers,FALSE,0,1,4,4,129.76049887506204,-1
+1999,4,1998-10-10,Boston Bruins,St. Louis Blues,FALSE,3,3,4,4,1668.8206538399186,0
+1999,5,1998-10-10,Carolina Hurricanes,Tampa Bay Lightning,FALSE,4,4,4,1,965.6212732300062,0
+1999,6,1998-10-10,Chicago Blackhawks,New Jersey Devils,TRUE,2,1,4,4,1128.6593725222901,1
+1999,7,1998-10-10,Colorado Avalanche,Ottawa Senators,FALSE,3,4,4,4,2467.90684045333,-1
+1999,8,1998-10-10,Dallas Stars,Buffalo Sabres,TRUE,4,1,4,4,1929.4552545697054,3
+1999,9,1998-10-10,Edmonton Oilers,Los Angeles Kings,FALSE,1,2,4,4,2202.135963213759,-1
+1999,10,1998-10-10,Montreal Canadiens,New York Rangers,TRUE,7,1,4,1,534.2879401746067,6
+1999,11,1998-10-10,Nashville Predators,Florida Panthers,FALSE,0,1,4,1,1273.683354838402,-1
+1999,12,1998-10-10,New York Islanders,Pittsburgh Penguins,FALSE,3,4,4,4,507.26040911440913,-1
 1999,13,1998-10-10,San Jose Sharks,Calgary Flames,FALSE,3,5,1,1,1646.1108820169086,-2
-1999,14,1998-10-10,Toronto Maple Leafs,Detroit Red Wings,TRUE,2,1,0,0,334.08583268586455,1
-1999,15,1998-10-10,Washington Capitals,Mighty Ducks of Anaheim,TRUE,1,0,0,0,3676.1811720334344,1
+1999,14,1998-10-10,Toronto Maple Leafs,Detroit Red Wings,TRUE,2,1,4,4,334.08583268586455,1
+1999,15,1998-10-10,Washington Capitals,Mighty Ducks of Anaheim,TRUE,1,0,4,4,3676.1811720334344,1
 1999,16,1998-10-11,Philadelphia Flyers,Mighty Ducks of Anaheim,TRUE,4,1,2,1,3829.00540715978,3
-1999,17,1998-10-11,Phoenix Coyotes,Ottawa Senators,FALSE,1,4,0,1,3363.7714866537917,-3
+1999,17,1998-10-11,Phoenix Coyotes,Ottawa Senators,FALSE,1,4,4,1,3363.7714866537917,-3
 1999,18,1998-10-12,Boston Bruins,New York Islanders,TRUE,3,0,2,2,306.45146321965285,3
 1999,19,1998-10-12,Colorado Avalanche,Buffalo Sabres,FALSE,0,3,2,2,2202.126540963024,-3
 1999,20,1998-10-12,New York Rangers,St. Louis Blues,FALSE,2,4,2,2,1404.755215695527,-2
-1999,21,1998-10-12,Vancouver Canucks,Los Angeles Kings,TRUE,4,2,0,2,1742.3279686271878,2
+1999,21,1998-10-12,Vancouver Canucks,Los Angeles Kings,TRUE,4,2,4,2,1742.3279686271878,2
 1999,22,1998-10-13,Dallas Stars,Chicago Blackhawks,TRUE,3,1,3,3,1296.4097190166246,2
 1999,23,1998-10-13,Edmonton Oilers,Toronto Maple Leafs,FALSE,2,3,3,3,2708.703820245351,-1
 1999,24,1998-10-13,Montreal Canadiens,Mighty Ducks of Anaheim,TRUE,1,0,3,2,3958.655546006156,1
@@ -1106,25 +1106,25 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 1999,1105,1999-04-18,Los Angeles Kings,St. Louis Blues,FALSE,2,3,2,3,2555.2830295991366,-1
 1999,1106,1999-04-18,New York Rangers,Pittsburgh Penguins,FALSE,1,2,3,1,507.26040911440913,-1
 1999,1107,1999-04-18,Philadelphia Flyers,Boston Bruins,TRUE,3,1,2,1,436.1175933140669,2
-2000,1,1999-10-01,Dallas Stars,Pittsburgh Penguins,TRUE,6,4,0,0,1722.5426915685778,2
-2000,2,1999-10-01,Edmonton Oilers,New York Rangers,FALSE,1,1,0,0,3259.622849876546,0
-2000,3,1999-10-02,Atlanta Thrashers,New Jersey Devils,FALSE,1,4,0,0,1131.3778514742983,-3
-2000,4,1999-10-02,Boston Bruins,Carolina Hurricanes,FALSE,1,3,0,0,981.8580953001334,-2
-2000,5,1999-10-02,Dallas Stars,Mighty Ducks of Anaheim,TRUE,2,0,1,0,1964.738590138696,2
-2000,6,1999-10-02,Detroit Red Wings,Buffalo Sabres,TRUE,2,0,0,0,348.54301108040886,2
-2000,7,1999-10-02,Florida Panthers,Washington Capitals,TRUE,4,3,0,0,1449.7749794123397,1
-2000,8,1999-10-02,Montreal Canadiens,Toronto Maple Leafs,FALSE,1,4,0,0,504.82722904779484,-3
-2000,9,1999-10-02,Nashville Predators,Los Angeles Kings,FALSE,0,2,0,0,2862.2967308749444,-2
-2000,10,1999-10-02,Philadelphia Flyers,Ottawa Senators,FALSE,0,3,0,0,610.3502863684885,-3
-2000,11,1999-10-02,San Jose Sharks,Calgary Flames,TRUE,5,3,0,0,1646.1108820169086,2
-2000,12,1999-10-02,St. Louis Blues,Phoenix Coyotes,FALSE,1,2,0,0,2046.0473959011829,-1
-2000,13,1999-10-02,Tampa Bay Lightning,New York Islanders,TRUE,4,2,0,0,1639.71410077463,2
-2000,14,1999-10-02,Vancouver Canucks,New York Rangers,TRUE,2,1,0,1,3908.7231351021837,1
-2000,15,1999-10-04,San Jose Sharks,Chicago Blackhawks,TRUE,7,1,2,0,2960.8920183719483,6
+2000,1,1999-10-01,Dallas Stars,Pittsburgh Penguins,TRUE,6,4,4,4,1722.5426915685778,2
+2000,2,1999-10-01,Edmonton Oilers,New York Rangers,FALSE,1,1,4,4,3259.622849876546,0
+2000,3,1999-10-02,Atlanta Thrashers,New Jersey Devils,FALSE,1,4,4,4,1131.3778514742983,-3
+2000,4,1999-10-02,Boston Bruins,Carolina Hurricanes,FALSE,1,3,4,4,981.8580953001334,-2
+2000,5,1999-10-02,Dallas Stars,Mighty Ducks of Anaheim,TRUE,2,0,1,4,1964.738590138696,2
+2000,6,1999-10-02,Detroit Red Wings,Buffalo Sabres,TRUE,2,0,4,4,348.54301108040886,2
+2000,7,1999-10-02,Florida Panthers,Washington Capitals,TRUE,4,3,4,4,1449.7749794123397,1
+2000,8,1999-10-02,Montreal Canadiens,Toronto Maple Leafs,FALSE,1,4,4,4,504.82722904779484,-3
+2000,9,1999-10-02,Nashville Predators,Los Angeles Kings,FALSE,0,2,4,4,2862.2967308749444,-2
+2000,10,1999-10-02,Philadelphia Flyers,Ottawa Senators,FALSE,0,3,4,4,610.3502863684885,-3
+2000,11,1999-10-02,San Jose Sharks,Calgary Flames,TRUE,5,3,4,4,1646.1108820169086,2
+2000,12,1999-10-02,St. Louis Blues,Phoenix Coyotes,FALSE,1,2,4,4,2046.0473959011829,-1
+2000,13,1999-10-02,Tampa Bay Lightning,New York Islanders,TRUE,4,2,4,4,1639.71410077463,2
+2000,14,1999-10-02,Vancouver Canucks,New York Rangers,TRUE,2,1,4,1,3908.7231351021837,1
+2000,15,1999-10-04,San Jose Sharks,Chicago Blackhawks,TRUE,7,1,2,4,2960.8920183719483,6
 2000,16,1999-10-04,St. Louis Blues,Los Angeles Kings,FALSE,2,3,2,2,2555.2830295991366,-1
 2000,17,1999-10-04,Toronto Maple Leafs,Boston Bruins,TRUE,4,0,2,2,692.4397927318,4
 2000,18,1999-10-05,Detroit Red Wings,Dallas Stars,FALSE,2,3,3,3,1608.4380848354774,-1
-2000,19,1999-10-05,Nashville Predators,Colorado Avalanche,FALSE,2,3,3,0,1643.9936280152428,-1
+2000,19,1999-10-05,Nashville Predators,Colorado Avalanche,FALSE,2,3,3,4,1643.9936280152428,-1
 2000,20,1999-10-05,New York Rangers,Ottawa Senators,FALSE,1,2,3,3,541.8839253024181,-1
 2000,21,1999-10-05,Phoenix Coyotes,Mighty Ducks of Anaheim,TRUE,4,0,3,3,542.8929153391765,4
 2000,22,1999-10-06,Calgary Flames,St. Louis Blues,FALSE,1,4,4,2,2319.7529359153696,-3
@@ -2254,29 +2254,29 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2000,1146,2000-04-09,Ottawa Senators,Tampa Bay Lightning,TRUE,5,2,1,1,2056.7798340485724,3
 2000,1147,2000-04-09,San Jose Sharks,Vancouver Canucks,FALSE,2,5,2,2,1333.3622199094134,-3
 2000,1148,2000-04-09,Washington Capitals,Buffalo Sabres,FALSE,1,1,2,2,469.2541361074428,0
-2001,1,2000-10-04,Dallas Stars,Colorado Avalanche,FALSE,2,2,0,0,1067.505950033487,0
-2001,2,2000-10-05,Boston Bruins,Ottawa Senators,FALSE,4,4,0,0,504.42403083392537,0
-2001,3,2000-10-05,Buffalo Sabres,Chicago Blackhawks,TRUE,4,2,0,0,727.9649718909436,2
-2001,4,2000-10-05,Calgary Flames,Detroit Red Wings,FALSE,3,4,0,0,2535.409360274591,-1
-2001,5,2000-10-05,Philadelphia Flyers,Vancouver Canucks,TRUE,6,3,0,0,3868.821452208479,3
-2001,6,2000-10-05,Phoenix Coyotes,St. Louis Blues,TRUE,4,1,0,0,2046.0473959011829,3
-2001,7,2000-10-06,Edmonton Oilers,Detroit Red Wings,TRUE,2,1,0,1,2562.357398421019,1
-2001,8,2000-10-06,Florida Panthers,Vancouver Canucks,FALSE,3,4,0,1,4479.208952968909,-1
-2001,9,2000-10-06,Mighty Ducks of Anaheim,Minnesota Wild,TRUE,3,1,0,0,2424.1641022196577,2
-2001,10,2000-10-06,New Jersey Devils,Montreal Canadiens,TRUE,8,4,0,0,609.8019665665469,4
-2001,12,2000-10-06,San Jose Sharks,St. Louis Blues,FALSE,1,4,0,1,2770.1591548928654,-3
-2001,13,2000-10-06,Tampa Bay Lightning,New York Islanders,FALSE,3,3,0,0,1639.71410077463,0
-2001,14,2000-10-06,Washington Capitals,Los Angeles Kings,FALSE,1,4,0,0,3696.137218494705,-3
-2001,11,2000-10-07,Pittsburgh Penguins,Nashville Predators,FALSE,1,3,0,0,759.9752413909999,-2
-2001,15,2000-10-07,Atlanta Thrashers,New York Rangers,FALSE,1,2,0,0,1201.6607809675365,-1
+2001,1,2000-10-04,Dallas Stars,Colorado Avalanche,FALSE,2,2,4,4,1067.505950033487,0
+2001,2,2000-10-05,Boston Bruins,Ottawa Senators,FALSE,4,4,4,4,504.42403083392537,0
+2001,3,2000-10-05,Buffalo Sabres,Chicago Blackhawks,TRUE,4,2,4,4,727.9649718909436,2
+2001,4,2000-10-05,Calgary Flames,Detroit Red Wings,FALSE,3,4,4,4,2535.409360274591,-1
+2001,5,2000-10-05,Philadelphia Flyers,Vancouver Canucks,TRUE,6,3,4,4,3868.821452208479,3
+2001,6,2000-10-05,Phoenix Coyotes,St. Louis Blues,TRUE,4,1,4,4,2046.0473959011829,3
+2001,7,2000-10-06,Edmonton Oilers,Detroit Red Wings,TRUE,2,1,4,1,2562.357398421019,1
+2001,8,2000-10-06,Florida Panthers,Vancouver Canucks,FALSE,3,4,4,1,4479.208952968909,-1
+2001,9,2000-10-06,Mighty Ducks of Anaheim,Minnesota Wild,TRUE,3,1,4,4,2424.1641022196577,2
+2001,10,2000-10-06,New Jersey Devils,Montreal Canadiens,TRUE,8,4,4,4,609.8019665665469,4
+2001,12,2000-10-06,San Jose Sharks,St. Louis Blues,FALSE,1,4,4,1,2770.1591548928654,-3
+2001,13,2000-10-06,Tampa Bay Lightning,New York Islanders,FALSE,3,3,4,4,1639.71410077463,0
+2001,14,2000-10-06,Washington Capitals,Los Angeles Kings,FALSE,1,4,4,4,3696.137218494705,-3
+2001,11,2000-10-07,Pittsburgh Penguins,Nashville Predators,FALSE,1,3,4,4,759.9752413909999,-2
+2001,15,2000-10-07,Atlanta Thrashers,New York Rangers,FALSE,1,2,4,4,1201.6607809675365,-1
 2001,16,2000-10-07,Buffalo Sabres,Los Angeles Kings,TRUE,5,3,2,1,3533.7605854511567,2
-2001,17,2000-10-07,Carolina Hurricanes,Washington Capitals,FALSE,3,3,0,1,375.88164099638885,0
-2001,18,2000-10-07,Columbus Blue Jackets,Chicago Blackhawks,FALSE,3,5,0,2,444.0701569394544,-2
+2001,17,2000-10-07,Carolina Hurricanes,Washington Capitals,FALSE,3,3,4,1,375.88164099638885,0
+2001,18,2000-10-07,Columbus Blue Jackets,Chicago Blackhawks,FALSE,3,5,4,2,444.0701569394544,-2
 2001,19,2000-10-07,Edmonton Oilers,Colorado Avalanche,FALSE,1,1,1,3,1665.920889504275,0
 2001,21,2000-10-07,Ottawa Senators,Dallas Stars,TRUE,3,1,2,3,2290.9993792826067,2
 2001,22,2000-10-07,Philadelphia Flyers,Boston Bruins,FALSE,1,5,2,2,436.1175933140669,-4
 2001,23,2000-10-07,Phoenix Coyotes,Minnesota Wild,TRUE,4,1,2,1,2083.4925609424663,3
-2001,24,2000-10-07,Toronto Maple Leafs,Montreal Canadiens,TRUE,2,0,0,1,504.82722904779484,2
+2001,24,2000-10-07,Toronto Maple Leafs,Montreal Canadiens,TRUE,2,0,4,1,504.82722904779484,2
 2001,20,2000-10-08,Nashville Predators,Pittsburgh Penguins,FALSE,1,3,1,1,759.9752413909999,-2
 2001,25,2000-10-08,Mighty Ducks of Anaheim,St. Louis Blues,FALSE,1,5,2,2,2534.8545894759714,-4
 2001,26,2000-10-08,Tampa Bay Lightning,Vancouver Canucks,FALSE,4,5,2,2,4193.983546514978,-1
@@ -3484,20 +3484,20 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2001,1228,2001-04-08,Mighty Ducks of Anaheim,San Jose Sharks,FALSE,1,4,2,1,530.2084515670917,-3
 2001,1229,2001-04-08,Minnesota Wild,Colorado Avalanche,FALSE,2,4,2,1,1140.1279569326618,-2
 2001,1230,2001-04-08,Washington Capitals,Tampa Bay Lightning,TRUE,2,1,2,3,1341.3555564295361,1
-2002,1,2001-10-03,Calgary Flames,Edmonton Oilers,TRUE,1,0,0,0,281.2183812161469,1
-2002,2,2001-10-03,Pittsburgh Penguins,Colorado Avalanche,FALSE,1,3,0,0,2122.924971046971,-2
-2002,3,2001-10-03,Toronto Maple Leafs,Ottawa Senators,FALSE,4,5,0,0,352.49012255498184,-1
-2002,4,2001-10-04,Boston Bruins,Mighty Ducks of Anaheim,TRUE,4,2,0,0,4158.187270044307,2
-2002,5,2001-10-04,Buffalo Sabres,Atlanta Thrashers,FALSE,1,2,0,0,1124.600903036915,-1
-2002,6,2001-10-04,Columbus Blue Jackets,St. Louis Blues,FALSE,3,3,0,0,637.6690262637389,0
-2002,7,2001-10-04,Los Angeles Kings,Phoenix Coyotes,FALSE,2,2,0,0,574.9050275298611,0
-2002,8,2001-10-04,Ottawa Senators,Montreal Canadiens,FALSE,4,6,1,0,166.5356402656483,-2
-2002,9,2001-10-04,Philadelphia Flyers,Florida Panthers,TRUE,5,2,0,0,1605.6557547562572,3
-2002,10,2001-10-04,San Jose Sharks,Detroit Red Wings,FALSE,3,4,0,0,3335.2539954084677,-1
-2002,11,2001-10-04,Vancouver Canucks,Chicago Blackhawks,FALSE,4,5,0,0,2855.845585296624,-1
-2002,12,2001-10-05,Carolina Hurricanes,New York Rangers,TRUE,3,1,0,0,682.0964382527886,2
-2002,13,2001-10-05,Dallas Stars,Nashville Predators,TRUE,4,1,0,0,992.7957466655384,3
-2002,14,2001-10-05,Tampa Bay Lightning,New York Islanders,FALSE,2,3,0,0,1639.71410077463,-1
+2002,1,2001-10-03,Calgary Flames,Edmonton Oilers,TRUE,1,0,4,4,281.2183812161469,1
+2002,2,2001-10-03,Pittsburgh Penguins,Colorado Avalanche,FALSE,1,3,4,4,2122.924971046971,-2
+2002,3,2001-10-03,Toronto Maple Leafs,Ottawa Senators,FALSE,4,5,4,4,352.49012255498184,-1
+2002,4,2001-10-04,Boston Bruins,Mighty Ducks of Anaheim,TRUE,4,2,4,4,4158.187270044307,2
+2002,5,2001-10-04,Buffalo Sabres,Atlanta Thrashers,FALSE,1,2,4,4,1124.600903036915,-1
+2002,6,2001-10-04,Columbus Blue Jackets,St. Louis Blues,FALSE,3,3,4,4,637.6690262637389,0
+2002,7,2001-10-04,Los Angeles Kings,Phoenix Coyotes,FALSE,2,2,4,4,574.9050275298611,0
+2002,8,2001-10-04,Ottawa Senators,Montreal Canadiens,FALSE,4,6,1,4,166.5356402656483,-2
+2002,9,2001-10-04,Philadelphia Flyers,Florida Panthers,TRUE,5,2,4,4,1605.6557547562572,3
+2002,10,2001-10-04,San Jose Sharks,Detroit Red Wings,FALSE,3,4,4,4,3335.2539954084677,-1
+2002,11,2001-10-04,Vancouver Canucks,Chicago Blackhawks,FALSE,4,5,4,4,2855.845585296624,-1
+2002,12,2001-10-05,Carolina Hurricanes,New York Rangers,TRUE,3,1,4,4,682.0964382527886,2
+2002,13,2001-10-05,Dallas Stars,Nashville Predators,TRUE,4,1,4,4,992.7957466655384,3
+2002,14,2001-10-05,Tampa Bay Lightning,New York Islanders,FALSE,2,3,4,4,1639.71410077463,-1
 2002,15,2001-10-06,Boston Bruins,Atlanta Thrashers,TRUE,4,3,2,2,1508.084972349009,1
 2002,16,2001-10-06,Buffalo Sabres,Ottawa Senators,TRUE,3,2,2,2,379.66453432686313,1
 2002,17,2001-10-06,Calgary Flames,Chicago Blackhawks,TRUE,4,0,3,2,2253.0105117502135,4
@@ -3507,9 +3507,9 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2002,21,2001-10-06,Nashville Predators,St. Louis Blues,FALSE,2,2,1,2,408.13584580192946,0
 2002,22,2001-10-06,Philadelphia Flyers,Columbus Blue Jackets,FALSE,3,3,2,2,668.2206230340339,0
 2002,23,2001-10-06,Pittsburgh Penguins,Mighty Ducks of Anaheim,FALSE,2,4,3,2,3416.8584083942383,-2
-2002,24,2001-10-06,San Jose Sharks,Minnesota Wild,FALSE,0,0,2,0,2463.5310379743623,0
+2002,24,2001-10-06,San Jose Sharks,Minnesota Wild,FALSE,0,0,2,4,2463.5310379743623,0
 2002,25,2001-10-06,Vancouver Canucks,Detroit Red Wings,FALSE,1,4,2,2,3163.395532280764,-3
-2002,26,2001-10-06,Washington Capitals,New Jersey Devils,TRUE,6,1,0,0,259.8440303819753,5
+2002,26,2001-10-06,Washington Capitals,New Jersey Devils,TRUE,6,1,4,4,259.8440303819753,5
 2002,27,2001-10-07,Carolina Hurricanes,Dallas Stars,TRUE,3,0,2,2,1700.8175032373106,3
 2002,28,2001-10-07,Los Angeles Kings,Minnesota Wild,FALSE,3,4,3,1,2430.1160397968356,-1
 2002,29,2001-10-07,New York Rangers,Buffalo Sabres,TRUE,5,4,2,1,471.09809505402666,1
@@ -4714,23 +4714,23 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2002,1228,2002-04-14,Minnesota Wild,Edmonton Oilers,FALSE,2,4,2,2,1534.8593243088585,-2
 2002,1229,2002-04-14,New York Islanders,Philadelphia Flyers,TRUE,3,1,2,1,129.76049887506204,2
 2002,1230,2002-04-14,Phoenix Coyotes,Nashville Predators,TRUE,6,4,2,3,2324.8192780436666,2
-2003,1,2002-10-09,Carolina Hurricanes,New York Rangers,FALSE,1,4,0,0,682.0964382527886,-3
-2003,2,2002-10-09,Colorado Avalanche,Dallas Stars,FALSE,1,1,0,0,1067.505950033487,0
-2003,3,2002-10-09,Los Angeles Kings,Phoenix Coyotes,TRUE,4,1,0,0,574.9050275298611,3
-2003,4,2002-10-10,Buffalo Sabres,New York Islanders,TRUE,5,1,0,0,471.09809505402666,4
-2003,5,2002-10-10,Columbus Blue Jackets,Chicago Blackhawks,TRUE,2,1,0,0,444.0701569394544,1
-2003,6,2002-10-10,Calgary Flames,Vancouver Canucks,FALSE,0,3,0,0,673.925787706445,-3
-2003,7,2002-10-10,Edmonton Oilers,Philadelphia Flyers,FALSE,2,2,0,0,3238.818774572986,0
-2003,8,2002-10-10,Florida Panthers,Tampa Bay Lightning,FALSE,3,4,0,0,288.21092229421953,-1
-2003,9,2002-10-10,Ottawa Senators,New Jersey Devils,FALSE,1,2,0,0,606.2710715367369,-1
-2003,10,2002-10-10,Pittsburgh Penguins,Toronto Maple Leafs,FALSE,0,6,0,0,361.1907558927795,-6
-2003,11,2002-10-10,San Jose Sharks,Detroit Red Wings,FALSE,3,6,0,0,3335.2539954084677,-3
-2003,12,2002-10-10,St. Louis Blues,Mighty Ducks of Anaheim,FALSE,3,4,0,0,2534.8545894759714,-1
-2003,13,2002-10-11,Carolina Hurricanes,Atlanta Thrashers,TRUE,5,3,2,0,572.2176642427648,2
+2003,1,2002-10-09,Carolina Hurricanes,New York Rangers,FALSE,1,4,4,4,682.0964382527886,-3
+2003,2,2002-10-09,Colorado Avalanche,Dallas Stars,FALSE,1,1,4,4,1067.505950033487,0
+2003,3,2002-10-09,Los Angeles Kings,Phoenix Coyotes,TRUE,4,1,4,4,574.9050275298611,3
+2003,4,2002-10-10,Buffalo Sabres,New York Islanders,TRUE,5,1,4,4,471.09809505402666,4
+2003,5,2002-10-10,Columbus Blue Jackets,Chicago Blackhawks,TRUE,2,1,4,4,444.0701569394544,1
+2003,6,2002-10-10,Calgary Flames,Vancouver Canucks,FALSE,0,3,4,4,673.925787706445,-3
+2003,7,2002-10-10,Edmonton Oilers,Philadelphia Flyers,FALSE,2,2,4,4,3238.818774572986,0
+2003,8,2002-10-10,Florida Panthers,Tampa Bay Lightning,FALSE,3,4,4,4,288.21092229421953,-1
+2003,9,2002-10-10,Ottawa Senators,New Jersey Devils,FALSE,1,2,4,4,606.2710715367369,-1
+2003,10,2002-10-10,Pittsburgh Penguins,Toronto Maple Leafs,FALSE,0,6,4,4,361.1907558927795,-6
+2003,11,2002-10-10,San Jose Sharks,Detroit Red Wings,FALSE,3,6,4,4,3335.2539954084677,-3
+2003,12,2002-10-10,St. Louis Blues,Mighty Ducks of Anaheim,FALSE,3,4,4,4,2534.8545894759714,-1
+2003,13,2002-10-11,Carolina Hurricanes,Atlanta Thrashers,TRUE,5,3,2,4,572.2176642427648,2
 2003,14,2002-10-11,Dallas Stars,Mighty Ducks of Anaheim,TRUE,4,2,2,1,1964.738590138696,2
-2003,15,2002-10-11,Minnesota Wild,Boston Bruins,TRUE,5,1,0,0,1928.4956284942696,4
-2003,16,2002-10-11,New York Rangers,Montreal Canadiens,FALSE,1,4,2,0,534.2879401746067,-3
-2003,17,2002-10-11,Washington Capitals,Nashville Predators,TRUE,5,4,0,0,912.2763001247557,1
+2003,15,2002-10-11,Minnesota Wild,Boston Bruins,TRUE,5,1,4,4,1928.4956284942696,4
+2003,16,2002-10-11,New York Rangers,Montreal Canadiens,FALSE,1,4,2,4,534.2879401746067,-3
+2003,17,2002-10-11,Washington Capitals,Nashville Predators,TRUE,5,4,4,4,912.2763001247557,1
 2003,18,2002-10-12,Atlanta Thrashers,Florida Panthers,FALSE,4,5,1,2,933.0967341193121,-1
 2003,19,2002-10-12,Calgary Flames,Philadelphia Flyers,FALSE,4,5,2,2,3231.0672511672074,-1
 2003,20,2002-10-12,Los Angeles Kings,Detroit Red Wings,TRUE,3,2,3,2,3187.3643542940745,1
@@ -5944,23 +5944,23 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2003,1228,2003-04-06,Minnesota Wild,Columbus Blue Jackets,TRUE,4,3,3,2,1207.2934436596643,1
 2003,1229,2003-04-06,San Jose Sharks,Phoenix Coyotes,FALSE,3,3,3,2,989.4255561520106,0
 2003,1230,2003-04-06,Vancouver Canucks,Los Angeles Kings,FALSE,0,2,4,2,1742.3279686271878,-2
-2004,1,2003-10-08,Boston Bruins,New Jersey Devils,FALSE,3,3,0,0,379.6938441202614,0
-2004,2,2003-10-08,Chicago Blackhawks,Minnesota Wild,TRUE,1,0,0,0,778.9272003944247,1
-2004,3,2003-10-08,Dallas Stars,Mighty Ducks of Anaheim,TRUE,4,1,0,0,1964.738590138696,3
-2004,4,2003-10-09,Atlanta Thrashers,Columbus Blue Jackets,TRUE,2,1,0,0,702.4911328904274,1
-2004,5,2003-10-09,Detroit Red Wings,Los Angeles Kings,TRUE,3,2,0,0,3187.3643542940745,1
-2004,6,2003-10-09,Edmonton Oilers,San Jose Sharks,TRUE,5,2,0,0,1916.464697779404,3
-2004,7,2003-10-09,Florida Panthers,Carolina Hurricanes,TRUE,3,1,0,0,1081.1096611931298,2
-2004,8,2003-10-09,Nashville Predators,Mighty Ducks of Anaheim,TRUE,3,1,0,1,2838.5719097761107,2
-2004,9,2003-10-09,Ottawa Senators,Montreal Canadiens,TRUE,5,2,0,0,166.5356402656483,3
-2004,10,2003-10-09,Philadelphia Flyers,Buffalo Sabres,TRUE,2,0,0,0,450.1741404499461,2
-2004,11,2003-10-09,Vancouver Canucks,Calgary Flames,TRUE,4,1,0,0,673.925787706445,3
-2004,12,2003-10-09,Washington Capitals,New York Islanders,TRUE,6,1,0,0,327.9484294258078,5
-2004,13,2003-10-10,Colorado Avalanche,Chicago Blackhawks,TRUE,5,0,0,2,1479.3544709615878,5
-2004,14,2003-10-10,Minnesota Wild,New York Rangers,TRUE,5,3,2,0,1786.811939378945,2
-2004,15,2003-10-10,Phoenix Coyotes,St. Louis Blues,TRUE,2,1,0,0,2046.0473959011829,1
-2004,16,2003-10-10,Pittsburgh Penguins,Los Angeles Kings,FALSE,0,3,0,1,3435.212502125698,-3
-2004,17,2003-10-10,Tampa Bay Lightning,Boston Bruins,TRUE,5,1,0,2,1928.590914941488,4
+2004,1,2003-10-08,Boston Bruins,New Jersey Devils,FALSE,3,3,4,4,379.6938441202614,0
+2004,2,2003-10-08,Chicago Blackhawks,Minnesota Wild,TRUE,1,0,4,4,778.9272003944247,1
+2004,3,2003-10-08,Dallas Stars,Mighty Ducks of Anaheim,TRUE,4,1,4,4,1964.738590138696,3
+2004,4,2003-10-09,Atlanta Thrashers,Columbus Blue Jackets,TRUE,2,1,4,4,702.4911328904274,1
+2004,5,2003-10-09,Detroit Red Wings,Los Angeles Kings,TRUE,3,2,4,4,3187.3643542940745,1
+2004,6,2003-10-09,Edmonton Oilers,San Jose Sharks,TRUE,5,2,4,4,1916.464697779404,3
+2004,7,2003-10-09,Florida Panthers,Carolina Hurricanes,TRUE,3,1,4,4,1081.1096611931298,2
+2004,8,2003-10-09,Nashville Predators,Mighty Ducks of Anaheim,TRUE,3,1,4,1,2838.5719097761107,2
+2004,9,2003-10-09,Ottawa Senators,Montreal Canadiens,TRUE,5,2,4,4,166.5356402656483,3
+2004,10,2003-10-09,Philadelphia Flyers,Buffalo Sabres,TRUE,2,0,4,4,450.1741404499461,2
+2004,11,2003-10-09,Vancouver Canucks,Calgary Flames,TRUE,4,1,4,4,673.925787706445,3
+2004,12,2003-10-09,Washington Capitals,New York Islanders,TRUE,6,1,4,4,327.9484294258078,5
+2004,13,2003-10-10,Colorado Avalanche,Chicago Blackhawks,TRUE,5,0,4,2,1479.3544709615878,5
+2004,14,2003-10-10,Minnesota Wild,New York Rangers,TRUE,5,3,2,4,1786.811939378945,2
+2004,15,2003-10-10,Phoenix Coyotes,St. Louis Blues,TRUE,2,1,4,4,2046.0473959011829,1
+2004,16,2003-10-10,Pittsburgh Penguins,Los Angeles Kings,FALSE,0,3,4,1,3435.212502125698,-3
+2004,17,2003-10-10,Tampa Bay Lightning,Boston Bruins,TRUE,5,1,4,2,1928.590914941488,4
 2004,18,2003-10-11,Buffalo Sabres,New York Islanders,FALSE,0,6,2,2,471.09809505402666,-6
 2004,19,2003-10-11,Carolina Hurricanes,New Jersey Devils,FALSE,1,2,2,3,604.0006236759991,-1
 2004,20,2003-10-11,Columbus Blue Jackets,New York Rangers,TRUE,5,0,2,1,767.3005481042186,5
@@ -5969,7 +5969,7 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2004,23,2003-10-11,Nashville Predators,Dallas Stars,FALSE,1,3,2,3,992.7957466655384,-2
 2004,24,2003-10-11,Ottawa Senators,Detroit Red Wings,FALSE,2,3,2,2,683.819541926067,-1
 2004,25,2003-10-11,Philadelphia Flyers,Pittsburgh Penguins,FALSE,3,3,2,1,414.27292851869714,0
-2004,26,2003-10-11,Toronto Maple Leafs,Montreal Canadiens,FALSE,0,4,0,2,504.82722904779484,-4
+2004,26,2003-10-11,Toronto Maple Leafs,Montreal Canadiens,FALSE,0,4,4,2,504.82722904779484,-4
 2004,27,2003-10-11,Vancouver Canucks,Edmonton Oilers,TRUE,3,0,2,2,818.6290857739193,3
 2004,28,2003-10-11,Washington Capitals,Atlanta Thrashers,FALSE,3,4,2,2,873.7125200722888,-1
 2004,29,2003-10-12,Chicago Blackhawks,Los Angeles Kings,FALSE,2,4,2,2,2807.1099885982912,-2
@@ -7174,21 +7174,21 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2004,1228,2004-04-04,New York Islanders,Philadelphia Flyers,FALSE,3,3,2,2,129.76049887506204,0
 2004,1229,2004-04-04,Pittsburgh Penguins,Washington Capitals,TRUE,4,3,2,1,305.6144910182143,1
 2004,1230,2004-04-04,San Jose Sharks,Los Angeles Kings,TRUE,4,3,2,2,492.1038503405466,1
-2006,1,2005-10-05,Boston Bruins,Montreal Canadiens,FALSE,1,2,0,0,403.36534090606233,-1
-2006,2,2005-10-05,Buffalo Sabres,New York Islanders,TRUE,6,4,0,0,471.09809505402666,2
-2006,3,2005-10-05,Chicago Blackhawks,Mighty Ducks of Anaheim,FALSE,3,5,0,0,2791.1356510983264,-2
-2006,4,2005-10-05,Dallas Stars,Los Angeles Kings,TRUE,5,4,0,0,1994.2193729568273,1
-2006,5,2005-10-05,Detroit Red Wings,St. Louis Blues,TRUE,5,1,0,0,730.8059860461439,4
-2006,6,2005-10-05,Edmonton Oilers,Colorado Avalanche,TRUE,4,3,0,0,1665.920889504275,1
-2006,7,2005-10-05,Florida Panthers,Atlanta Thrashers,TRUE,2,0,0,0,933.0967341193121,2
-2006,8,2005-10-05,Minnesota Wild,Calgary Flames,TRUE,6,3,0,0,1492.8826561620926,3
-2006,9,2005-10-05,New Jersey Devils,Pittsburgh Penguins,TRUE,5,1,0,0,476.7856992525174,4
-2006,10,2005-10-05,Nashville Predators,San Jose Sharks,TRUE,3,2,0,0,3115.8223802318535,1
-2006,11,2005-10-05,Philadelphia Flyers,New York Rangers,FALSE,3,5,0,0,129.76049887506204,-2
-2006,12,2005-10-05,Tampa Bay Lightning,Carolina Hurricanes,TRUE,5,2,0,0,965.6212732300062,3
-2006,13,2005-10-05,Toronto Maple Leafs,Ottawa Senators,FALSE,2,3,0,0,352.49012255498184,-1
-2006,14,2005-10-05,Vancouver Canucks,Phoenix Coyotes,TRUE,3,2,0,0,1984.8182018972518,1
-2006,15,2005-10-05,Washington Capitals,Columbus Blue Jackets,TRUE,3,2,0,0,525.7391236565289,1
+2006,1,2005-10-05,Boston Bruins,Montreal Canadiens,FALSE,1,2,4,4,403.36534090606233,-1
+2006,2,2005-10-05,Buffalo Sabres,New York Islanders,TRUE,6,4,4,4,471.09809505402666,2
+2006,3,2005-10-05,Chicago Blackhawks,Mighty Ducks of Anaheim,FALSE,3,5,4,4,2791.1356510983264,-2
+2006,4,2005-10-05,Dallas Stars,Los Angeles Kings,TRUE,5,4,4,4,1994.2193729568273,1
+2006,5,2005-10-05,Detroit Red Wings,St. Louis Blues,TRUE,5,1,4,4,730.8059860461439,4
+2006,6,2005-10-05,Edmonton Oilers,Colorado Avalanche,TRUE,4,3,4,4,1665.920889504275,1
+2006,7,2005-10-05,Florida Panthers,Atlanta Thrashers,TRUE,2,0,4,4,933.0967341193121,2
+2006,8,2005-10-05,Minnesota Wild,Calgary Flames,TRUE,6,3,4,4,1492.8826561620926,3
+2006,9,2005-10-05,New Jersey Devils,Pittsburgh Penguins,TRUE,5,1,4,4,476.7856992525174,4
+2006,10,2005-10-05,Nashville Predators,San Jose Sharks,TRUE,3,2,4,4,3115.8223802318535,1
+2006,11,2005-10-05,Philadelphia Flyers,New York Rangers,FALSE,3,5,4,4,129.76049887506204,-2
+2006,12,2005-10-05,Tampa Bay Lightning,Carolina Hurricanes,TRUE,5,2,4,4,965.6212732300062,3
+2006,13,2005-10-05,Toronto Maple Leafs,Ottawa Senators,FALSE,2,3,4,4,352.49012255498184,-1
+2006,14,2005-10-05,Vancouver Canucks,Phoenix Coyotes,TRUE,3,2,4,4,1984.8182018972518,1
+2006,15,2005-10-05,Washington Capitals,Columbus Blue Jackets,TRUE,3,2,4,4,525.7391236565289,1
 2006,16,2005-10-06,Los Angeles Kings,Phoenix Coyotes,TRUE,3,2,1,1,574.9050275298611,1
 2006,17,2005-10-06,New York Rangers,Montreal Canadiens,FALSE,3,4,1,1,534.2879401746067,-1
 2006,18,2005-10-06,St. Louis Blues,Detroit Red Wings,FALSE,3,4,1,1,730.8059860461439,-1
@@ -8404,24 +8404,24 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2006,1228,2006-04-18,New York Rangers,Ottawa Senators,FALSE,1,5,3,3,541.8839253024181,-4
 2006,1229,2006-04-18,Tampa Bay Lightning,Washington Capitals,FALSE,1,4,3,1,1341.3555564295361,-3
 2006,1230,2006-04-18,Toronto Maple Leafs,Pittsburgh Penguins,TRUE,5,3,2,1,361.1907558927795,2
-2007,1,2006-10-04,Carolina Hurricanes,Buffalo Sabres,FALSE,2,3,0,0,791.4009347589177,-1
-2007,2,2006-10-04,Colorado Avalanche,Dallas Stars,FALSE,2,3,0,0,1067.505950033487,-1
-2007,3,2006-10-04,Toronto Maple Leafs,Ottawa Senators,FALSE,1,4,0,0,352.49012255498184,-3
-2007,4,2006-10-05,Atlanta Thrashers,Tampa Bay Lightning,FALSE,2,3,0,0,689.235100855136,-1
-2007,5,2006-10-05,Detroit Red Wings,Vancouver Canucks,FALSE,1,3,0,0,3163.395532280764,-2
-2007,6,2006-10-05,Edmonton Oilers,Calgary Flames,TRUE,3,1,0,0,281.2183812161469,2
-2007,7,2006-10-05,Minnesota Wild,Colorado Avalanche,TRUE,3,2,0,1,1140.1279569326618,1
-2007,8,2006-10-05,Nashville Predators,Chicago Blackhawks,FALSE,6,8,0,0,640.4456248145765,-2
-2007,9,2006-10-05,New York Rangers,Washington Capitals,TRUE,5,2,0,0,327.9484294258078,3
+2007,1,2006-10-04,Carolina Hurricanes,Buffalo Sabres,FALSE,2,3,4,4,791.4009347589177,-1
+2007,2,2006-10-04,Colorado Avalanche,Dallas Stars,FALSE,2,3,4,4,1067.505950033487,-1
+2007,3,2006-10-04,Toronto Maple Leafs,Ottawa Senators,FALSE,1,4,4,4,352.49012255498184,-3
+2007,4,2006-10-05,Atlanta Thrashers,Tampa Bay Lightning,FALSE,2,3,4,4,689.235100855136,-1
+2007,5,2006-10-05,Detroit Red Wings,Vancouver Canucks,FALSE,1,3,4,4,3163.395532280764,-2
+2007,6,2006-10-05,Edmonton Oilers,Calgary Flames,TRUE,3,1,4,4,281.2183812161469,2
+2007,7,2006-10-05,Minnesota Wild,Colorado Avalanche,TRUE,3,2,4,1,1140.1279569326618,1
+2007,8,2006-10-05,Nashville Predators,Chicago Blackhawks,FALSE,6,8,4,4,640.4456248145765,-2
+2007,9,2006-10-05,New York Rangers,Washington Capitals,TRUE,5,2,4,4,327.9484294258078,3
 2007,10,2006-10-05,Ottawa Senators,Toronto Maple Leafs,FALSE,0,6,1,1,352.49012255498184,-6
-2007,11,2006-10-05,Phoenix Coyotes,New York Islanders,TRUE,6,3,0,0,3447.5618512168717,3
-2007,12,2006-10-05,Pittsburgh Penguins,Philadelphia Flyers,TRUE,4,0,0,0,414.27292851869714,4
-2007,13,2006-10-05,San Jose Sharks,St. Louis Blues,TRUE,5,4,0,0,2770.1591548928654,1
-2007,14,2006-10-06,Anaheim Ducks,Los Angeles Kings,TRUE,4,3,0,0,38.74915335503478,1
-2007,15,2006-10-06,Buffalo Sabres,Montreal Canadiens,TRUE,5,4,2,0,514.0679535709085,1
-2007,16,2006-10-06,Carolina Hurricanes,New Jersey Devils,FALSE,0,4,2,0,604.0006236759991,-4
-2007,17,2006-10-06,Columbus Blue Jackets,Vancouver Canucks,FALSE,2,3,0,1,3299.7240359595985,-1
-2007,18,2006-10-06,Florida Panthers,Boston Bruins,TRUE,8,3,0,0,1988.3419614439981,5
+2007,11,2006-10-05,Phoenix Coyotes,New York Islanders,TRUE,6,3,4,4,3447.5618512168717,3
+2007,12,2006-10-05,Pittsburgh Penguins,Philadelphia Flyers,TRUE,4,0,4,4,414.27292851869714,4
+2007,13,2006-10-05,San Jose Sharks,St. Louis Blues,TRUE,5,4,4,4,2770.1591548928654,1
+2007,14,2006-10-06,Anaheim Ducks,Los Angeles Kings,TRUE,4,3,4,4,38.74915335503478,1
+2007,15,2006-10-06,Buffalo Sabres,Montreal Canadiens,TRUE,5,4,2,4,514.0679535709085,1
+2007,16,2006-10-06,Carolina Hurricanes,New Jersey Devils,FALSE,0,4,2,4,604.0006236759991,-4
+2007,17,2006-10-06,Columbus Blue Jackets,Vancouver Canucks,FALSE,2,3,4,1,3299.7240359595985,-1
+2007,18,2006-10-06,Florida Panthers,Boston Bruins,TRUE,8,3,4,4,1988.3419614439981,5
 2007,19,2006-10-07,Atlanta Thrashers,Florida Panthers,TRUE,6,0,2,1,933.0967341193121,6
 2007,20,2006-10-07,Calgary Flames,Edmonton Oilers,TRUE,2,1,2,2,281.2183812161469,1
 2007,21,2006-10-07,Chicago Blackhawks,Columbus Blue Jackets,FALSE,4,5,2,1,444.0701569394544,-1
@@ -9634,26 +9634,26 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2007,1228,2007-04-08,New Jersey Devils,New York Islanders,FALSE,2,3,3,1,80.3499401545681,-1
 2007,1229,2007-04-08,Philadelphia Flyers,Buffalo Sabres,TRUE,4,3,1,1,450.1741404499461,1
 2007,1230,2007-04-08,Phoenix Coyotes,Vancouver Canucks,TRUE,3,1,1,1,1984.8182018972518,2
-2008,1,2007-09-29,Los Angeles Kings,Anaheim Ducks,TRUE,4,1,0,0,38.74915335503478,3
+2008,1,2007-09-29,Los Angeles Kings,Anaheim Ducks,TRUE,4,1,4,4,38.74915335503478,3
 2008,2,2007-09-30,Anaheim Ducks,Los Angeles Kings,TRUE,4,1,1,1,38.74915335503478,3
-2008,3,2007-10-03,Carolina Hurricanes,Montreal Canadiens,FALSE,2,3,0,0,1163.3122394520933,-1
-2008,4,2007-10-03,Colorado Avalanche,Dallas Stars,TRUE,4,3,0,0,1067.505950033487,1
-2008,5,2007-10-03,Detroit Red Wings,Anaheim Ducks,TRUE,3,2,0,3,3171.4465401651682,1
-2008,6,2007-10-03,Toronto Maple Leafs,Ottawa Senators,FALSE,3,4,0,0,352.49012255498184,-1
-2008,7,2007-10-04,Calgary Flames,Philadelphia Flyers,FALSE,2,3,0,0,3231.0672511672074,-1
-2008,8,2007-10-04,Edmonton Oilers,San Jose Sharks,TRUE,3,2,0,0,1916.464697779404,1
-2008,9,2007-10-04,Minnesota Wild,Chicago Blackhawks,TRUE,1,0,0,0,778.9272003944247,1
-2008,10,2007-10-04,Nashville Predators,Colorado Avalanche,TRUE,4,0,0,1,1643.9936280152428,4
-2008,11,2007-10-04,New York Rangers,Florida Panthers,TRUE,5,2,0,0,1718.938543113028,3
+2008,3,2007-10-03,Carolina Hurricanes,Montreal Canadiens,FALSE,2,3,4,4,1163.3122394520933,-1
+2008,4,2007-10-03,Colorado Avalanche,Dallas Stars,TRUE,4,3,4,4,1067.505950033487,1
+2008,5,2007-10-03,Detroit Red Wings,Anaheim Ducks,TRUE,3,2,4,3,3171.4465401651682,1
+2008,6,2007-10-03,Toronto Maple Leafs,Ottawa Senators,FALSE,3,4,4,4,352.49012255498184,-1
+2008,7,2007-10-04,Calgary Flames,Philadelphia Flyers,FALSE,2,3,4,4,3231.0672511672074,-1
+2008,8,2007-10-04,Edmonton Oilers,San Jose Sharks,TRUE,3,2,4,4,1916.464697779404,1
+2008,9,2007-10-04,Minnesota Wild,Chicago Blackhawks,TRUE,1,0,4,4,778.9272003944247,1
+2008,10,2007-10-04,Nashville Predators,Colorado Avalanche,TRUE,4,0,4,1,1643.9936280152428,4
+2008,11,2007-10-04,New York Rangers,Florida Panthers,TRUE,5,2,4,4,1718.938543113028,3
 2008,12,2007-10-04,Ottawa Senators,Toronto Maple Leafs,TRUE,3,2,1,1,352.49012255498184,1
-2008,13,2007-10-04,Phoenix Coyotes,St. Louis Blues,TRUE,3,2,0,0,2046.0473959011829,1
-2008,14,2007-10-04,Tampa Bay Lightning,New Jersey Devils,TRUE,3,1,0,0,1559.8314059312384,2
-2008,15,2007-10-05,Atlanta Thrashers,Washington Capitals,FALSE,1,3,0,0,873.7125200722888,-2
-2008,16,2007-10-05,Buffalo Sabres,New York Islanders,FALSE,4,6,0,0,471.09809505402666,-2
-2008,17,2007-10-05,Carolina Hurricanes,Pittsburgh Penguins,TRUE,4,1,2,0,532.2964466578625,3
-2008,18,2007-10-05,Columbus Blue Jackets,Anaheim Ducks,TRUE,4,0,0,2,3160.8981135886934,4
-2008,19,2007-10-05,Dallas Stars,Boston Bruins,TRUE,4,1,2,0,2495.8958359982166,3
-2008,20,2007-10-05,Vancouver Canucks,San Jose Sharks,FALSE,1,3,0,1,1333.3622199094134,-2
+2008,13,2007-10-04,Phoenix Coyotes,St. Louis Blues,TRUE,3,2,4,4,2046.0473959011829,1
+2008,14,2007-10-04,Tampa Bay Lightning,New Jersey Devils,TRUE,3,1,4,4,1559.8314059312384,2
+2008,15,2007-10-05,Atlanta Thrashers,Washington Capitals,FALSE,1,3,4,4,873.7125200722888,-2
+2008,16,2007-10-05,Buffalo Sabres,New York Islanders,FALSE,4,6,4,4,471.09809505402666,-2
+2008,17,2007-10-05,Carolina Hurricanes,Pittsburgh Penguins,TRUE,4,1,2,4,532.2964466578625,3
+2008,18,2007-10-05,Columbus Blue Jackets,Anaheim Ducks,TRUE,4,0,4,2,3160.8981135886934,4
+2008,19,2007-10-05,Dallas Stars,Boston Bruins,TRUE,4,1,2,4,2495.8958359982166,3
+2008,20,2007-10-05,Vancouver Canucks,San Jose Sharks,FALSE,1,3,4,1,1333.3622199094134,-2
 2008,21,2007-10-06,Calgary Flames,Vancouver Canucks,FALSE,3,4,2,1,673.925787706445,-1
 2008,22,2007-10-06,Chicago Blackhawks,Detroit Red Wings,TRUE,4,3,2,3,380.31764619006117,1
 2008,23,2007-10-06,Edmonton Oilers,Philadelphia Flyers,TRUE,5,3,2,2,3238.818774572986,2
@@ -10864,36 +10864,36 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2008,1228,2008-04-06,Detroit Red Wings,Chicago Blackhawks,TRUE,4,1,3,2,380.31764619006117,3
 2008,1229,2008-04-06,New Jersey Devils,New York Rangers,TRUE,3,2,2,2,80.3499401545681,1
 2008,1230,2008-04-06,Philadelphia Flyers,Pittsburgh Penguins,TRUE,2,0,2,4,414.27292851869714,2
-2009,1,2008-10-04,Ottawa Senators,Pittsburgh Penguins,FALSE,3,4,0,0,655.6601951346106,-1
-2009,2,2008-10-04,Tampa Bay Lightning,New York Rangers,FALSE,1,2,0,0,1639.71410077463,-1
+2009,1,2008-10-04,Ottawa Senators,Pittsburgh Penguins,FALSE,3,4,4,4,655.6601951346106,-1
+2009,2,2008-10-04,Tampa Bay Lightning,New York Rangers,FALSE,1,2,4,4,1639.71410077463,-1
 2009,3,2008-10-05,New York Rangers,Tampa Bay Lightning,TRUE,2,1,1,1,1639.71410077463,1
 2009,4,2008-10-05,Pittsburgh Penguins,Ottawa Senators,FALSE,1,3,1,1,655.6601951346106,-2
-2009,5,2008-10-09,Colorado Avalanche,Boston Bruins,FALSE,4,5,0,0,2844.4604875765317,-1
-2009,6,2008-10-09,Detroit Red Wings,Toronto Maple Leafs,FALSE,2,3,0,0,334.08583268586455,-1
-2009,7,2008-10-09,San Jose Sharks,Anaheim Ducks,TRUE,4,1,0,0,530.2084515670917,3
-2009,8,2008-10-09,Vancouver Canucks,Calgary Flames,TRUE,6,0,0,0,673.925787706445,6
-2009,9,2008-10-10,Atlanta Thrashers,Washington Capitals,TRUE,7,4,0,0,873.7125200722888,3
-2009,10,2008-10-10,Buffalo Sabres,Montreal Canadiens,TRUE,2,1,0,0,514.0679535709085,1
-2009,11,2008-10-10,Carolina Hurricanes,Florida Panthers,TRUE,6,4,0,0,1081.1096611931298,2
-2009,12,2008-10-10,Dallas Stars,Columbus Blue Jackets,FALSE,4,5,0,0,1470.1969224825846,-1
-2009,13,2008-10-10,New Jersey Devils,New York Islanders,TRUE,2,1,0,0,80.3499401545681,1
-2009,14,2008-10-10,New York Rangers,Chicago Blackhawks,TRUE,4,2,5,0,1145.5758250747779,2
-2009,15,2008-10-10,St. Louis Blues,Nashville Predators,TRUE,5,2,0,0,408.13584580192946,3
+2009,5,2008-10-09,Colorado Avalanche,Boston Bruins,FALSE,4,5,4,4,2844.4604875765317,-1
+2009,6,2008-10-09,Detroit Red Wings,Toronto Maple Leafs,FALSE,2,3,4,4,334.08583268586455,-1
+2009,7,2008-10-09,San Jose Sharks,Anaheim Ducks,TRUE,4,1,4,4,530.2084515670917,3
+2009,8,2008-10-09,Vancouver Canucks,Calgary Flames,TRUE,6,0,4,4,673.925787706445,6
+2009,9,2008-10-10,Atlanta Thrashers,Washington Capitals,TRUE,7,4,4,4,873.7125200722888,3
+2009,10,2008-10-10,Buffalo Sabres,Montreal Canadiens,TRUE,2,1,4,4,514.0679535709085,1
+2009,11,2008-10-10,Carolina Hurricanes,Florida Panthers,TRUE,6,4,4,4,1081.1096611931298,2
+2009,12,2008-10-10,Dallas Stars,Columbus Blue Jackets,FALSE,4,5,4,4,1470.1969224825846,-1
+2009,13,2008-10-10,New Jersey Devils,New York Islanders,TRUE,2,1,4,4,80.3499401545681,1
+2009,14,2008-10-10,New York Rangers,Chicago Blackhawks,TRUE,4,2,5,4,1145.5758250747779,2
+2009,15,2008-10-10,St. Louis Blues,Nashville Predators,TRUE,5,2,4,4,408.13584580192946,3
 2009,16,2008-10-11,Calgary Flames,Vancouver Canucks,FALSE,4,5,2,2,673.925787706445,-1
 2009,17,2008-10-11,Florida Panthers,Atlanta Thrashers,TRUE,3,2,1,1,933.0967341193121,1
-2009,18,2008-10-11,Minnesota Wild,Boston Bruins,TRUE,4,3,0,2,1928.4956284942696,1
+2009,18,2008-10-11,Minnesota Wild,Boston Bruins,TRUE,4,3,4,2,1928.4956284942696,1
 2009,19,2008-10-11,Nashville Predators,Dallas Stars,TRUE,3,1,1,1,992.7957466655384,2
 2009,20,2008-10-11,New York Islanders,St. Louis Blues,TRUE,5,2,1,1,1404.755215695527,3
 2009,21,2008-10-11,Ottawa Senators,Detroit Red Wings,FALSE,2,3,6,2,683.819541926067,-1
-2009,22,2008-10-11,Philadelphia Flyers,New York Rangers,FALSE,3,4,0,1,129.76049887506204,-1
-2009,23,2008-10-11,Phoenix Coyotes,Columbus Blue Jackets,TRUE,3,1,0,1,2680.935613844161,2
+2009,22,2008-10-11,Philadelphia Flyers,New York Rangers,FALSE,3,4,4,1,129.76049887506204,-1
+2009,23,2008-10-11,Phoenix Coyotes,Columbus Blue Jackets,TRUE,3,1,4,1,2680.935613844161,2
 2009,24,2008-10-11,Pittsburgh Penguins,New Jersey Devils,FALSE,1,2,6,1,476.7856992525174,-1
-2009,25,2008-10-11,San Jose Sharks,Los Angeles Kings,TRUE,3,1,2,0,492.1038503405466,2
+2009,25,2008-10-11,San Jose Sharks,Los Angeles Kings,TRUE,3,1,2,4,492.1038503405466,2
 2009,26,2008-10-11,Tampa Bay Lightning,Carolina Hurricanes,FALSE,3,4,6,1,965.6212732300062,-1
 2009,27,2008-10-11,Toronto Maple Leafs,Montreal Canadiens,FALSE,1,6,2,1,504.82722904779484,-5
 2009,28,2008-10-11,Washington Capitals,Chicago Blackhawks,TRUE,4,2,1,1,956.2566922007718,2
 2009,29,2008-10-12,Anaheim Ducks,Phoenix Coyotes,FALSE,2,4,3,1,542.8929153391765,-2
-2009,30,2008-10-12,Edmonton Oilers,Colorado Avalanche,TRUE,3,2,0,3,1665.920889504275,1
+2009,30,2008-10-12,Edmonton Oilers,Colorado Avalanche,TRUE,3,2,4,3,1665.920889504275,1
 2009,31,2008-10-12,Los Angeles Kings,San Jose Sharks,FALSE,0,1,1,1,492.1038503405466,-1
 2009,32,2008-10-13,Carolina Hurricanes,Detroit Red Wings,FALSE,1,3,2,2,822.8993490122255,-2
 2009,33,2008-10-13,Chicago Blackhawks,Nashville Predators,FALSE,2,3,2,2,640.4456248145765,-1
@@ -12094,27 +12094,27 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2009,1228,2009-04-12,Colorado Avalanche,St. Louis Blues,FALSE,0,1,1,2,1280.77875829715,-1
 2009,1229,2009-04-12,New York Islanders,Boston Bruins,FALSE,2,6,1,1,306.45146321965285,-4
 2009,1230,2009-04-12,Philadelphia Flyers,New York Rangers,FALSE,3,4,1,3,129.76049887506204,-1
-2010,1,2009-10-01,Boston Bruins,Washington Capitals,FALSE,1,4,0,0,634.380130138029,-3
-2010,2,2009-10-01,Calgary Flames,Vancouver Canucks,TRUE,5,3,0,0,673.925787706445,2
-2010,3,2009-10-01,Colorado Avalanche,San Jose Sharks,TRUE,5,2,0,0,1492.915208167014,3
-2010,4,2009-10-01,Toronto Maple Leafs,Montreal Canadiens,FALSE,3,4,0,0,504.82722904779484,-1
-2010,5,2009-10-02,Carolina Hurricanes,Philadelphia Flyers,FALSE,0,2,0,0,555.7137177696153,-2
-2010,6,2009-10-02,Chicago Blackhawks,Florida Panthers,FALSE,3,4,0,0,1874.7084979959643,-1
-2010,7,2009-10-02,Detroit Red Wings,St. Louis Blues,FALSE,3,4,0,0,730.8059860461439,-1
-2010,8,2009-10-02,Pittsburgh Penguins,New York Rangers,TRUE,3,2,0,0,507.26040911440913,1
-2010,9,2009-10-03,Anaheim Ducks,San Jose Sharks,FALSE,1,4,0,2,530.2084515670917,-3
-2010,10,2009-10-03,Atlanta Thrashers,Tampa Bay Lightning,TRUE,6,3,0,0,689.235100855136,3
+2010,1,2009-10-01,Boston Bruins,Washington Capitals,FALSE,1,4,4,4,634.380130138029,-3
+2010,2,2009-10-01,Calgary Flames,Vancouver Canucks,TRUE,5,3,4,4,673.925787706445,2
+2010,3,2009-10-01,Colorado Avalanche,San Jose Sharks,TRUE,5,2,4,4,1492.915208167014,3
+2010,4,2009-10-01,Toronto Maple Leafs,Montreal Canadiens,FALSE,3,4,4,4,504.82722904779484,-1
+2010,5,2009-10-02,Carolina Hurricanes,Philadelphia Flyers,FALSE,0,2,4,4,555.7137177696153,-2
+2010,6,2009-10-02,Chicago Blackhawks,Florida Panthers,FALSE,3,4,4,4,1874.7084979959643,-1
+2010,7,2009-10-02,Detroit Red Wings,St. Louis Blues,FALSE,3,4,4,4,730.8059860461439,-1
+2010,8,2009-10-02,Pittsburgh Penguins,New York Rangers,TRUE,3,2,4,4,507.26040911440913,1
+2010,9,2009-10-03,Anaheim Ducks,San Jose Sharks,FALSE,1,4,4,2,530.2084515670917,-3
+2010,10,2009-10-03,Atlanta Thrashers,Tampa Bay Lightning,TRUE,6,3,4,4,689.235100855136,3
 2010,11,2009-10-03,Boston Bruins,Carolina Hurricanes,TRUE,7,2,2,1,981.8580953001334,5
-2010,12,2009-10-03,Buffalo Sabres,Montreal Canadiens,FALSE,1,2,0,2,514.0679535709085,-1
-2010,13,2009-10-03,Columbus Blue Jackets,Minnesota Wild,TRUE,2,1,0,0,1207.2934436596643,1
+2010,12,2009-10-03,Buffalo Sabres,Montreal Canadiens,FALSE,1,2,4,2,514.0679535709085,-1
+2010,13,2009-10-03,Columbus Blue Jackets,Minnesota Wild,TRUE,2,1,4,4,1207.2934436596643,1
 2010,14,2009-10-03,Colorado Avalanche,Vancouver Canucks,TRUE,3,0,2,2,1781.2665230317757,3
-2010,15,2009-10-03,Dallas Stars,Nashville Predators,FALSE,2,3,0,0,992.7957466655384,-1
-2010,16,2009-10-03,Edmonton Oilers,Calgary Flames,FALSE,3,4,0,2,281.2183812161469,-1
+2010,15,2009-10-03,Dallas Stars,Nashville Predators,FALSE,2,3,4,4,992.7957466655384,-1
+2010,16,2009-10-03,Edmonton Oilers,Calgary Flames,FALSE,3,4,4,2,281.2183812161469,-1
 2010,17,2009-10-03,Florida Panthers,Chicago Blackhawks,FALSE,0,4,1,1,1874.7084979959643,-4
-2010,18,2009-10-03,Los Angeles Kings,Phoenix Coyotes,FALSE,3,6,0,0,574.9050275298611,-3
-2010,19,2009-10-03,New Jersey Devils,Philadelphia Flyers,FALSE,2,5,0,1,65.82757416267319,-3
-2010,20,2009-10-03,New York Islanders,Pittsburgh Penguins,FALSE,3,4,0,1,507.26040911440913,-1
-2010,21,2009-10-03,New York Rangers,Ottawa Senators,TRUE,5,2,1,0,541.8839253024181,3
+2010,18,2009-10-03,Los Angeles Kings,Phoenix Coyotes,FALSE,3,6,4,4,574.9050275298611,-3
+2010,19,2009-10-03,New Jersey Devils,Philadelphia Flyers,FALSE,2,5,4,1,65.82757416267319,-3
+2010,20,2009-10-03,New York Islanders,Pittsburgh Penguins,FALSE,3,4,4,1,507.26040911440913,-1
+2010,21,2009-10-03,New York Rangers,Ottawa Senators,TRUE,5,2,1,4,541.8839253024181,3
 2010,22,2009-10-03,St. Louis Blues,Detroit Red Wings,TRUE,5,3,1,1,730.8059860461439,2
 2010,23,2009-10-03,Washington Capitals,Toronto Maple Leafs,TRUE,6,4,2,2,563.5422926046916,2
 2010,24,2009-10-05,New Jersey Devils,New York Rangers,FALSE,2,3,2,2,80.3499401545681,-1
@@ -13324,31 +13324,31 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2010,1228,2010-04-11,New York Islanders,Pittsburgh Penguins,FALSE,5,6,1,1,507.26040911440913,-1
 2010,1229,2010-04-11,Philadelphia Flyers,New York Rangers,TRUE,2,1,2,2,129.76049887506204,1
 2010,1230,2010-04-11,Washington Capitals,Boston Bruins,FALSE,3,4,2,1,634.380130138029,-1
-2011,1,2010-10-07,Colorado Avalanche,Chicago Blackhawks,TRUE,4,3,0,0,1479.3544709615878,1
-2011,2,2010-10-07,Edmonton Oilers,Calgary Flames,TRUE,4,0,0,0,281.2183812161469,4
-2011,3,2010-10-07,Minnesota Wild,Carolina Hurricanes,FALSE,3,4,0,0,1807.251600916273,-1
-2011,4,2010-10-07,Pittsburgh Penguins,Philadelphia Flyers,FALSE,2,3,0,0,414.27292851869714,-1
-2011,5,2010-10-07,Toronto Maple Leafs,Montreal Canadiens,TRUE,3,2,0,0,504.82722904779484,1
-2011,6,2010-10-08,Atlanta Thrashers,Washington Capitals,TRUE,4,2,0,0,873.7125200722888,2
+2011,1,2010-10-07,Colorado Avalanche,Chicago Blackhawks,TRUE,4,3,4,4,1479.3544709615878,1
+2011,2,2010-10-07,Edmonton Oilers,Calgary Flames,TRUE,4,0,4,4,281.2183812161469,4
+2011,3,2010-10-07,Minnesota Wild,Carolina Hurricanes,FALSE,3,4,4,4,1807.251600916273,-1
+2011,4,2010-10-07,Pittsburgh Penguins,Philadelphia Flyers,FALSE,2,3,4,4,414.27292851869714,-1
+2011,5,2010-10-07,Toronto Maple Leafs,Montreal Canadiens,TRUE,3,2,4,4,504.82722904779484,1
+2011,6,2010-10-08,Atlanta Thrashers,Washington Capitals,TRUE,4,2,4,4,873.7125200722888,2
 2011,7,2010-10-08,Carolina Hurricanes,Minnesota Wild,TRUE,2,1,1,1,1807.251600916273,1
-2011,8,2010-10-08,Columbus Blue Jackets,San Jose Sharks,FALSE,2,3,0,0,3366.6495018630126,-1
-2011,9,2010-10-08,Detroit Red Wings,Anaheim Ducks,TRUE,4,0,0,0,3171.4465401651682,4
-2011,10,2010-10-08,New Jersey Devils,Dallas Stars,FALSE,3,4,0,0,2155.895959023115,-1
-2011,11,2010-10-08,Ottawa Senators,Buffalo Sabres,FALSE,1,2,0,0,379.66453432686313,-1
-2011,12,2010-10-09,Boston Bruins,Phoenix Coyotes,FALSE,2,5,0,0,3697.856484591129,-3
-2011,13,2010-10-09,Buffalo Sabres,New York Rangers,FALSE,3,6,1,0,471.09809505402666,-3
+2011,8,2010-10-08,Columbus Blue Jackets,San Jose Sharks,FALSE,2,3,4,4,3366.6495018630126,-1
+2011,9,2010-10-08,Detroit Red Wings,Anaheim Ducks,TRUE,4,0,4,4,3171.4465401651682,4
+2011,10,2010-10-08,New Jersey Devils,Dallas Stars,FALSE,3,4,4,4,2155.895959023115,-1
+2011,11,2010-10-08,Ottawa Senators,Buffalo Sabres,FALSE,1,2,4,4,379.66453432686313,-1
+2011,12,2010-10-09,Boston Bruins,Phoenix Coyotes,FALSE,2,5,4,4,3697.856484591129,-3
+2011,13,2010-10-09,Buffalo Sabres,New York Rangers,FALSE,3,6,1,4,471.09809505402666,-3
 2011,14,2010-10-09,Chicago Blackhawks,Detroit Red Wings,FALSE,2,3,2,1,380.31764619006117,-1
-2011,15,2010-10-09,Nashville Predators,Anaheim Ducks,TRUE,4,1,0,1,2838.5719097761107,3
-2011,16,2010-10-09,New York Islanders,Dallas Stars,FALSE,4,5,0,1,2208.2005931895173,-1
+2011,15,2010-10-09,Nashville Predators,Anaheim Ducks,TRUE,4,1,4,1,2838.5719097761107,3
+2011,16,2010-10-09,New York Islanders,Dallas Stars,FALSE,4,5,4,1,2208.2005931895173,-1
 2011,17,2010-10-09,Pittsburgh Penguins,Montreal Canadiens,FALSE,2,3,2,2,768.6490736570055,-1
 2011,18,2010-10-09,San Jose Sharks,Columbus Blue Jackets,FALSE,2,3,1,1,3366.6495018630126,-1
-2011,19,2010-10-09,St. Louis Blues,Philadelphia Flyers,TRUE,2,1,0,2,1302.09165850325,1
-2011,20,2010-10-09,Tampa Bay Lightning,Atlanta Thrashers,TRUE,5,3,0,1,689.235100855136,2
+2011,19,2010-10-09,St. Louis Blues,Philadelphia Flyers,TRUE,2,1,4,2,1302.09165850325,1
+2011,20,2010-10-09,Tampa Bay Lightning,Atlanta Thrashers,TRUE,5,3,4,1,689.235100855136,2
 2011,21,2010-10-09,Toronto Maple Leafs,Ottawa Senators,TRUE,5,1,2,1,352.49012255498184,4
-2011,22,2010-10-09,Vancouver Canucks,Los Angeles Kings,FALSE,1,2,0,0,1742.3279686271878,-1
+2011,22,2010-10-09,Vancouver Canucks,Los Angeles Kings,FALSE,1,2,4,4,1742.3279686271878,-1
 2011,23,2010-10-09,Washington Capitals,New Jersey Devils,TRUE,7,2,1,1,259.8440303819753,5
 2011,24,2010-10-10,Calgary Flames,Los Angeles Kings,TRUE,3,1,3,1,1921.4892403362792,2
-2011,25,2010-10-10,Edmonton Oilers,Florida Panthers,TRUE,3,2,3,0,4096.437619445798,1
+2011,25,2010-10-10,Edmonton Oilers,Florida Panthers,TRUE,3,2,3,4,4096.437619445798,1
 2011,26,2010-10-10,Phoenix Coyotes,Boston Bruins,FALSE,0,3,1,1,3697.856484591129,-3
 2011,27,2010-10-11,Buffalo Sabres,Chicago Blackhawks,FALSE,3,4,2,2,727.9649718909436,-1
 2011,28,2010-10-11,New Jersey Devils,Pittsburgh Penguins,FALSE,1,3,2,2,476.7856992525174,-2
@@ -14554,30 +14554,30 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2011,1228,2011-04-10,Colorado Avalanche,Edmonton Oilers,TRUE,4,3,2,2,1665.920889504275,1
 2011,1229,2011-04-10,Minnesota Wild,Dallas Stars,TRUE,5,3,2,2,1563.5415559415594,2
 2011,1230,2011-04-10,New Jersey Devils,Boston Bruins,TRUE,3,2,1,1,379.6938441202614,1
-2012,1,2011-10-06,Boston Bruins,Philadelphia Flyers,FALSE,1,2,0,0,436.1175933140669,-1
-2012,2,2011-10-06,Toronto Maple Leafs,Montreal Canadiens,TRUE,2,0,0,0,504.82722904779484,2
-2012,3,2011-10-06,Vancouver Canucks,Pittsburgh Penguins,FALSE,3,4,0,0,3489.90890971586,-1
-2012,4,2011-10-07,Buffalo Sabres,Anaheim Ducks,TRUE,4,1,0,0,3518.249488863887,3
-2012,5,2011-10-07,Carolina Hurricanes,Tampa Bay Lightning,FALSE,1,5,0,0,965.6212732300062,-4
-2012,6,2011-10-07,Columbus Blue Jackets,Nashville Predators,FALSE,2,3,0,0,537.2125866638297,-1
-2012,7,2011-10-07,Dallas Stars,Chicago Blackhawks,TRUE,2,1,0,0,1296.4097190166246,1
-2012,8,2011-10-07,Detroit Red Wings,Ottawa Senators,TRUE,5,3,0,0,683.819541926067,2
-2012,9,2011-10-07,Los Angeles Kings,New York Rangers,TRUE,3,2,0,0,3940.1548469738304,1
+2012,1,2011-10-06,Boston Bruins,Philadelphia Flyers,FALSE,1,2,4,4,436.1175933140669,-1
+2012,2,2011-10-06,Toronto Maple Leafs,Montreal Canadiens,TRUE,2,0,4,4,504.82722904779484,2
+2012,3,2011-10-06,Vancouver Canucks,Pittsburgh Penguins,FALSE,3,4,4,4,3489.90890971586,-1
+2012,4,2011-10-07,Buffalo Sabres,Anaheim Ducks,TRUE,4,1,4,4,3518.249488863887,3
+2012,5,2011-10-07,Carolina Hurricanes,Tampa Bay Lightning,FALSE,1,5,4,4,965.6212732300062,-4
+2012,6,2011-10-07,Columbus Blue Jackets,Nashville Predators,FALSE,2,3,4,4,537.2125866638297,-1
+2012,7,2011-10-07,Dallas Stars,Chicago Blackhawks,TRUE,2,1,4,4,1296.4097190166246,1
+2012,8,2011-10-07,Detroit Red Wings,Ottawa Senators,TRUE,5,3,4,4,683.819541926067,2
+2012,9,2011-10-07,Los Angeles Kings,New York Rangers,TRUE,3,2,4,4,3940.1548469738304,1
 2012,10,2011-10-08,Anaheim Ducks,New York Rangers,TRUE,2,1,1,1,3922.254143678852,1
 2012,11,2011-10-08,Boston Bruins,Tampa Bay Lightning,TRUE,4,1,2,1,1928.590914941488,3
-2012,12,2011-10-08,Calgary Flames,Pittsburgh Penguins,FALSE,3,5,0,2,2865.5506473745936,-2
+2012,12,2011-10-08,Calgary Flames,Pittsburgh Penguins,FALSE,3,5,4,2,2865.5506473745936,-2
 2012,13,2011-10-08,Chicago Blackhawks,Dallas Stars,TRUE,5,2,1,1,1296.4097190166246,3
-2012,14,2011-10-08,Colorado Avalanche,Detroit Red Wings,FALSE,0,3,0,1,1858.2196028190695,-3
+2012,14,2011-10-08,Colorado Avalanche,Detroit Red Wings,FALSE,0,3,4,1,1858.2196028190695,-3
 2012,15,2011-10-08,Los Angeles Kings,Buffalo Sabres,FALSE,2,4,1,1,3533.7605854511567,-2
-2012,16,2011-10-08,Minnesota Wild,Columbus Blue Jackets,TRUE,4,2,0,1,1207.2934436596643,2
-2012,17,2011-10-08,New Jersey Devils,Philadelphia Flyers,FALSE,0,3,0,2,65.82757416267319,-3
-2012,18,2011-10-08,New York Islanders,Florida Panthers,FALSE,0,2,0,0,1718.938543113028,-2
-2012,19,2011-10-08,San Jose Sharks,Phoenix Coyotes,TRUE,6,3,0,0,989.4255561520106,3
-2012,20,2011-10-08,St. Louis Blues,Nashville Predators,FALSE,2,4,0,1,408.13584580192946,-2
+2012,16,2011-10-08,Minnesota Wild,Columbus Blue Jackets,TRUE,4,2,4,1,1207.2934436596643,2
+2012,17,2011-10-08,New Jersey Devils,Philadelphia Flyers,FALSE,0,3,4,2,65.82757416267319,-3
+2012,18,2011-10-08,New York Islanders,Florida Panthers,FALSE,0,2,4,4,1718.938543113028,-2
+2012,19,2011-10-08,San Jose Sharks,Phoenix Coyotes,TRUE,6,3,4,4,989.4255561520106,3
+2012,20,2011-10-08,St. Louis Blues,Nashville Predators,FALSE,2,4,4,1,408.13584580192946,-2
 2012,21,2011-10-08,Toronto Maple Leafs,Ottawa Senators,TRUE,6,5,2,1,352.49012255498184,1
-2012,22,2011-10-08,Washington Capitals,Carolina Hurricanes,TRUE,4,3,0,1,375.88164099638885,1
-2012,23,2011-10-09,Edmonton Oilers,Pittsburgh Penguins,TRUE,2,1,0,1,2893.57983240456,1
-2012,24,2011-10-09,Winnipeg Jets,Montreal Canadiens,FALSE,1,5,0,3,1823.9212886416908,-4
+2012,22,2011-10-08,Washington Capitals,Carolina Hurricanes,TRUE,4,3,4,1,375.88164099638885,1
+2012,23,2011-10-09,Edmonton Oilers,Pittsburgh Penguins,TRUE,2,1,4,1,2893.57983240456,1
+2012,24,2011-10-09,Winnipeg Jets,Montreal Canadiens,FALSE,1,5,4,3,1823.9212886416908,-4
 2012,25,2011-10-10,Boston Bruins,Colorado Avalanche,FALSE,0,1,2,2,2844.4604875765317,-1
 2012,26,2011-10-10,Columbus Blue Jackets,Vancouver Canucks,FALSE,2,3,2,4,3299.7240359595985,-1
 2012,27,2011-10-10,Dallas Stars,Phoenix Coyotes,TRUE,2,1,2,2,1425.1286231022978,1
@@ -15784,25 +15784,25 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2012,1228,2012-04-07,San Jose Sharks,Los Angeles Kings,TRUE,3,2,2,2,492.1038503405466,1
 2012,1229,2012-04-07,Vancouver Canucks,Edmonton Oilers,TRUE,3,0,2,2,818.6290857739193,3
 2012,1230,2012-04-07,Winnipeg Jets,Tampa Bay Lightning,FALSE,3,4,2,2,2758.4554833894813,-1
-2013,1,2013-01-19,Boston Bruins,New York Rangers,TRUE,3,1,0,0,306.45146321965285,2
-2013,2,2013-01-19,Dallas Stars,Phoenix Coyotes,TRUE,4,3,0,0,1425.1286231022978,1
-2013,3,2013-01-19,Florida Panthers,Carolina Hurricanes,TRUE,5,1,0,0,1081.1096611931298,4
-2013,4,2013-01-19,Los Angeles Kings,Chicago Blackhawks,FALSE,2,5,0,0,2807.1099885982912,-3
-2013,5,2013-01-19,Minnesota Wild,Colorado Avalanche,TRUE,4,2,0,0,1140.1279569326618,2
-2013,6,2013-01-19,Montreal Canadiens,Toronto Maple Leafs,FALSE,1,2,0,0,504.82722904779484,-1
-2013,7,2013-01-19,Nashville Predators,Columbus Blue Jackets,FALSE,2,3,0,0,537.2125866638297,-1
-2013,8,2013-01-19,New York Islanders,New Jersey Devils,FALSE,1,2,0,0,80.3499401545681,-1
-2013,9,2013-01-19,Philadelphia Flyers,Pittsburgh Penguins,FALSE,1,3,0,0,414.27292851869714,-2
-2013,10,2013-01-19,St. Louis Blues,Detroit Red Wings,TRUE,6,0,0,0,730.8059860461439,6
-2013,11,2013-01-19,Tampa Bay Lightning,Washington Capitals,TRUE,6,3,0,0,1341.3555564295361,3
-2013,12,2013-01-19,Vancouver Canucks,Anaheim Ducks,FALSE,3,7,0,0,1772.203634756649,-4
-2013,13,2013-01-19,Winnipeg Jets,Ottawa Senators,FALSE,1,4,0,0,1676.2863116243955,-3
-2013,14,2013-01-20,Buffalo Sabres,Philadelphia Flyers,TRUE,5,2,0,1,450.1741404499461,3
-2013,15,2013-01-20,Calgary Flames,San Jose Sharks,FALSE,1,4,0,0,1646.1108820169086,-3
+2013,1,2013-01-19,Boston Bruins,New York Rangers,TRUE,3,1,4,4,306.45146321965285,2
+2013,2,2013-01-19,Dallas Stars,Phoenix Coyotes,TRUE,4,3,4,4,1425.1286231022978,1
+2013,3,2013-01-19,Florida Panthers,Carolina Hurricanes,TRUE,5,1,4,4,1081.1096611931298,4
+2013,4,2013-01-19,Los Angeles Kings,Chicago Blackhawks,FALSE,2,5,4,4,2807.1099885982912,-3
+2013,5,2013-01-19,Minnesota Wild,Colorado Avalanche,TRUE,4,2,4,4,1140.1279569326618,2
+2013,6,2013-01-19,Montreal Canadiens,Toronto Maple Leafs,FALSE,1,2,4,4,504.82722904779484,-1
+2013,7,2013-01-19,Nashville Predators,Columbus Blue Jackets,FALSE,2,3,4,4,537.2125866638297,-1
+2013,8,2013-01-19,New York Islanders,New Jersey Devils,FALSE,1,2,4,4,80.3499401545681,-1
+2013,9,2013-01-19,Philadelphia Flyers,Pittsburgh Penguins,FALSE,1,3,4,4,414.27292851869714,-2
+2013,10,2013-01-19,St. Louis Blues,Detroit Red Wings,TRUE,6,0,4,4,730.8059860461439,6
+2013,11,2013-01-19,Tampa Bay Lightning,Washington Capitals,TRUE,6,3,4,4,1341.3555564295361,3
+2013,12,2013-01-19,Vancouver Canucks,Anaheim Ducks,FALSE,3,7,4,4,1772.203634756649,-4
+2013,13,2013-01-19,Winnipeg Jets,Ottawa Senators,FALSE,1,4,4,4,1676.2863116243955,-3
+2013,14,2013-01-20,Buffalo Sabres,Philadelphia Flyers,TRUE,5,2,4,1,450.1741404499461,3
+2013,15,2013-01-20,Calgary Flames,San Jose Sharks,FALSE,1,4,4,4,1646.1108820169086,-3
 2013,16,2013-01-20,Minnesota Wild,Dallas Stars,TRUE,1,0,1,1,1563.5415559415594,1
 2013,17,2013-01-20,New York Rangers,Pittsburgh Penguins,FALSE,3,6,1,1,507.26040911440913,-3
 2013,18,2013-01-20,Phoenix Coyotes,Chicago Blackhawks,FALSE,4,6,1,1,2338.963065363237,-2
-2013,19,2013-01-20,Vancouver Canucks,Edmonton Oilers,FALSE,2,3,1,0,818.6290857739193,-1
+2013,19,2013-01-20,Vancouver Canucks,Edmonton Oilers,FALSE,2,3,1,4,818.6290857739193,-1
 2013,20,2013-01-21,Boston Bruins,Winnipeg Jets,TRUE,2,1,2,2,2165.782331775843,1
 2013,21,2013-01-21,Columbus Blue Jackets,Detroit Red Wings,FALSE,3,4,2,2,263.4400440763562,-1
 2013,22,2013-01-21,Calgary Flames,Anaheim Ducks,FALSE,4,5,1,2,1940.7496265008074,-1
@@ -16504,25 +16504,25 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2013,718,2013-04-27,Toronto Maple Leafs,Montreal Canadiens,FALSE,1,4,2,2,504.82722904779484,-3
 2013,719,2013-04-27,Washington Capitals,Boston Bruins,TRUE,3,2,2,2,634.380130138029,1
 2013,720,2013-04-28,Boston Bruins,Ottawa Senators,FALSE,2,4,1,1,504.42403083392537,-2
-2014,1,2013-10-01,Chicago Blackhawks,Washington Capitals,TRUE,6,4,0,0,956.2566922007718,2
-2014,2,2013-10-01,Edmonton Oilers,Winnipeg Jets,FALSE,4,5,0,0,1195.6256642480942,-1
-2014,3,2013-10-01,Montreal Canadiens,Toronto Maple Leafs,FALSE,3,4,0,0,504.82722904779484,-1
-2014,4,2013-10-02,Colorado Avalanche,Anaheim Ducks,TRUE,6,1,0,0,1324.4359964103407,5
-2014,5,2013-10-02,Detroit Red Wings,Buffalo Sabres,TRUE,2,1,0,0,348.54301108040886,1
-2014,6,2013-10-02,Philadelphia Flyers,Toronto Maple Leafs,FALSE,1,3,0,1,540.4142919441362,-2
-2014,7,2013-10-03,Boston Bruins,Tampa Bay Lightning,TRUE,3,1,0,0,1928.590914941488,2
-2014,8,2013-10-03,Dallas Stars,Florida Panthers,FALSE,2,4,0,0,1760.9853268370098,-2
-2014,9,2013-10-03,Minnesota Wild,Los Angeles Kings,FALSE,2,3,0,0,2430.1160397968356,-1
-2014,10,2013-10-03,Phoenix Coyotes,New York Rangers,TRUE,4,1,0,0,3447.5618512168717,3
-2014,11,2013-10-03,Pittsburgh Penguins,New Jersey Devils,TRUE,3,0,0,0,476.7856992525174,3
-2014,12,2013-10-03,San Jose Sharks,Vancouver Canucks,TRUE,4,1,0,0,1333.3622199094134,3
-2014,13,2013-10-03,St. Louis Blues,Nashville Predators,TRUE,4,2,0,0,408.13584580192946,2
-2014,14,2013-10-03,Washington Capitals,Calgary Flames,TRUE,5,4,2,0,3170.8334701766735,1
-2014,15,2013-10-04,Buffalo Sabres,Ottawa Senators,FALSE,0,1,2,0,379.66453432686313,-1
-2014,16,2013-10-04,Carolina Hurricanes,Detroit Red Wings,FALSE,2,3,0,2,822.8993490122255,-1
-2014,17,2013-10-04,Columbus Blue Jackets,Calgary Flames,FALSE,3,4,0,1,2692.682293184285,-1
+2014,1,2013-10-01,Chicago Blackhawks,Washington Capitals,TRUE,6,4,4,4,956.2566922007718,2
+2014,2,2013-10-01,Edmonton Oilers,Winnipeg Jets,FALSE,4,5,4,4,1195.6256642480942,-1
+2014,3,2013-10-01,Montreal Canadiens,Toronto Maple Leafs,FALSE,3,4,4,4,504.82722904779484,-1
+2014,4,2013-10-02,Colorado Avalanche,Anaheim Ducks,TRUE,6,1,4,4,1324.4359964103407,5
+2014,5,2013-10-02,Detroit Red Wings,Buffalo Sabres,TRUE,2,1,4,4,348.54301108040886,1
+2014,6,2013-10-02,Philadelphia Flyers,Toronto Maple Leafs,FALSE,1,3,4,1,540.4142919441362,-2
+2014,7,2013-10-03,Boston Bruins,Tampa Bay Lightning,TRUE,3,1,4,4,1928.590914941488,2
+2014,8,2013-10-03,Dallas Stars,Florida Panthers,FALSE,2,4,4,4,1760.9853268370098,-2
+2014,9,2013-10-03,Minnesota Wild,Los Angeles Kings,FALSE,2,3,4,4,2430.1160397968356,-1
+2014,10,2013-10-03,Phoenix Coyotes,New York Rangers,TRUE,4,1,4,4,3447.5618512168717,3
+2014,11,2013-10-03,Pittsburgh Penguins,New Jersey Devils,TRUE,3,0,4,4,476.7856992525174,3
+2014,12,2013-10-03,San Jose Sharks,Vancouver Canucks,TRUE,4,1,4,4,1333.3622199094134,3
+2014,13,2013-10-03,St. Louis Blues,Nashville Predators,TRUE,4,2,4,4,408.13584580192946,2
+2014,14,2013-10-03,Washington Capitals,Calgary Flames,TRUE,5,4,2,4,3170.8334701766735,1
+2014,15,2013-10-04,Buffalo Sabres,Ottawa Senators,FALSE,0,1,2,4,379.66453432686313,-1
+2014,16,2013-10-04,Carolina Hurricanes,Detroit Red Wings,FALSE,2,3,4,2,822.8993490122255,-1
+2014,17,2013-10-04,Columbus Blue Jackets,Calgary Flames,FALSE,3,4,4,1,2692.682293184285,-1
 2014,18,2013-10-04,Colorado Avalanche,Nashville Predators,TRUE,3,1,2,1,1643.9936280152428,2
-2014,19,2013-10-04,New Jersey Devils,New York Islanders,FALSE,3,4,1,0,80.3499401545681,-1
+2014,19,2013-10-04,New Jersey Devils,New York Islanders,FALSE,3,4,1,4,80.3499401545681,-1
 2014,20,2013-10-04,Winnipeg Jets,Los Angeles Kings,TRUE,5,3,3,1,2465.532067672044,2
 2014,21,2013-10-05,Boston Bruins,Detroit Red Wings,TRUE,4,1,2,1,986.9821088665648,3
 2014,22,2013-10-05,Chicago Blackhawks,Tampa Bay Lightning,FALSE,2,3,4,2,1637.7177894920153,-1
@@ -17738,23 +17738,23 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2014,1232,2014-04-13,St. Louis Blues,Detroit Red Wings,FALSE,0,3,2,2,730.8059860461439,-3
 2014,1233,2014-04-13,Vancouver Canucks,Calgary Flames,TRUE,5,1,1,2,673.925787706445,4
 2014,1234,2014-04-13,Washington Capitals,Tampa Bay Lightning,FALSE,0,1,2,2,1341.3555564295361,-1
-2015,1,2014-10-08,Boston Bruins,Philadelphia Flyers,TRUE,2,1,0,0,436.1175933140669,1
-2015,2,2014-10-08,Calgary Flames,Vancouver Canucks,FALSE,2,4,0,0,673.925787706445,-2
-2015,3,2014-10-08,Los Angeles Kings,San Jose Sharks,FALSE,0,4,0,0,492.1038503405466,-4
-2015,4,2014-10-08,Toronto Maple Leafs,Montreal Canadiens,FALSE,3,4,0,0,504.82722904779484,-1
-2015,5,2014-10-09,Arizona Coyotes,Winnipeg Jets,FALSE,2,6,0,0,2100.813812780933,-4
-2015,6,2014-10-09,Buffalo Sabres,Columbus Blue Jackets,FALSE,1,3,0,0,473.5253311564194,-2
-2015,7,2014-10-09,Dallas Stars,Chicago Blackhawks,FALSE,2,3,0,0,1296.4097190166246,-1
-2015,8,2014-10-09,Detroit Red Wings,Boston Bruins,TRUE,2,1,0,1,986.9821088665648,1
-2015,9,2014-10-09,Edmonton Oilers,Calgary Flames,FALSE,2,5,0,1,281.2183812161469,-3
-2015,10,2014-10-09,Minnesota Wild,Colorado Avalanche,TRUE,5,0,0,0,1140.1279569326618,5
-2015,11,2014-10-09,Nashville Predators,Ottawa Senators,TRUE,3,2,0,0,1388.4145728002068,1
-2015,12,2014-10-09,Philadelphia Flyers,New Jersey Devils,FALSE,4,6,1,0,65.82757416267319,-2
-2015,13,2014-10-09,Pittsburgh Penguins,Anaheim Ducks,TRUE,6,4,0,0,3416.8584083942383,2
-2015,14,2014-10-09,St. Louis Blues,New York Rangers,FALSE,2,3,0,0,1404.755215695527,-1
-2015,15,2014-10-09,Tampa Bay Lightning,Florida Panthers,TRUE,3,2,0,0,288.21092229421953,1
-2015,16,2014-10-09,Washington Capitals,Montreal Canadiens,FALSE,1,2,0,1,787.672649847598,-1
-2015,17,2014-10-10,Carolina Hurricanes,New York Islanders,FALSE,3,5,0,0,682.0964382527886,-2
+2015,1,2014-10-08,Boston Bruins,Philadelphia Flyers,TRUE,2,1,4,4,436.1175933140669,1
+2015,2,2014-10-08,Calgary Flames,Vancouver Canucks,FALSE,2,4,4,4,673.925787706445,-2
+2015,3,2014-10-08,Los Angeles Kings,San Jose Sharks,FALSE,0,4,4,4,492.1038503405466,-4
+2015,4,2014-10-08,Toronto Maple Leafs,Montreal Canadiens,FALSE,3,4,4,4,504.82722904779484,-1
+2015,5,2014-10-09,Arizona Coyotes,Winnipeg Jets,FALSE,2,6,4,4,2100.813812780933,-4
+2015,6,2014-10-09,Buffalo Sabres,Columbus Blue Jackets,FALSE,1,3,4,4,473.5253311564194,-2
+2015,7,2014-10-09,Dallas Stars,Chicago Blackhawks,FALSE,2,3,4,4,1296.4097190166246,-1
+2015,8,2014-10-09,Detroit Red Wings,Boston Bruins,TRUE,2,1,4,1,986.9821088665648,1
+2015,9,2014-10-09,Edmonton Oilers,Calgary Flames,FALSE,2,5,4,1,281.2183812161469,-3
+2015,10,2014-10-09,Minnesota Wild,Colorado Avalanche,TRUE,5,0,4,4,1140.1279569326618,5
+2015,11,2014-10-09,Nashville Predators,Ottawa Senators,TRUE,3,2,4,4,1388.4145728002068,1
+2015,12,2014-10-09,Philadelphia Flyers,New Jersey Devils,FALSE,4,6,1,4,65.82757416267319,-2
+2015,13,2014-10-09,Pittsburgh Penguins,Anaheim Ducks,TRUE,6,4,4,4,3416.8584083942383,2
+2015,14,2014-10-09,St. Louis Blues,New York Rangers,FALSE,2,3,4,4,1404.755215695527,-1
+2015,15,2014-10-09,Tampa Bay Lightning,Florida Panthers,TRUE,3,2,4,4,288.21092229421953,1
+2015,16,2014-10-09,Washington Capitals,Montreal Canadiens,FALSE,1,2,4,1,787.672649847598,-1
+2015,17,2014-10-10,Carolina Hurricanes,New York Islanders,FALSE,3,5,4,4,682.0964382527886,-2
 2015,18,2014-10-11,Arizona Coyotes,Los Angeles Kings,TRUE,3,2,2,3,659.3278646882401,1
 2015,19,2014-10-11,Boston Bruins,Washington Capitals,FALSE,0,4,2,2,634.380130138029,-4
 2015,20,2014-10-11,Columbus Blue Jackets,New York Rangers,TRUE,5,2,2,2,767.3005481042186,3
@@ -18968,36 +18968,36 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2015,1228,2015-04-11,Vancouver Canucks,Edmonton Oilers,TRUE,6,5,2,2,818.6290857739193,1
 2015,1229,2015-04-11,Winnipeg Jets,Calgary Flames,TRUE,5,1,2,2,1203.8963463935338,4
 2015,1230,2015-04-11,Washington Capitals,New York Rangers,FALSE,2,4,3,2,327.9484294258078,-2
-2016,1,2015-10-07,Calgary Flames,Vancouver Canucks,FALSE,1,5,0,0,673.925787706445,-4
-2016,2,2015-10-07,Chicago Blackhawks,New York Rangers,FALSE,2,3,0,0,1145.5758250747779,-1
-2016,3,2015-10-07,Los Angeles Kings,San Jose Sharks,FALSE,1,5,0,0,492.1038503405466,-4
-2016,4,2015-10-07,Toronto Maple Leafs,Montreal Canadiens,FALSE,1,3,0,0,504.82722904779484,-2
-2016,5,2015-10-08,Boston Bruins,Winnipeg Jets,FALSE,2,6,0,0,2165.782331775843,-4
-2016,6,2015-10-08,Buffalo Sabres,Ottawa Senators,FALSE,1,3,0,0,379.66453432686313,-2
-2016,7,2015-10-08,Colorado Avalanche,Minnesota Wild,FALSE,4,5,0,0,1140.1279569326618,-1
-2016,8,2015-10-08,Dallas Stars,Pittsburgh Penguins,TRUE,3,0,0,0,1722.5426915685778,3
-2016,9,2015-10-08,Nashville Predators,Carolina Hurricanes,TRUE,2,1,0,0,734.6816722967566,1
-2016,10,2015-10-08,St. Louis Blues,Edmonton Oilers,TRUE,3,1,0,0,2427.344384906583,2
-2016,11,2015-10-08,Tampa Bay Lightning,Philadelphia Flyers,TRUE,3,2,0,0,1517.2550004848997,1
-2016,12,2015-10-09,Columbus Blue Jackets,New York Rangers,FALSE,2,4,0,2,767.3005481042186,-2
-2016,13,2015-10-09,Detroit Red Wings,Toronto Maple Leafs,TRUE,4,0,0,2,334.08583268586455,4
-2016,14,2015-10-09,Los Angeles Kings,Arizona Coyotes,FALSE,1,4,2,0,659.3278646882401,-3
-2016,15,2015-10-09,New Jersey Devils,Winnipeg Jets,FALSE,1,3,0,1,2085.9207326326077,-2
-2016,16,2015-10-09,New York Islanders,Chicago Blackhawks,FALSE,2,3,0,2,1145.5758250747779,-1
+2016,1,2015-10-07,Calgary Flames,Vancouver Canucks,FALSE,1,5,4,4,673.925787706445,-4
+2016,2,2015-10-07,Chicago Blackhawks,New York Rangers,FALSE,2,3,4,4,1145.5758250747779,-1
+2016,3,2015-10-07,Los Angeles Kings,San Jose Sharks,FALSE,1,5,4,4,492.1038503405466,-4
+2016,4,2015-10-07,Toronto Maple Leafs,Montreal Canadiens,FALSE,1,3,4,4,504.82722904779484,-2
+2016,5,2015-10-08,Boston Bruins,Winnipeg Jets,FALSE,2,6,4,4,2165.782331775843,-4
+2016,6,2015-10-08,Buffalo Sabres,Ottawa Senators,FALSE,1,3,4,4,379.66453432686313,-2
+2016,7,2015-10-08,Colorado Avalanche,Minnesota Wild,FALSE,4,5,4,4,1140.1279569326618,-1
+2016,8,2015-10-08,Dallas Stars,Pittsburgh Penguins,TRUE,3,0,4,4,1722.5426915685778,3
+2016,9,2015-10-08,Nashville Predators,Carolina Hurricanes,TRUE,2,1,4,4,734.6816722967566,1
+2016,10,2015-10-08,St. Louis Blues,Edmonton Oilers,TRUE,3,1,4,4,2427.344384906583,2
+2016,11,2015-10-08,Tampa Bay Lightning,Philadelphia Flyers,TRUE,3,2,4,4,1517.2550004848997,1
+2016,12,2015-10-09,Columbus Blue Jackets,New York Rangers,FALSE,2,4,4,2,767.3005481042186,-2
+2016,13,2015-10-09,Detroit Red Wings,Toronto Maple Leafs,TRUE,4,0,4,2,334.08583268586455,4
+2016,14,2015-10-09,Los Angeles Kings,Arizona Coyotes,FALSE,1,4,2,4,659.3278646882401,-3
+2016,15,2015-10-09,New Jersey Devils,Winnipeg Jets,FALSE,1,3,4,1,2085.9207326326077,-2
+2016,16,2015-10-09,New York Islanders,Chicago Blackhawks,FALSE,2,3,4,2,1145.5758250747779,-1
 2016,17,2015-10-10,Arizona Coyotes,Pittsburgh Penguins,TRUE,2,1,1,2,2830.1431913457536,1
 2016,18,2015-10-10,Boston Bruins,Montreal Canadiens,FALSE,2,4,2,3,403.36534090606233,-2
 2016,19,2015-10-10,Buffalo Sabres,Tampa Bay Lightning,FALSE,1,4,2,2,1715.614593058569,-3
 2016,20,2015-10-10,Carolina Hurricanes,Detroit Red Wings,FALSE,3,4,2,1,822.8993490122255,-1
 2016,21,2015-10-10,Chicago Blackhawks,New York Islanders,TRUE,4,1,1,1,1145.5758250747779,3
 2016,22,2015-10-10,Colorado Avalanche,Dallas Stars,TRUE,6,3,2,2,1067.505950033487,3
-2016,23,2015-10-10,Florida Panthers,Philadelphia Flyers,TRUE,7,1,0,2,1605.6557547562572,6
+2016,23,2015-10-10,Florida Panthers,Philadelphia Flyers,TRUE,7,1,4,2,1605.6557547562572,6
 2016,24,2015-10-10,Minnesota Wild,St. Louis Blues,TRUE,3,2,2,2,973.4148802349873,1
 2016,25,2015-10-10,Nashville Predators,Edmonton Oilers,TRUE,2,0,2,2,2830.560358634696,2
 2016,26,2015-10-10,New York Rangers,Columbus Blue Jackets,TRUE,5,2,1,1,767.3005481042186,3
-2016,27,2015-10-10,San Jose Sharks,Anaheim Ducks,TRUE,2,0,3,0,530.2084515670917,2
+2016,27,2015-10-10,San Jose Sharks,Anaheim Ducks,TRUE,2,0,3,4,530.2084515670917,2
 2016,28,2015-10-10,Toronto Maple Leafs,Ottawa Senators,FALSE,4,5,1,2,352.49012255498184,-1
 2016,29,2015-10-10,Vancouver Canucks,Calgary Flames,FALSE,2,3,3,3,673.925787706445,-1
-2016,30,2015-10-10,Washington Capitals,New Jersey Devils,TRUE,5,3,0,1,259.8440303819753,2
+2016,30,2015-10-10,Washington Capitals,New Jersey Devils,TRUE,5,3,4,1,259.8440303819753,2
 2016,31,2015-10-11,Ottawa Senators,Montreal Canadiens,FALSE,1,3,1,1,166.5356402656483,-2
 2016,32,2015-10-12,Anaheim Ducks,Vancouver Canucks,FALSE,1,2,2,2,1772.203634756649,-1
 2016,33,2015-10-12,Boston Bruins,Tampa Bay Lightning,FALSE,3,6,2,2,1928.590914941488,-3
@@ -20198,26 +20198,26 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2016,1228,2016-04-09,Vancouver Canucks,Edmonton Oilers,TRUE,4,3,2,3,818.6290857739193,1
 2016,1229,2016-04-10,New York Islanders,Philadelphia Flyers,FALSE,2,5,1,1,129.76049887506204,-3
 2016,1230,2016-04-10,Washington Capitals,Anaheim Ducks,FALSE,0,2,1,1,3676.1811720334344,-2
-2017,1,2016-10-12,Chicago Blackhawks,St. Louis Blues,FALSE,2,5,0,0,422.6073139123538,-3
-2017,2,2016-10-12,Edmonton Oilers,Calgary Flames,TRUE,7,4,0,0,281.2183812161469,3
-2017,3,2016-10-12,Ottawa Senators,Toronto Maple Leafs,TRUE,5,4,0,0,352.49012255498184,1
-2017,4,2016-10-12,San Jose Sharks,Los Angeles Kings,TRUE,2,1,0,0,492.1038503405466,1
-2017,5,2016-10-13,Buffalo Sabres,Montreal Canadiens,FALSE,1,4,0,0,514.0679535709085,-3
-2017,6,2016-10-13,Columbus Blue Jackets,Boston Bruins,FALSE,3,6,0,0,1034.697619642792,-3
-2017,7,2016-10-13,Dallas Stars,Anaheim Ducks,TRUE,4,2,0,0,1964.738590138696,2
-2017,8,2016-10-13,Florida Panthers,New Jersey Devils,TRUE,2,1,0,0,1638.7497337775735,1
-2017,9,2016-10-13,New York Rangers,New York Islanders,TRUE,5,3,0,0,0,2
-2017,10,2016-10-13,Pittsburgh Penguins,Washington Capitals,TRUE,3,2,0,0,305.6144910182143,1
-2017,11,2016-10-13,St. Louis Blues,Minnesota Wild,TRUE,3,2,1,0,973.4148802349873,1
-2017,12,2016-10-13,Tampa Bay Lightning,Detroit Red Wings,TRUE,6,4,0,0,1621.919906465072,2
-2017,13,2016-10-13,Winnipeg Jets,Carolina Hurricanes,TRUE,5,4,0,0,2167.725731680012,1
+2017,1,2016-10-12,Chicago Blackhawks,St. Louis Blues,FALSE,2,5,4,4,422.6073139123538,-3
+2017,2,2016-10-12,Edmonton Oilers,Calgary Flames,TRUE,7,4,4,4,281.2183812161469,3
+2017,3,2016-10-12,Ottawa Senators,Toronto Maple Leafs,TRUE,5,4,4,4,352.49012255498184,1
+2017,4,2016-10-12,San Jose Sharks,Los Angeles Kings,TRUE,2,1,4,4,492.1038503405466,1
+2017,5,2016-10-13,Buffalo Sabres,Montreal Canadiens,FALSE,1,4,4,4,514.0679535709085,-3
+2017,6,2016-10-13,Columbus Blue Jackets,Boston Bruins,FALSE,3,6,4,4,1034.697619642792,-3
+2017,7,2016-10-13,Dallas Stars,Anaheim Ducks,TRUE,4,2,4,4,1964.738590138696,2
+2017,8,2016-10-13,Florida Panthers,New Jersey Devils,TRUE,2,1,4,4,1638.7497337775735,1
+2017,9,2016-10-13,New York Rangers,New York Islanders,TRUE,5,3,4,4,0,2
+2017,10,2016-10-13,Pittsburgh Penguins,Washington Capitals,TRUE,3,2,4,4,305.6144910182143,1
+2017,11,2016-10-13,St. Louis Blues,Minnesota Wild,TRUE,3,2,1,4,973.4148802349873,1
+2017,12,2016-10-13,Tampa Bay Lightning,Detroit Red Wings,TRUE,6,4,4,4,1621.919906465072,2
+2017,13,2016-10-13,Winnipeg Jets,Carolina Hurricanes,TRUE,5,4,4,4,2167.725731680012,1
 2017,14,2016-10-14,Calgary Flames,Edmonton Oilers,FALSE,3,5,2,2,281.2183812161469,-2
-2017,15,2016-10-14,Los Angeles Kings,Philadelphia Flyers,FALSE,2,4,2,0,3847.754508024997,-2
-2017,16,2016-10-14,Nashville Predators,Chicago Blackhawks,TRUE,3,2,0,2,640.4456248145765,1
-2017,17,2016-10-15,Arizona Coyotes,Philadelphia Flyers,TRUE,4,3,0,1,3238.271567237374,1
+2017,15,2016-10-14,Los Angeles Kings,Philadelphia Flyers,FALSE,2,4,2,4,3847.754508024997,-2
+2017,16,2016-10-14,Nashville Predators,Chicago Blackhawks,TRUE,3,2,4,2,640.4456248145765,1
+2017,17,2016-10-15,Arizona Coyotes,Philadelphia Flyers,TRUE,4,3,4,1,3238.271567237374,1
 2017,18,2016-10-15,Columbus Blue Jackets,San Jose Sharks,FALSE,2,3,2,3,3366.6495018630126,-1
 2017,19,2016-10-15,Chicago Blackhawks,Nashville Predators,TRUE,5,3,1,1,640.4456248145765,2
-2017,20,2016-10-15,Colorado Avalanche,Dallas Stars,TRUE,6,5,0,2,1067.505950033487,1
+2017,20,2016-10-15,Colorado Avalanche,Dallas Stars,TRUE,6,5,4,2,1067.505950033487,1
 2017,21,2016-10-15,Florida Panthers,Detroit Red Wings,TRUE,4,1,2,2,1817.1127300712928,3
 2017,22,2016-10-15,Minnesota Wild,Winnipeg Jets,TRUE,4,3,2,2,396.3634914272468,1
 2017,23,2016-10-15,Ottawa Senators,Montreal Canadiens,TRUE,4,3,3,2,166.5356402656483,1
@@ -20225,7 +20225,7 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2017,25,2016-10-15,St. Louis Blues,New York Rangers,TRUE,3,2,2,2,1404.755215695527,1
 2017,26,2016-10-15,Tampa Bay Lightning,New Jersey Devils,TRUE,3,2,2,2,1559.8314059312384,1
 2017,27,2016-10-15,Toronto Maple Leafs,Boston Bruins,TRUE,4,1,3,2,692.4397927318,3
-2017,28,2016-10-15,Vancouver Canucks,Calgary Flames,TRUE,2,1,0,1,673.925787706445,1
+2017,28,2016-10-15,Vancouver Canucks,Calgary Flames,TRUE,2,1,4,1,673.925787706445,1
 2017,29,2016-10-15,Washington Capitals,New York Islanders,TRUE,2,1,2,2,327.9484294258078,1
 2017,30,2016-10-16,Edmonton Oilers,Buffalo Sabres,FALSE,2,6,2,3,2792.475129572146,-4
 2017,31,2016-10-16,New York Islanders,Anaheim Ducks,TRUE,3,2,1,1,3922.254143678852,1
@@ -21428,35 +21428,35 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2017,1228,2017-04-09,Tampa Bay Lightning,Buffalo Sabres,TRUE,4,2,2,1,1715.614593058569,2
 2017,1229,2017-04-09,Toronto Maple Leafs,Columbus Blue Jackets,FALSE,2,3,1,1,508.7300808615878,-1
 2017,1230,2017-04-09,Washington Capitals,Florida Panthers,FALSE,0,2,1,1,1449.7749794123397,-2
-2018,1,2017-10-04,Edmonton Oilers,Calgary Flames,TRUE,3,0,0,0,281.2183812161469,3
-2018,2,2017-10-04,Pittsburgh Penguins,St. Louis Blues,FALSE,4,5,0,0,898.4205304488,-1
-2018,3,2017-10-04,San Jose Sharks,Philadelphia Flyers,FALSE,3,5,0,0,4026.0097077498162,-2
-2018,4,2017-10-04,Winnipeg Jets,Toronto Maple Leafs,FALSE,2,7,0,0,1516.3852239919293,-5
-2018,5,2017-10-05,Anaheim Ducks,Arizona Coyotes,TRUE,5,4,0,0,630.2074108392776,1
-2018,6,2017-10-05,Boston Bruins,Nashville Predators,TRUE,4,3,0,0,1517.3622878245299,1
-2018,7,2017-10-05,Buffalo Sabres,Montreal Canadiens,FALSE,2,3,0,0,514.0679535709085,-1
-2018,8,2017-10-05,Chicago Blackhawks,Pittsburgh Penguins,TRUE,10,1,0,1,659.2565086389524,9
-2018,9,2017-10-05,Detroit Red Wings,Minnesota Wild,TRUE,4,2,0,0,1042.9275908643156,2
-2018,10,2017-10-05,Los Angeles Kings,Philadelphia Flyers,TRUE,2,0,0,1,3847.754508024997,2
-2018,11,2017-10-05,New York Rangers,Colorado Avalanche,FALSE,2,4,0,0,2621.9870682122096,-2
-2018,12,2017-10-05,Ottawa Senators,Washington Capitals,FALSE,4,5,0,0,733.5180594182563,-1
-2018,13,2017-10-06,Columbus Blue Jackets,New York Islanders,TRUE,5,0,0,0,767.3005481042186,5
-2018,14,2017-10-06,Dallas Stars,Vegas Golden Knights,FALSE,1,2,0,0,1722.353304691894,-1
-2018,15,2017-10-06,Tampa Bay Lightning,Florida Panthers,TRUE,5,3,0,0,288.21092229421953,2
+2018,1,2017-10-04,Edmonton Oilers,Calgary Flames,TRUE,3,0,4,4,281.2183812161469,3
+2018,2,2017-10-04,Pittsburgh Penguins,St. Louis Blues,FALSE,4,5,4,4,898.4205304488,-1
+2018,3,2017-10-04,San Jose Sharks,Philadelphia Flyers,FALSE,3,5,4,4,4026.0097077498162,-2
+2018,4,2017-10-04,Winnipeg Jets,Toronto Maple Leafs,FALSE,2,7,4,4,1516.3852239919293,-5
+2018,5,2017-10-05,Anaheim Ducks,Arizona Coyotes,TRUE,5,4,4,4,630.2074108392776,1
+2018,6,2017-10-05,Boston Bruins,Nashville Predators,TRUE,4,3,4,4,1517.3622878245299,1
+2018,7,2017-10-05,Buffalo Sabres,Montreal Canadiens,FALSE,2,3,4,4,514.0679535709085,-1
+2018,8,2017-10-05,Chicago Blackhawks,Pittsburgh Penguins,TRUE,10,1,4,1,659.2565086389524,9
+2018,9,2017-10-05,Detroit Red Wings,Minnesota Wild,TRUE,4,2,4,4,1042.9275908643156,2
+2018,10,2017-10-05,Los Angeles Kings,Philadelphia Flyers,TRUE,2,0,4,1,3847.754508024997,2
+2018,11,2017-10-05,New York Rangers,Colorado Avalanche,FALSE,2,4,4,4,2621.9870682122096,-2
+2018,12,2017-10-05,Ottawa Senators,Washington Capitals,FALSE,4,5,4,4,733.5180594182563,-1
+2018,13,2017-10-06,Columbus Blue Jackets,New York Islanders,TRUE,5,0,4,4,767.3005481042186,5
+2018,14,2017-10-06,Dallas Stars,Vegas Golden Knights,FALSE,1,2,4,4,1722.353304691894,-1
+2018,15,2017-10-06,Tampa Bay Lightning,Florida Panthers,TRUE,5,3,4,4,288.21092229421953,2
 2018,16,2017-10-07,Anaheim Ducks,Philadelphia Flyers,FALSE,2,3,2,2,3829.00540715978,-1
 2018,17,2017-10-07,Arizona Coyotes,Vegas Golden Knights,FALSE,1,2,2,1,437.55397021409703,-1
-2018,18,2017-10-07,Carolina Hurricanes,Minnesota Wild,TRUE,5,4,0,2,1807.251600916273,1
+2018,18,2017-10-07,Carolina Hurricanes,Minnesota Wild,TRUE,5,4,4,2,1807.251600916273,1
 2018,19,2017-10-07,Calgary Flames,Winnipeg Jets,TRUE,6,3,3,3,1203.8963463935338,3
 2018,20,2017-10-07,Chicago Blackhawks,Columbus Blue Jackets,TRUE,5,1,2,1,444.0701569394544,4
 2018,21,2017-10-07,Florida Panthers,Tampa Bay Lightning,TRUE,5,4,1,1,288.21092229421953,1
-2018,22,2017-10-07,New Jersey Devils,Colorado Avalanche,TRUE,4,1,0,2,2599.2595113367215,3
+2018,22,2017-10-07,New Jersey Devils,Colorado Avalanche,TRUE,4,1,4,2,2599.2595113367215,3
 2018,23,2017-10-07,New York Islanders,Buffalo Sabres,TRUE,6,3,1,2,471.09809505402666,3
 2018,24,2017-10-07,Ottawa Senators,Detroit Red Wings,FALSE,1,2,2,2,683.819541926067,-1
 2018,25,2017-10-07,Pittsburgh Penguins,Nashville Predators,TRUE,4,0,2,2,759.9752413909999,4
 2018,26,2017-10-07,San Jose Sharks,Los Angeles Kings,FALSE,1,4,3,2,492.1038503405466,-3
 2018,27,2017-10-07,St. Louis Blues,Dallas Stars,TRUE,4,2,3,1,882.5649739964305,2
 2018,28,2017-10-07,Toronto Maple Leafs,New York Rangers,TRUE,8,5,3,2,551.0645111121854,3
-2018,29,2017-10-07,Vancouver Canucks,Edmonton Oilers,TRUE,3,2,0,3,818.6290857739193,1
+2018,29,2017-10-07,Vancouver Canucks,Edmonton Oilers,TRUE,3,2,4,3,818.6290857739193,1
 2018,30,2017-10-07,Washington Capitals,Montreal Canadiens,TRUE,6,1,2,2,787.672649847598,5
 2018,31,2017-10-08,New York Rangers,Montreal Canadiens,TRUE,2,0,1,1,534.2879401746067,2
 2018,32,2017-10-09,Anaheim Ducks,Calgary Flames,FALSE,0,2,2,2,1940.7496265008074,-2
@@ -22699,33 +22699,33 @@ season,game_id,game_date,home,away,home_win,home_score,away_score,home_days_sinc
 2018,1269,2018-04-07,Winnipeg Jets,Chicago Blackhawks,TRUE,4,1,2,1,1155.4111150549538,3
 2018,1270,2018-04-07,Washington Capitals,New Jersey Devils,TRUE,5,3,2,2,259.8440303819753,2
 2018,1271,2018-04-08,Boston Bruins,Florida Panthers,FALSE,2,4,1,1,1988.3419614439981,-2
-2019,1,2018-10-03,San Jose Sharks,Anaheim Ducks,FALSE,2,5,0,0,530.2084515670917,-3
-2019,2,2018-10-03,Toronto Maple Leafs,Montreal Canadiens,TRUE,3,2,0,0,504.82722904779484,1
-2019,3,2018-10-03,Vancouver Canucks,Calgary Flames,TRUE,5,2,0,0,673.925787706445,3
-2019,4,2018-10-03,Washington Capitals,Boston Bruins,TRUE,7,0,0,0,634.380130138029,7
-2019,5,2018-10-04,Buffalo Sabres,Boston Bruins,FALSE,0,4,0,1,642.9443366857274,-4
-2019,6,2018-10-04,Carolina Hurricanes,New York Islanders,FALSE,1,2,0,0,682.0964382527886,-1
-2019,7,2018-10-04,Colorado Avalanche,Minnesota Wild,TRUE,4,1,0,0,1140.1279569326618,3
-2019,8,2018-10-04,Dallas Stars,Arizona Coyotes,TRUE,3,0,0,0,1334.8918165325085,3
-2019,9,2018-10-04,Detroit Red Wings,Columbus Blue Jackets,FALSE,2,3,0,0,263.4400440763562,-1
-2019,10,2018-10-04,New York Rangers,Nashville Predators,FALSE,2,3,0,0,1222.132196944452,-1
-2019,11,2018-10-04,Ottawa Senators,Chicago Blackhawks,FALSE,3,4,0,0,1037.6400076664852,-1
-2019,12,2018-10-04,Pittsburgh Penguins,Washington Capitals,TRUE,7,6,0,1,305.6144910182143,1
-2019,13,2018-10-04,St. Louis Blues,Winnipeg Jets,FALSE,1,5,0,0,1369.4765373999292,-4
-2019,14,2018-10-04,Vegas Golden Knights,Philadelphia Flyers,FALSE,2,5,0,0,3499.5027673184622,-3
+2019,1,2018-10-03,San Jose Sharks,Anaheim Ducks,FALSE,2,5,4,4,530.2084515670917,-3
+2019,2,2018-10-03,Toronto Maple Leafs,Montreal Canadiens,TRUE,3,2,4,4,504.82722904779484,1
+2019,3,2018-10-03,Vancouver Canucks,Calgary Flames,TRUE,5,2,4,4,673.925787706445,3
+2019,4,2018-10-03,Washington Capitals,Boston Bruins,TRUE,7,0,4,4,634.380130138029,7
+2019,5,2018-10-04,Buffalo Sabres,Boston Bruins,FALSE,0,4,4,1,642.9443366857274,-4
+2019,6,2018-10-04,Carolina Hurricanes,New York Islanders,FALSE,1,2,4,4,682.0964382527886,-1
+2019,7,2018-10-04,Colorado Avalanche,Minnesota Wild,TRUE,4,1,4,4,1140.1279569326618,3
+2019,8,2018-10-04,Dallas Stars,Arizona Coyotes,TRUE,3,0,4,4,1334.8918165325085,3
+2019,9,2018-10-04,Detroit Red Wings,Columbus Blue Jackets,FALSE,2,3,4,4,263.4400440763562,-1
+2019,10,2018-10-04,New York Rangers,Nashville Predators,FALSE,2,3,4,4,1222.132196944452,-1
+2019,11,2018-10-04,Ottawa Senators,Chicago Blackhawks,FALSE,3,4,4,4,1037.6400076664852,-1
+2019,12,2018-10-04,Pittsburgh Penguins,Washington Capitals,TRUE,7,6,4,1,305.6144910182143,1
+2019,13,2018-10-04,St. Louis Blues,Winnipeg Jets,FALSE,1,5,4,4,1369.4765373999292,-4
+2019,14,2018-10-04,Vegas Golden Knights,Philadelphia Flyers,FALSE,2,5,4,4,3499.5027673184622,-3
 2019,15,2018-10-05,Columbus Blue Jackets,Carolina Hurricanes,FALSE,1,3,1,1,602.7512490716824,-2
-2019,16,2018-10-05,Los Angeles Kings,San Jose Sharks,FALSE,2,3,0,2,492.1038503405466,-1
+2019,16,2018-10-05,Los Angeles Kings,San Jose Sharks,FALSE,2,3,4,2,492.1038503405466,-1
 2019,17,2018-10-06,Arizona Coyotes,Anaheim Ducks,FALSE,0,1,2,3,630.2074108392776,-1
 2019,18,2018-10-06,Buffalo Sabres,New York Rangers,TRUE,3,1,2,2,471.09809505402666,2
 2019,19,2018-10-06,Calgary Flames,Vancouver Canucks,TRUE,7,4,3,3,673.925787706445,3
 2019,20,2018-10-06,Colorado Avalanche,Philadelphia Flyers,TRUE,5,2,2,2,2537.197511428729,3
 2019,21,2018-10-06,Dallas Stars,Winnipeg Jets,TRUE,5,1,2,2,1905.8278807302179,4
 2019,22,2018-10-06,Minnesota Wild,Vegas Golden Knights,FALSE,1,2,2,2,2062.3209420236994,-1
-2019,23,2018-10-06,New Jersey Devils,Edmonton Oilers,TRUE,5,2,0,0,3280.367927917414,3
+2019,23,2018-10-06,New Jersey Devils,Edmonton Oilers,TRUE,5,2,4,4,3280.367927917414,3
 2019,24,2018-10-06,New York Islanders,Nashville Predators,FALSE,3,4,2,2,1222.132196944452,-1
 2019,25,2018-10-06,Pittsburgh Penguins,Montreal Canadiens,FALSE,1,5,2,3,768.6490736570055,-4
 2019,26,2018-10-06,St. Louis Blues,Chicago Blackhawks,FALSE,4,5,2,2,422.6073139123538,-1
-2019,27,2018-10-06,Tampa Bay Lightning,Florida Panthers,TRUE,2,1,0,0,288.21092229421953,1
+2019,27,2018-10-06,Tampa Bay Lightning,Florida Panthers,TRUE,2,1,4,4,288.21092229421953,1
 2019,28,2018-10-06,Toronto Maple Leafs,Ottawa Senators,FALSE,3,5,3,2,352.49012255498184,-2
 2019,29,2018-10-07,Carolina Hurricanes,New York Rangers,TRUE,8,5,2,1,682.0964382527886,3
 2019,30,2018-10-07,Chicago Blackhawks,Toronto Maple Leafs,FALSE,6,7,1,1,701.9664532501878,-1

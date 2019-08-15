@@ -33,10 +33,12 @@ body {
 ```{r setup, include=FALSE, message=FALSE}
 library(tidyverse)
 library(lubridate)
-library(BradleyTerry2)
+library(broom)
 library(Matrix)
 library(printr)
 library(furrr)
+library(BradleyTerry2)
+source("sports_helpers.R")
 
 options(width = 80)
 set.seed(07301999)
@@ -65,59 +67,67 @@ I restrict our sample to a single season of NBA for now and just run a simple Br
 nba_11 <- nba %>%
   filter(season == "2011") %>%
   mutate(
-    home = as.factor(home),
-    away = as.factor(away)
+    home = factor(home),
+    away = factor(away)
     )
 
-# Fit Bradley-Terry rating model for binary outcomes
-btm <- BTm(outcome = home_win, #1 if player1 (home) wins and 0 if player2 (away) does
-    player1 = data.frame(team = home, hfa = 1), 
-    player2 = data.frame(team = away, hfa = 0),
-    formula = ~team + hfa, id = "team", data = nba_11)
+# Create design matrix with no extra features
+btm_matrix <- nba_11 %>%
+  match_design_matrix(mov = FALSE)
 
+# Fit glm without intercept
+btm <- glm(formula = Y ~ . - 1, family = binomial(), data = btm_matrix)
 summary(btm)
 ```
 
 HFA seems to increase a teams strength parameter quite a lot (0.53427) with a high statistical significance from the null. That's about the difference between last place 30th Minnesota Timberwolves (-1.521) and the middle of the pack 14th Houston Rockets (0.069).
 
 ```{r bt_plot, echo=FALSE}
-qvcalc(BTabilities(btm))$qvframe %>% #quasi normal standard errors
-  rownames_to_column(var = "team") %>%
-  ggplot(aes(x = reorder(as.factor(team), estimate), color = as.factor(team))) +
+btm %>%
+  tidy() %>% # Add back the Atlanta Hawks term at 0 with undefined errors
+  rbind(data.frame(term = 'Atlanta Hawks', estimate = 0, std.error = 0, statistic = NA, p.value = NA)) %>%
+  mutate(term = str_remove(term, "`team"), 
+         term = str_remove(term, "`")
+  ) %>%
+  filter(term != 'hfa') %>%
+  ggplot(aes(x = reorder(as.factor(term), estimate), color = as.factor(term))) +
   geom_point(aes(y = estimate)) +
-  geom_errorbar(aes(ymin = estimate - quasiSE, ymax = estimate + quasiSE)) + 
+  geom_errorbar(aes(ymin = estimate - std.error, ymax = estimate + std.error)) +
   coord_flip() + theme(legend.position = "none") + xlab("Team") + ylab(expression(theta))
 ```
 
 ## Days Since Last Game
 
-I add another variable within the Bradley-Terry model to measure the effect of how much down time teams have in between their matches. The variable **days_out** aims to measure the effect each day out a team is from their last game has on their odds of winning. This is shown in (2) with $\delta_{i}$ and $\delta_{j}$ representing the days since $i$ and $j$ played their last game respectively and $\beta$ being the effect parameter.
+I add another variable within the Bradley-Terry model to measure the effect of how much down time teams have in between their matches. The variable **home_days_advantage** aims to measure the effect each day of rest a team has over their opponent has on their winning odds. This is shown in (2) with $\delta_{i}$ and $\delta_{j}$ representing the days since $i$ and $j$ played their last game respectively and $\beta$ being the effect parameter.
 
 \begin{equation}
   \ln\left( \frac{\pi_{i,j}}{1 - \pi_{i,j}} \right) = \theta_i - \theta_j + \alpha + \delta(d_{i} - d_{j})
 \end{equation}
 
 ```{r bt_days}
-# Fit Bradley-Terry rating model for binary outcomes
-btm_days <- BTm(outcome = home_win, #1 if player1 (home) wins and 0 if player2 (away) does
-    player1 = data.frame(team = home, hfa = 1, days_out = home_days_since_last_game), 
-    player2 = data.frame(team = away, hfa = 0, days_out = away_days_since_last_game),
-    formula = ~team + hfa + days_out, id = "team", data = nba_11)
+# Create design matrix with home_days_advantage as an extra feature
+btm_days_matrix <- nba_11 %>%
+  mutate(home_days_advantage = home_days_since_last_game - away_days_since_last_game) %>%
+  match_design_matrix(mov = FALSE, home_days_advantage)
 
+btm_days <- glm(formula = Y ~ . - 1, family = "binomial", data = btm_days_matrix)
 summary(btm_days)
 ```
 
-My prior going into fitting this model is that coefficient for **days_out**, $\delta$ would likely be very insignificant. Just by my thinking, the amount of days in between matches might have a more complex relationship with winning odds and is likely not linear. For instance, a long time not playing may give teams an opportunity to rest but also can make them deconditioned from intense competition, on the flipside, a team can have a lot of momentum playing a lot frequently but can result in injuries and 'burnout'. 
+My prior going into fitting this model is that coefficient for **home_days_advantage**, $\delta$ would likely be very insignificant. Just by my thinking, the amount of days in between matches might have a more complex relationship with winning odds and is likely not linear. For instance, a long time not playing may give teams an opportunity to rest but also can make them deconditioned from intense competition, on the flipside, a team can have a lot of momentum playing a lot frequently but can result in injuries and 'burnout'. 
 
 We end up seeing a pretty small coefficient as well as a low absolute z score and higher p value. Most of the strength parameters are not really affected by the inclusion of this predictor, with the change across $\theta$'s being below the order of $0.01$. In addition to looking at a deeper number of lagged games, testing this across seasons as well as with the measuring information content through forecasting will be a good step forward.
 
-```{r bt_days_plot, echo=FALSE}
-qvcalc(BTabilities(btm_days))$qvframe %>% #quasi normal standard errors
-  rownames_to_column(var = "team") %>%
-  ggplot(aes(x = reorder(as.factor(team), estimate), color = as.factor(team))) +
-  geom_point(aes(y = estimate)) +
-  geom_errorbar(aes(ymin = estimate - quasiSE, ymax = estimate + quasiSE)) + 
-  coord_flip() + theme(legend.position = "none") + xlab("Team") + ylab(expression(theta))
+However, this **home_days_advantage** on the full sample of games across seasons is significant and positive
+
+```{r bt_days_full}
+# Create design matrix with home_days_advantage as an extra feature
+btm_days_full_matrix <- nba %>%
+  mutate(home_days_advantage = home_days_since_last_game - away_days_since_last_game) %>%
+  match_design_matrix(mov = FALSE, home_days_advantage)
+
+btm_days_full <- glm(formula = Y ~ . - 1, family = "binomial", data = btm_days_full_matrix)
+summary(btm_days_full)
 ```
 
 I redo this model letting the coefficient for `home_days_since_last_game` and `away_days_since_last_game` be different and manually running the regression in glm. This equation is expressed below.
@@ -126,61 +136,81 @@ I redo this model letting the coefficient for `home_days_since_last_game` and `a
   \ln\left( \frac{\pi_{i,j}}{1 - \pi_{i,j}} \right) = \theta_i - \theta_j + \alpha + \delta_h d_{i} - \delta_a d_{j}
 \end{equation}
 
-```{r bt_days_manual}
-# Function records each instance of a team participating in a match, whether they were home or away
-stack_games <- function(df, ...){
-  home_teams <- df %>%
-    select(season, game_id, home, home_mov, ...) %>%
-    mutate(hfa = 1) %>%
-    rename('team' = home)
-  away_teams <- df %>%
-    select(season, game_id, away, home_mov, ...) %>%
-    mutate(hfa = -1) %>%
-    rename('team' = away)
-  return(bind_rows(home_teams, away_teams))
-}
+```{r bt_days_separate}
+# Create design matrix with home_days and away_days as extra features
+btm_days_sep_matrix <- nba_11 %>%
+  match_design_matrix(mov = FALSE, home_days_since_last_game, away_days_since_last_game)
 
-btm_model_matrix <- nba_11 %>%
-  stack_games() %>%
-  mutate(home_win = home_mov > 0) %>%
-  spread(key = team, value = hfa, fill = 0) %>%
-  select(-c(season, game_id, home_mov)) %>%
-  cbind(nba_11$home_days_since_last_game, nba_11$away_days_since_last_game) %>%
-  rename('home_days_since_last_game' = `nba_11$home_days_since_last_game`, 
-         'away_days_since_last_game' = `nba_11$away_days_since_last_game` )%>%
-  rbind(c(1 , rep(1, length(levels(nba_11$home))), 0, 0)) # Arbitrary linear constraint for unique solution vec
-
-btm_days_manual <- glm(formula = home_win ~ ., family = "binomial", data = btm_model_matrix)
-summary(btm_days_manual)
+# Fit with -1 to remove intercept factor in estimation
+btm_days_sep <- glm(formula = Y ~ . - 1, family = "binomial", data = btm_days_sep_matrix)
+summary(btm_days_sep)
 ```
 
 It still remains that having more days out since last game for the home team reduces their chance of winning. On the flipside having more days out on the away team increase the home team's chance of winning. All in all, the model spits out a negative effect on winning probability for increased days out.
 
-Continuing onward, it is quite possible that there is a non-linear relationship between days out and winning odds, additionally the sample is centered about around 2 `days_since_last_game`. I want to test this first by fitting the same model as (2), having the number of days out be a factor variable. The equation is outlined below where 9 is the highest number of days out, $\delta_{h, i}$ is the effect of having a team be $i$ days out on the winning odds for the home team and $d_{h, i}$ is 1 or 0 whether the home team is $i$ days out or not.
+Continuing onward, it is quite possible that there is a non-linear relationship between days out and winning odds, additionally the sample is centered about around 2 `days_since_last_game`. I want to test this first by fitting the same model as (2), having the number of days out be a factor variable. The equation is outlined below where 9 is the highest number of days out, $\delta_{i}$ is the effect of having a team be $i$ days out on the winning odds for the home team and $d_{h, i}$/$d_{a, i}$ is 1 or 0 whether the home/away team is $i$ days out or not.
 
 \begin{equation}
-  \displaystyle \ln\left( \frac{\pi_{i,j}}{1 - \pi_{i,j}} \right) = \theta_i - \theta_j + \alpha + \sum_{i = 1}^{9}\delta_{i}d_{a, i} + \sum_{i = 1}^{9}\delta_{i}d_{a, i}
+  \displaystyle \ln\left( \frac{\pi_{i,j}}{1 - \pi_{i,j}} \right) = \theta_i - \theta_j + \alpha + \sum_{i = 1}^{9}\delta_{i}d_{h, i} + \sum_{i = 1}^{9}\delta_{i}d_{a, i}
 \end{equation}
 
 ```{r bt_days_fct}
+# Create factor variables for home & away with the same levels
 all_days_values <- unique(union(nba_11$home_days_since_last_game, nba_11$away_days_since_last_game))
-
-nba_11_days_fct <- nba_11 %>%
+nba_days_fct <- nba %>%
   mutate(
     home_days_since_last_game = factor(x = home_days_since_last_game, levels = all_days_values),
     away_days_since_last_game = factor(x = away_days_since_last_game, levels = all_days_values)
   )
 
-# Fit Bradley-Terry rating model for binary outcomes
-btm_days <- BTm(outcome = home_win, #1 if player1 (home) wins and 0 if player2 (away) does
-    player1 = data.frame(team = home, hfa = 1, days_out = home_days_since_last_game), 
-    player2 = data.frame(team = away, hfa = 0, days_out = away_days_since_last_game),
-    formula = ~team + hfa + days_out, id = "team", data = nba_11_days_fct)
+home_days_out <- nba_11 %>%
+  mutate(
+    days_out = fct_relevel(factor(x = home_days_since_last_game, levels = all_days_values), "1", "2", "3")) %>%
+  model.matrix(~ days_out - 1, .) %>% .[, -1] # days_out1 factor as the 0 reference level
 
-summary(btm_days)
+away_days_out <- nba_11 %>%
+  mutate(
+    days_out = fct_relevel(factor(x = away_days_since_last_game, levels = all_days_values), "1", "2", "3")) %>%
+  model.matrix(~ days_out - 1, .) %>% .[, -1] # days_out1 factor as the 0 reference level
+
+# Create design matrix and attach days_out factor matrix
+btm_days_fct_matrix <- nba_11 %>%
+  match_design_matrix(mov = FALSE) %>% cbind(home_days_out - away_days_out)
+
+# Fit with -1 to remove intercept factor in estimation
+btm_days_fct <- glm(formula = Y ~ . - 1, family = "binomial", data = btm_days_fct_matrix)
+summary(btm_days_fct)
 ```
 
 It's a pretty non-linear trend. It seems like the high days out really messes with winning odds so that may be why it's trending negative on the continuous models (2)/(3). I'll look into the decision tree models. I want to try on the entire data set to see if this rings true since the only day_out9 is for an away team so that may be skewing things heavily. Also, I use days_out0 as the first game of the season, should think about how we think about the first day of the season in the data. 
+
+```{r bt_days_fct_full_set}
+all_days_values <- unique(union(nba$home_days_since_last_game, nba$away_days_since_last_game))
+nba_days_fct <- nba %>%
+  mutate(
+    home_days_since_last_game = factor(x = home_days_since_last_game, levels = all_days_values),
+    away_days_since_last_game = factor(x = away_days_since_last_game, levels = all_days_values)
+  )
+
+home_days_out_full <- nba %>%
+  mutate(
+    days_out = fct_relevel(factor(x = home_days_since_last_game, levels = all_days_values), "1", "2", "3")) %>%
+  model.matrix(~ days_out - 1, .) %>% .[, -1] # days_out1 factor as the 0 reference level
+
+away_days_out_full <- nba %>%
+  mutate(
+    days_out = fct_relevel(factor(x = away_days_since_last_game, levels = all_days_values), "1", "2", "3")) %>%
+  model.matrix(~ days_out - 1, .) %>% .[, -1] # days_out1 factor as the 0 reference level
+
+btm_days_fct_matrix_full <- nba %>%
+  match_design_matrix(mov = FALSE) %>% cbind(home_days_out_full - away_days_out_full)
+
+# Fit with -1 to remove intercept factor in estimation
+btm_days_fct_full <- glm(formula = Y ~ . - 1, family = "binomial", data = btm_days_fct_matrix_full)
+summary(btm_days_fct_full)
+```
+
+Interesting... It seems like the sweet spot in the whole set is around 2/3 days but that is also where the distribution of days_out is concentrated. This confirms pretty heavily our non-linear hypothesis though I think. Also, just an FYI, the days_out10 occurs only in the away_days_since_last_game column so there's likely a skew there.
 
 ## Away Distance Traveled
 
@@ -191,22 +221,23 @@ Another feature I looked at was the distance that the away team had to travel be
 \end{equation}
 
 ```{r bt_distance}
-# Fit Bradley-Terry rating model for binary outcomes
-btm_distance <- BTm(outcome = home_win, #1 if player1 (home) wins and 0 if player2 (away) does
-    player1 = data.frame(team = home, hfa = 1, distance_traveled = 0), 
-    player2 = data.frame(team = away, hfa = 0, distance_traveled = away_distance_traveled),
-    formula = ~team + hfa + distance_traveled, id = "team", data = nba_11)
+# Create design matrix with home_days_advantage as an extra feature
+btm_dist_matrix <- nba_11 %>%
+  match_design_matrix(mov = FALSE, away_distance_traveled)
 
-summary(btm_distance)
+btm_dist <- glm(formula = Y ~ . - 1, family = "binomial", data = btm_dist_matrix)
+summary(btm_dist)
 ```
 
-```{r bt_distance_plot, echo=FALSE}
-qvcalc(BTabilities(btm_distance))$qvframe %>% #quasi normal standard errors
-  rownames_to_column(var = "team") %>%
-  ggplot(aes(x = reorder(as.factor(team), estimate), color = as.factor(team))) +
-  geom_point(aes(y = estimate)) +
-  geom_errorbar(aes(ymin = estimate - quasiSE, ymax = estimate + quasiSE)) + 
-  coord_flip() + theme(legend.position = "none") + xlab("Team") + ylab(expression(theta))
+I try this one more time for the full sample of all games
+
+```{r bt_distance_full}
+# Create design matrix with home_days_advantage as an extra feature
+btm_dist_matrix <- nba %>%
+  match_design_matrix(mov = FALSE, away_distance_traveled)
+
+btm_dist <- glm(formula = Y ~ . - 1, family = "binomial", data = btm_dist_matrix)
+summary(btm_dist)
 ```
 
 ## Quantifying Information Content: Random Sample Games
@@ -223,49 +254,6 @@ I make functions for sampling a portion of the season games without replacement 
 \begin{equation*}
   \displaystyle I^{BT}(S, S', R') = \frac{| \{ \ r \in R' \ | \ r = s \in S' \}|}{| S' |}
 \end{equation}
-
-```{r info_content_helpers}
-# For each proportion, make n_sets of training and test sets and bind into dataframe
-training_split_df <- function(df, prop, n_sets) {
-  train_list <- list()
-  test_list <- list()
-
-  for (p in prop) {
-    for (idx in 1:n_sets) {
-      #Create training set
-      train <- df %>%
-        sample_frac(p, replace = FALSE)
-
-      #Create test set
-      test  <- df %>%
-        anti_join(y = train, by = 'game_id')
-
-      train_list[[as.character(p)]][[idx]] <- train
-      test_list[[as.character(p)]][[idx]] <- test
-    }
-  }
-
-  tibble(
-    train_prop = rep(prop, n_sets) %>% sort(),
-    train = train_list %>% unlist(recursive = FALSE),
-    test = test_list %>% unlist(recursive = FALSE)
-  )
-}
-
-# Transform log_odds to prob
-sigmoid <- function(log_odds) {
-  1/(1 + exp(-log_odds))
-}
-
-#Function returns the sum of sim and actual predicting the same, conf.matrix = true only returns the confusion matrix version
-pred_accuracy <- function(sim, actual, conf.matrix = FALSE) {
-  if (conf.matrix) {
-    return(xtabs(formula = ~ sim + actual))
-  }
-
-  return(sum(actual == sim)/length(actual))
-}
-```
 
 For each training set, I fit the Bradley-Terry Model with HFA, I then use the model to predict the log odds for each match within the training set. This prediction is identical to plugging in the parameters to (1) Translating that to a probability using the sigmoid function, I then use a simple proportion of correct predictions of game outcomes from the Monte-Carlo simulation as an information metric.
 
@@ -310,87 +298,87 @@ info_metrics %>%
 
 I was able to reproduce the NBA 2010-2011 season results from Wolfson Koopmeiner's paper for the mean information metric. In that paper they simply take the predicted probability of the match result and predict a win if the probability is over 0.5. The same information metric in (4) based off of predicted results is used.
 
-However, we see a pretty significant difference when implementing an info metric based off of a Monte-Carlo simulation from the predicted probabilties rather than the simple greater than 0.5 rule used in the paper. Next steps are to fit a similar quadratic curve as is what's seen in the paper to see how it would compare to the visual crux of the paper.
+However, we see a pretty significant difference when implementing an info metric based off of a Monte-Carlo simulation from the predicted probabilties rather than the simple greater than 0.5 rule used in the paper. Next steps are to fit a similar quadratic curve as is what's seen in the paper to see how it would compare to those.
 
-## Margin of Victory
-Now, we try a margin of victory to predict $\theta_i$ where the intercept parameter in the linear model represents a home field advantage. In (2), $\delta_{i,j}$ represents the number of points $i$ (home) has over $j$ (away) and is negative if $j$ won.
+<!-- ## Margin of Victory -->
+<!-- Now, we try a margin of victory to predict $\theta_i$ where the intercept parameter in the linear model represents a home field advantage. In (2), $\delta_{i,j}$ represents the number of points $i$ (home) has over $j$ (away) and is negative if $j$ won. -->
 
-\begin{equation}
-  \delta_{i,j} = \theta_i - \theta_j + \alpha
-\end{equation}
+<!-- \begin{equation} -->
+<!--   \delta_{i,j} = \theta_i - \theta_j + \alpha -->
+<!-- \end{equation} -->
 
-\begin{equation}
-  \mathbf{X \theta} = \mathbf{y}
-\end{equation}
-<br>
-\[
-\mathbf{X} =
-\begin{bmatrix}
-\begin{array}{rrrrrrr}
-1 & 0 & -1 & 0 & 0 & \cdots  & 0\\
-0 & 0 & 1 & 0 & -1 & \cdots  & 0\\
--1 & 0 & 1 & 0 & 1 & \cdots  & 0\\
-\vdots &  &  & &  & \ddots  & \vdots\\
-0 & -1 & 0 & 0 & 0 & \cdots  & 1 \\
-1 & 1 & 1 & 1 & 1 & \cdots  & 1
-\end{array}
-\end{bmatrix}, \quad
-\mathbf{r} =
-\begin{bmatrix}
-\begin{array}{r}
-\theta_1 \\
-\theta_2 \\
-\theta_3 \\
-\vdots\\
-\theta_s
-\end{array}
-\end{bmatrix}, \quad
-\mathbf{y} =
-\begin{bmatrix}
-\begin{array}{r}
-y_1 \\
-y_2 \\
-y_3 \\
-\vdots\\
-y_k \\
-0
-\end{array}
-\end{bmatrix}
-\]
-<br>
+<!-- \begin{equation} -->
+<!--   \mathbf{X \theta} = \mathbf{y} -->
+<!-- \end{equation} -->
+<!-- <br> -->
+<!-- \[ -->
+<!-- \mathbf{X} = -->
+<!-- \begin{bmatrix} -->
+<!-- \begin{array}{rrrrrrr} -->
+<!-- 1 & 0 & -1 & 0 & 0 & \cdots  & 0\\ -->
+<!-- 0 & 0 & 1 & 0 & -1 & \cdots  & 0\\ -->
+<!-- -1 & 0 & 1 & 0 & 1 & \cdots  & 0\\ -->
+<!-- \vdots &  &  & &  & \ddots  & \vdots\\ -->
+<!-- 0 & -1 & 0 & 0 & 0 & \cdots  & 1 \\ -->
+<!-- 1 & 1 & 1 & 1 & 1 & \cdots  & 1 -->
+<!-- \end{array} -->
+<!-- \end{bmatrix}, \quad -->
+<!-- \mathbf{r} = -->
+<!-- \begin{bmatrix} -->
+<!-- \begin{array}{r} -->
+<!-- \theta_1 \\ -->
+<!-- \theta_2 \\ -->
+<!-- \theta_3 \\ -->
+<!-- \vdots\\ -->
+<!-- \theta_s -->
+<!-- \end{array} -->
+<!-- \end{bmatrix}, \quad -->
+<!-- \mathbf{y} = -->
+<!-- \begin{bmatrix} -->
+<!-- \begin{array}{r} -->
+<!-- y_1 \\ -->
+<!-- y_2 \\ -->
+<!-- y_3 \\ -->
+<!-- \vdots\\ -->
+<!-- y_k \\ -->
+<!-- 0 -->
+<!-- \end{array} -->
+<!-- \end{bmatrix} -->
+<!-- \] -->
+<!-- <br> -->
 
-Thus, for a season with $k$ games and $s$ teams, (3) is our system of linear equations. The sparse matrix $\mathbf{X}_{k \times s}$ has each row representing a game, all elements in a particular row are 0 except for teams $i$ and $j$ participating in the game, with 1 under the winning team's column and -1 under the losing team's column. $\mathbf{\theta}_{s \times 1}$ is the vector of strength parameters and $\mathbf{y}_{k \times 1}$ is the point differential for each match. Because each row sums to 0, the columns of $\mathbf{M}_{s \times s}$ are not linearly independent and $rank(\mathbf{M}_{s \times s}) < s$ meaning that there is no unique solution to (2).
+<!-- Thus, for a season with $k$ games and $s$ teams, (3) is our system of linear equations. The sparse matrix $\mathbf{X}_{k \times s}$ has each row representing a game, all elements in a particular row are 0 except for teams $i$ and $j$ participating in the game, with 1 under the winning team's column and -1 under the losing team's column. $\mathbf{\theta}_{s \times 1}$ is the vector of strength parameters and $\mathbf{y}_{k \times 1}$ is the point differential for each match. Because each row sums to 0, the columns of $\mathbf{M}_{s \times s}$ are not linearly independent and $rank(\mathbf{M}_{s \times s}) < s$ meaning that there is no unique solution to (2). -->
 
-This is solved by including a linear constraint to $\mathbf{X}$ through a row constraint. A simple constraint is to have all of the strength parameters sum up to 1 $\left(\sum_S \theta_i = 0\right)$. This is done by inserting a row with all ones in $\mathbf{X}$ and having the corresponding element in the response vector, $\mathbf{y}$, be $0$.
+<!-- This is solved by including a linear constraint to $\mathbf{X}$ through a row constraint. A simple constraint is to have all of the strength parameters sum up to 1 $\left(\sum_S \theta_i = 0\right)$. This is done by inserting a row with all ones in $\mathbf{X}$ and having the corresponding element in the response vector, $\mathbf{y}$, be $0$. -->
 
-```{r massey}
-# Creates a column for each team and, in each game_id row, puts a 1 if they're the home team and a -1 if they're away, 0 otherwise
-# Equivalent to a column of home_mov results and a design matrix for each game
-# home_mov = home - away + hfa
+<!-- ```{r massey} -->
+<!-- # Creates a column for each team and, in each game_id row, puts a 1 if they're the home team and a -1 if they're away, 0 otherwise -->
+<!-- # Equivalent to a column of home_mov results and a design matrix for each game -->
+<!-- # home_mov = home - away + hfa -->
 
-mov_model_matrix <- nba_11 %>%
-  stack_games %>%
-  spread(key = team, value = hfa, fill = 0) %>%
-  select(-c(season, game_id)) %>%
-  rbind(c(0, rep(1, length(levels(nba_11$home))))) # Linear Constraint, make the sum of all team parameters equal to 0
+<!-- mov_model_matrix <- nba_11 %>% -->
+<!--   stack_games %>% -->
+<!--   spread(key = team, value = hfa, fill = 0) %>% -->
+<!--   select(-c(season, game_id)) %>% -->
+<!--   rbind(c(0, rep(1, length(levels(nba_11$home))))) # Linear Constraint, make the sum of all team parameters equal to 0 -->
 
-mov <- lm(formula = home_mov ~., data = mov_model_matrix)
-summary(mov)
-```
+<!-- mov <- lm(formula = home_mov ~., data = mov_model_matrix) -->
+<!-- summary(mov) -->
+<!-- ``` -->
 
-Strength parameters represent a shift of the expected margin of victory over the other team. An example being a match up between Atlanta Hawks (-1.2021) and Phoenix Suns (-0.5638), with the Atlanta Hawks having the home-field advantage, would have an expected margin of victory of $\theta_{AH} - \theta_{PS} + \alpha = 2.5292$ in favor of the Atlanta Hawks.
+<!-- Strength parameters represent a shift of the expected margin of victory over the other team. An example being a match up between Atlanta Hawks (-1.2021) and Phoenix Suns (-0.5638), with the Atlanta Hawks having the home-field advantage, would have an expected margin of victory of $\theta_{AH} - \theta_{PS} + \alpha = 2.5292$ in favor of the Atlanta Hawks. -->
 
-```{r massey_plot}
-mov_thetas <- coef(summary(mov)) %>%
-  data.frame() %>%
-  rownames_to_column(var = "team") %>%
-  filter(team != "(Intercept)")
+<!-- ```{r massey_plot} -->
+<!-- mov_thetas <- coef(summary(mov)) %>% -->
+<!--   data.frame() %>% -->
+<!--   rownames_to_column(var = "team") %>% -->
+<!--   filter(team != "(Intercept)") -->
 
-mov_thetas %>%
-  ggplot(aes(x = reorder(as.factor(team), Estimate), color = as.factor(team))) +
-  geom_point(aes(y = Estimate)) +
-  geom_errorbar(aes(ymin = Estimate - Std..Error, ymax =Estimate + Std..Error)) +
-  coord_flip() + theme(legend.position = "none") + xlab("Team") + ylab(expression(theta))
-```
+<!-- mov_thetas %>% -->
+<!--   ggplot(aes(x = reorder(as.factor(team), Estimate), color = as.factor(team))) + -->
+<!--   geom_point(aes(y = Estimate)) + -->
+<!--   geom_errorbar(aes(ymin = Estimate - Std..Error, ymax =Estimate + Std..Error)) + -->
+<!--   coord_flip() + theme(legend.position = "none") + xlab("Team") + ylab(expression(theta)) -->
+<!-- ``` -->
 
-In reference to the results in the Bradley-Terry model, home-field advantage tends to add about a 3 point margin of victory. A few teams changed in the ranking, because some teams lost in blow outs. A drastic change was in the last place team, Minnesota, who had lost some closer games, going from the lowest strength parameter according to Bradley-Terry to 5th from lowest according to Massey.
+<!-- In reference to the results in the Bradley-Terry model, home-field advantage tends to add about a 3 point margin of victory. A few teams changed in the ranking, because some teams lost in blow outs. A drastic change was in the last place team, Minnesota, who had lost some closer games, going from the lowest strength parameter according to Bradley-Terry to 5th from lowest according to Massey. -->

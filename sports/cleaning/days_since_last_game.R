@@ -65,7 +65,17 @@ get_days_since_last_game <- function(df) {
     arrange(game_date, game_id) %>%
     select(-c(team0_hfa, team1_hfa))
   
-  return(home_away)
+  # Find the 95% quantile value for home days out as a higher end prediction of beginning of season rest
+  days_out_95 <- home_away %>% filter(home_days_since_last_game != 0) %>% pull(home_days_since_last_game) %>% quantile(0.95) %>% .[[1]]
+  
+  # Replace beginning of season 0's with the 95% quantile value
+  home_away_zeros_fixed <- home_away %>% 
+    mutate(
+      home_days_since_last_game = recode(home_days_since_last_game, `0` = days_out_95),
+      away_days_since_last_game = recode(away_days_since_last_game, `0` = days_out_95)
+    )
+  
+  return(home_away_zeros_fixed)
 }
 
 # RUN
@@ -73,9 +83,9 @@ nba <- read_csv(file = "../../sports_scraper/nba_1999_2019.csv") %>% get_days_si
 nhl <- read_csv(file = "../../sports_scraper/nhl_1999_2019.csv") %>% get_days_since_last_game()
 nfl <- read_csv(file = "../../sports_scraper/nfl_1999_2018.csv") %>% get_days_since_last_game()
 
-# write_csv(x = nba, path = "data/nba.csv")
-# write_csv(x = nhl, path = "data/nhl.csv")
-# write_csv(x = nfl, path = "data/nfl.csv")
+write_csv(x = nba, path = "data/nba.csv")
+write_csv(x = nhl, path = "data/nhl.csv")
+write_csv(x = nfl, path = "data/nfl.csv")
 
 
 # # Visualize for fun!
